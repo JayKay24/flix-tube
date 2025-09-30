@@ -1,0 +1,26 @@
+{
+  "name": "@flix-tube/video-streaming-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@flix-tube/video-streaming"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "apps/video-streaming-e2e/jest.config.ts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "@flix-tube/video-streaming:build",
+          "@flix-tube/video-streaming:serve"
+        ]
+      }
+    }
+  }
+}
