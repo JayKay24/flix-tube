@@ -10,7 +10,7 @@ export class VideoService {
   }
 
   async findAll() {
-    const videoPath = "apps/video-streaming/src/assets/videos/SampleVideo_1280x720_1mb.mp4";
+    const videoPath = "./assets/videos/SampleVideo_1280x720_1mb.mp4";
     const stats = await stat(videoPath);
     return { stats, videoPath };
   }

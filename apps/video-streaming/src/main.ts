@@ -9,7 +9,10 @@ import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT;
+  if (!port) {
+    throw new Error("Please specify the port number for the HTTP server with the environment variable PORT.");
+  }
   await app.listen(port);
   Logger.log(
     `🚀 Application is running on: http://localhost:${port}`
