@@ -47,3 +47,4 @@ test-output
 
 error.log
 launch.json
+.env

@@ -28,10 +28,8 @@ RUN npm ci --omit=dev
 # Copy the built application from the builder stage
 COPY --from=builder /app/apps/video-streaming/dist/ .
 
-ENV PORT=3000
-
 # Expose the port the app runs on
-EXPOSE 3000
+EXPOSE 80
 
 # Command to run the built application
 CMD [ "node", "main.js" ]
