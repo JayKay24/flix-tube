@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
+import { BlobServiceClient, StorageSharedKeyCredential } from '@azure/storage-blob';
+
+const STORAGE_ACCOUNT_NAME = process.env.STORAGE_ACCOUNT_NAME ?? '';
+const STORAGE_ACCESS_KEY = process.env.STORAGE_ACCESS_KEY ?? '';
 
 @Injectable()
 export class VideoService {
@@ -8,8 +12,13 @@ export class VideoService {
     return 'This action adds a new video';
   }
 
-  findAll() {
-    return `This action returns all video`;
+  async findAll(videoPath: string) {
+    const containerName = "videos";
+    const blobService = this.createBlobService();
+    const containerClient = blobService.getContainerClient(containerName);
+    const blobClient = containerClient.getBlobClient(videoPath);
+    
+    return blobClient;
   }
 
   findOne(id: number) {
@@ -22,5 +31,11 @@ export class VideoService {
 
   remove(id: number) {
     return `This action removes a #${id} video`;
+  }
+
+  private createBlobService() {
+    const sharedKeyCredential = new StorageSharedKeyCredential(STORAGE_ACCOUNT_NAME, STORAGE_ACCESS_KEY);
+    const blobService = new BlobServiceClient(`https://${STORAGE_ACCOUNT_NAME}.blob.core.windows.net`, sharedKeyCredential);
+    return blobService;
   }
 }

@@ -6,10 +6,13 @@ import {
   Patch,
   Param,
   Delete,
+  Res,
+  Req,
 } from '@nestjs/common';
 import { VideoService } from './video.service';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
+import type { Response, Request } from 'express';
 
 @Controller('video')
 export class VideoController {
@@ -21,8 +24,18 @@ export class VideoController {
   }
 
   @Get()
-  findAll() {
-    return this.videoService.findAll();
+  async findAll(@Req() req: Request, @Res() res: Response) {
+    const blobClient = await this.videoService.findAll(req.query.path as string);
+    
+    const properties = await blobClient.getProperties();
+
+    res.writeHead(200, {
+      "Content-Length": properties.contentLength,
+      "Content-Type": "video/mp4"
+    });
+
+    const response = await blobClient.download();
+    response.readableStreamBody?.pipe(res);
   }
 
   @Get(':id')
