@@ -52,7 +52,10 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["apps/video-streaming-e2e/**/*"]
+      "exclude": [
+        "apps/video-streaming-e2e/**/*",
+        "apps/azure-storage-e2e/**/*"
+      ]
     }
   ],
   "targetDefaults": {

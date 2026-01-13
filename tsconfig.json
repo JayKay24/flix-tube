@@ -8,6 +8,12 @@
     },
     {
       "path": "./apps/video-streaming"
+    },
+    {
+      "path": "./apps/azure-storage-e2e"
+    },
+    {
+      "path": "./apps/azure-storage"
     }
   ]
 }
