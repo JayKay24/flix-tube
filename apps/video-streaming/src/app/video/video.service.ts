@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
-import { stat } from 'node:fs/promises';
 
 @Injectable()
 export class VideoService {
@@ -9,10 +8,8 @@ export class VideoService {
     return 'This action adds a new video';
   }
 
-  async findAll() {
-    const videoPath = process.env.VIDEO_PATH ?? '';
-    const stats = await stat(videoPath);
-    return { stats, videoPath };
+  findAll() {
+    return 'This action returns all videos';
   }
 
   findOne(id: number) {
