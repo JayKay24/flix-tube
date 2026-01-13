@@ -12,7 +12,7 @@ RUN npm ci
 COPY ../../ .
 
 # Build the azure-storage application
-RUN npx nx build @flix-tube/azure-storage --configuration=production
+RUN npx nx build azure-storage --configuration=production
 
 # Stage 2: Create the final production image
 FROM node:25-alpine3.22
