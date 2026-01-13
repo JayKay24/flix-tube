@@ -6,13 +6,17 @@ import {
   Patch,
   Param,
   Delete,
-  Res
+  Res,
+  Req,
 } from '@nestjs/common';
-import type { Response } from 'express';
+import type { Response, Request } from 'express';
 import { VideoService } from './video.service';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
-import * as fs from 'fs';
+import http from 'http';
+
+const VIDEO_STORAGE_HOST = process.env.VIDEO_STORAGE_HOST ?? '';
+const VIDEO_STORAGE_PORT = parseInt(process.env.VIDEO_STORAGE_PORT ?? '') ?? 80;
 
 @Controller('video')
 export class VideoController {
@@ -24,14 +28,19 @@ export class VideoController {
   }
 
   @Get()
-  async findAll(@Res() res: Response) {
-    const { stats, videoPath } = await this.videoService.findAll();
-    console.log(stats);
-    res.writeHead(200, {
-      "Content-Length": stats.size,
-      "Content-Type": "video/mp4",
+  async findAll(@Req() req: Request, @Res() res: Response) {
+    const forwardRequest = http.request({
+      host: VIDEO_STORAGE_HOST,
+      port: VIDEO_STORAGE_PORT,
+      path: '/video?path=SampleVideo_1280x720_1mb.mp4',
+      method: 'GET',
+      headers: req.headers
+    }, (forwardResponse) => {
+      res.writeHead(forwardResponse.statusCode as number, forwardResponse.headers);
+      forwardResponse.pipe(res);
     });
-    fs.createReadStream(videoPath).pipe(res);
+    
+    req.pipe(forwardRequest);
   }
 
   @Get(':id')
