@@ -14,6 +14,12 @@
     },
     {
       "path": "./apps/azure-storage"
+    },
+    {
+      "path": "./apps/history-e2e"
+    },
+    {
+      "path": "./apps/history"
     }
   ]
 }
