@@ -16,7 +16,12 @@ import { UpdateVideoDto } from './dto/update-video.dto';
 import http from 'http';
 
 const VIDEO_STORAGE_HOST = process.env.VIDEO_STORAGE_HOST ?? '';
-const VIDEO_STORAGE_PORT = parseInt(process.env.VIDEO_STORAGE_PORT ?? '') ?? 80;
+
+if (!process.env.VIDEO_STORAGE_PORT) {
+  throw new Error('VIDEO_STORAGE_PORT is not defined');
+}
+
+const VIDEO_STORAGE_PORT = parseInt(process.env.VIDEO_STORAGE_PORT);
 
 @Controller('video')
 export class VideoController {
