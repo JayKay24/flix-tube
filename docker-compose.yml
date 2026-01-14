@@ -13,9 +13,9 @@ services:
       dockerfile: apps/azure-storage/Dockerfile
     container_name: video-storage
     ports:
-      - "4001:80"
+      - "4001:${PORT}"
     environment:
-      - PORT=80
+      - PORT=${PORT}
       - STORAGE_ACCOUNT_NAME=${STORAGE_ACCOUNT_NAME}
       - STORAGE_ACCESS_KEY=${STORAGE_ACCESS_KEY}
     restart: "no"
@@ -27,14 +27,14 @@ services:
       dockerfile: apps/video-streaming/Dockerfile
     container_name: video-streaming
     ports:
-      - "4002:80"
+      - "4002:${PORT}"
     depends_on:
       - db
       - azure-storage
     environment:
-      - PORT=80
+      - PORT=${PORT}
       - DBHOST=${DBHOST}
       - DBNAME=${DBNAME}
-      - VIDEO_STORAGE_HOST=video-storage
-      - VIDEO_STORAGE_PORT=80
+      - VIDEO_STORAGE_HOST=${VIDEO_STORAGE_HOST}
+      - VIDEO_STORAGE_PORT=${VIDEO_STORAGE_PORT}
     restart: "no"
