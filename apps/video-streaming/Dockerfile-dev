@@ -1,0 +1,11 @@
+# Stage 1: Build the application
+FROM node:25-alpine3.22 AS builder
+
+WORKDIR /app
+
+# Copy package.json and package-lock.json for dependency installation
+# We need the root package.json and package-lock.lock for nx commands
+COPY ../../package*.json ./
+
+CMD npm install --prefer-offline && \
+  npx nx run @flix-tube/video-streaming:serve:development

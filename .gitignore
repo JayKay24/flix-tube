@@ -48,3 +48,6 @@ test-output
 error.log
 launch.json
 .env
+
+# npm cache
+npm-cache/
