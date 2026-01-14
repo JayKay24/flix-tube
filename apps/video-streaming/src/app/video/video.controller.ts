@@ -14,6 +14,7 @@ import { VideoService } from './video.service';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import http from 'http';
+import mongoose from 'mongoose';
 
 const VIDEO_STORAGE_HOST = process.env.VIDEO_STORAGE_HOST ?? '';
 
@@ -34,10 +35,17 @@ export class VideoController {
 
   @Get()
   async findAll(@Req() req: Request, @Res() res: Response) {
+    const videoId = new mongoose.Types.ObjectId(req.query.id as string);
+    const videoRecord = await this.videoService.findById(videoId);
+    if (!videoRecord) {
+      res.sendStatus(404);
+      return;
+    }
+
     const forwardRequest = http.request({
       host: VIDEO_STORAGE_HOST,
       port: VIDEO_STORAGE_PORT,
-      path: '/video?path=SampleVideo_1280x720_1mb.mp4',
+      path: `/video?path=${videoRecord.videoPath}`,
       method: 'GET',
       headers: req.headers
     }, (forwardResponse) => {
