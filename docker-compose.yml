@@ -10,8 +10,13 @@ services:
     image: azure-storage
     build:
       context: .
-      dockerfile: apps/azure-storage/Dockerfile
+      dockerfile: apps/azure-storage/Dockerfile-dev
     container_name: video-storage
+    volumes:
+      - ./npm-cache:/root/.npm:z
+      - ./:/app:z
+      - ./node_modules:/app/node_modules:z
+      - ./.nx:/app/.nx:z
     ports:
       - "4001:${PORT}"
     environment:
@@ -24,8 +29,13 @@ services:
     image: video-streaming
     build:
       context: .
-      dockerfile: apps/video-streaming/Dockerfile
+      dockerfile: apps/video-streaming/Dockerfile-dev
     container_name: video-streaming
+    volumes:
+      - ./npm-cache:/root/.npm:z
+      - ./:/app:z
+      - ./node_modules:/app/node_modules:z
+      - ./.nx:/app/.nx:z
     ports:
       - "4002:${PORT}"
     depends_on:
@@ -37,4 +47,24 @@ services:
       - DBNAME=${DBNAME}
       - VIDEO_STORAGE_HOST=${VIDEO_STORAGE_HOST}
       - VIDEO_STORAGE_PORT=${VIDEO_STORAGE_PORT}
+    restart: "no"
+  
+  history:
+    image: history
+    build:
+      context: .
+      dockerfile: apps/history/Dockerfile-dev
+    container_name: history
+    volumes:
+      - ./npm-cache:/root/.npm:z
+      - ./:/app:z
+      - ./node_modules:/app/node_modules:z
+      - ./.nx:/app/.nx:z
+    ports:
+      - "4003:${PORT}"
+    depends_on:
+      - video-streaming
+    environment:
+      - PORT=${PORT}
+      - NODE_ENV=development
     restart: "no"

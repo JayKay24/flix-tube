@@ -8,4 +8,4 @@ WORKDIR /app
 COPY ../../package*.json ./
 
 CMD npm install --prefer-offline && \
-  npx nx run azure-storage:serve:development
+    npx nx run azure-storage:serve:development
