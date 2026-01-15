@@ -1,0 +1,55 @@
+services:
+  db:
+    image: mongo:7.0.0
+    container_name: db
+    ports:
+      - "4000:27017"
+    restart: "always"
+
+  azure-storage:
+    image: azure-storage
+    build:
+      context: .
+      dockerfile: apps/azure-storage/Dockerfile-prod
+    container_name: video-storage
+    ports:
+      - "4001:${PORT}"
+    environment:
+      - PORT=${PORT}
+      - STORAGE_ACCOUNT_NAME=${STORAGE_ACCOUNT_NAME}
+      - STORAGE_ACCESS_KEY=${STORAGE_ACCESS_KEY}
+    restart: "no"
+
+  video-streaming:
+    image: video-streaming
+    build:
+      context: .
+      dockerfile: apps/video-streaming/Dockerfile-prod
+    container_name: video-streaming
+    ports:
+      - "4002:${PORT}"
+    depends_on:
+      - db
+      - azure-storage
+    environment:
+      - PORT=${PORT}
+      - DBHOST=${DBHOST}
+      - DBNAME=${DBNAME}
+      - VIDEO_STORAGE_HOST=${VIDEO_STORAGE_HOST}
+      - VIDEO_STORAGE_PORT=${VIDEO_STORAGE_PORT}
+    restart: "no"
+
+  history:
+    image: history
+    build:
+      context: .
+      dockerfile: apps/history/Dockerfile-prod
+    container_name: history
+    ports:
+      - "4003:${PORT}"
+    depends_on:
+      - video-streaming
+    environment:
+      - PORT=${PORT}
+      - NODE_ENV=development
+    restart: "no"
