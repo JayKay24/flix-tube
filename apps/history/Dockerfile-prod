@@ -1,5 +1,5 @@
 # Stage 1: Build the application
-FROM node:24.13 AS builder
+FROM node:24-alpine AS builder
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ COPY ../../ .
 RUN npx nx build history --configuration=production
 
 # Stage 2: Create the final production image
-FROM node:24.13
+FROM node:24-alpine
 
 WORKDIR /app
 
