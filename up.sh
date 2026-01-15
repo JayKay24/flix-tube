@@ -1,3 +1,10 @@
 #!/usr/bin/env bash
 
-docker compose up --build
+prod=$1
+
+if [[ -n $prod ]];
+then
+  docker compose -f docker-compose-prod.yml up --build
+else
+  docker compose up --build
+fi
