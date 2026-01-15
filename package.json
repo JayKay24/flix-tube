@@ -39,7 +39,8 @@
   },
   "workspaces": [
     "packages/*",
-    "apps/*"
+    "apps/*",
+    "libs/flixtube-http-client"
   ],
   "dependencies": {
     "@azure/storage-blob": "^12.29.1",
