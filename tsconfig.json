@@ -20,9 +20,6 @@
     },
     {
       "path": "./apps/history"
-    },
-    {
-      "path": "./libs/flixtube-http-client"
     }
   ]
 }
