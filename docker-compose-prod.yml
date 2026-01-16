@@ -51,5 +51,7 @@ services:
       - video-streaming
     environment:
       - PORT=${PORT}
+      - HISTORY_DBNAME=${HISTORY_DBNAME}
+      - HISTORY_DBHOST=${HISTORY_DBHOST}
       - NODE_ENV=development
     restart: "no"
