@@ -1,1 +1,3 @@
-export class CreateViewedDto {}
+export class CreateViewedDto {
+  videoPath!: string;
+}

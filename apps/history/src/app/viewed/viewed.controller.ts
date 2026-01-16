@@ -6,18 +6,25 @@ import {
   Patch,
   Param,
   Delete,
+  Res,
 } from '@nestjs/common';
 import { ViewedService } from './viewed.service';
 import { CreateViewedDto } from './dto/create-viewed.dto';
 import { UpdateViewedDto } from './dto/update-viewed.dto';
+import type { Response } from 'express';
 
 @Controller('viewed')
 export class ViewedController {
   constructor(private readonly viewedService: ViewedService) {}
 
   @Post()
-  create(@Body() createViewedDto: CreateViewedDto) {
-    return this.viewedService.create(createViewedDto);
+  async create(
+    @Body() createViewedDto: CreateViewedDto,
+    @Res() res: Response,
+  ) {
+    await this.viewedService.create(createViewedDto.videoPath);
+
+    res.sendStatus(201);
   }
 
   @Get()
