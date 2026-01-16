@@ -15,6 +15,7 @@ import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import http from 'http';
 import mongoose from 'mongoose';
+import axios from 'axios';
 
 const VIDEO_STORAGE_HOST = process.env.VIDEO_STORAGE_HOST ?? '';
 
@@ -31,6 +32,12 @@ export class VideoController {
   @Post()
   create(@Body() createVideoDto: CreateVideoDto) {
     return this.videoService.create(createVideoDto);
+  }
+
+  async sendViewedMessage(videoPath: string) {
+    return await axios.post('http://history/viewed', {
+      videoPath
+    });
   }
 
   @Get()
@@ -54,6 +61,8 @@ export class VideoController {
     });
     
     req.pipe(forwardRequest);
+
+    this.sendViewedMessage(videoRecord.videoPath);
   }
 
   @Get(':id')
