@@ -5,6 +5,14 @@ services:
     ports:
       - "4000:27017"
     restart: "always"
+  
+  rabbit:
+    image: rabbitmq:4.2.2-management
+    container_name: rabbit
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: "always"
 
   azure-storage:
     image: azure-storage
@@ -48,9 +56,11 @@ services:
     ports:
       - "4003:${PORT}"
     depends_on:
-      - video-streaming
+      - db
+      - rabbit
     environment:
       - PORT=${PORT}
+      - RABBIT=${RABBIT}
       - HISTORY_DBNAME=${HISTORY_DBNAME}
       - HISTORY_DBHOST=${HISTORY_DBHOST}
       - NODE_ENV=development
