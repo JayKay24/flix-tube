@@ -20,6 +20,9 @@
     },
     {
       "path": "./apps/history"
+    },
+    {
+      "path": "./libs/rabbitmq"
     }
   ]
 }

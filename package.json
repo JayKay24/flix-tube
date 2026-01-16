@@ -40,7 +40,8 @@
   "workspaces": [
     "packages/*",
     "apps/*",
-    "libs/flixtube-http-client"
+    "libs/flixtube-http-client",
+    "libs/rabbitmq"
   ],
   "dependencies": {
     "@azure/storage-blob": "^12.29.1",
