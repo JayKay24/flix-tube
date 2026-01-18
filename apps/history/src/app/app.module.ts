@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ViewedModule } from './viewed/viewed.module';
+import { ProducerService } from '@flix-tube/rabbitmq-broker';
 
 const HISTORY_DBNAME = process.env.HISTORY_DBNAME ?? '';
 const HISTORY_DBHOST = process.env.HISTORY_DBHOST ?? '';
@@ -13,6 +14,6 @@ const HISTORY_DBHOST = process.env.HISTORY_DBHOST ?? '';
     ViewedModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ProducerService],
 })
 export class AppModule {}

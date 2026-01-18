@@ -11,6 +11,8 @@ RUN npm ci
 # Copy the rest of the application
 COPY ../../ .
 
+RUN npx nx sync
+
 # Build the history application
 RUN npx nx build history --configuration=production
 

@@ -11,6 +11,6 @@ export class ProducerService {
   }
 
   async sendMessage(pattern: string, data: any) {
-    return this.client.send(pattern, data).toPromise();
+    return this.client.send(pattern, data);
   }
 }
