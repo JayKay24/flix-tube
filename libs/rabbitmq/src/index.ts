@@ -1,1 +1,2 @@
-export * from './lib/rabbitmq-broker.js';
+export * from './rabbitmq.options';
+export * from './producer.service';
