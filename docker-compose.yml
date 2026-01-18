@@ -46,6 +46,7 @@ services:
       - "4002:${PORT}"
     depends_on:
       - db
+      - rabbit
       - azure-storage
     environment:
       - PORT=${PORT}
