@@ -4,6 +4,6 @@ import { ProducerService } from './producer.service';
 @Module({
   controllers: [],
   providers: [ProducerService],
-  exports: [],
+  exports: [ProducerService],
 })
 export class FlixTubeRmqBrokerModule {}
