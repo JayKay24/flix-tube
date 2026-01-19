@@ -17,6 +17,9 @@
     "strict": true,
     "target": "es2022",
     "customConditions": ["@flix-tube/source"],
-    "sourceMap": true
+    "sourceMap": true,
+    "paths": {
+      "@flix-tube/rmq-broker": ["./libs/rmq-broker/src/index.ts"]
+    }
   }
 }
