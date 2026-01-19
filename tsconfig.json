@@ -23,6 +23,9 @@
     },
     {
       "path": "./libs/rabbitmq"
+    },
+    {
+      "path": "./libs/rmq-broker"
     }
   ]
 }

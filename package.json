@@ -41,7 +41,8 @@
     "packages/*",
     "apps/*",
     "libs/flixtube-http-client",
-    "libs/rabbitmq"
+    "libs/rabbitmq",
+    "libs/*"
   ],
   "dependencies": {
     "@azure/storage-blob": "^12.29.1",

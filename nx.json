@@ -28,7 +28,8 @@
           "buildDepsName": "build-deps",
           "watchDepsName": "watch-deps"
         }
-      }
+      },
+      "exclude": ["libs/rmq-broker/*"]
     },
     {
       "plugin": "@nx/webpack/plugin",
@@ -57,6 +58,15 @@
         "apps/azure-storage-e2e/**/*",
         "apps/history-e2e/**/*"
       ]
+    },
+    {
+      "plugin": "@nx/js/typescript",
+      "include": ["libs/rmq-broker/*"],
+      "options": {
+        "typecheck": {
+          "targetName": "typecheck"
+        }
+      }
     }
   ],
   "targetDefaults": {
