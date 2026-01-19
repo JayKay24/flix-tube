@@ -14,7 +14,7 @@ COPY ../../ .
 RUN npx nx sync
 
 # Build the video-streaming application
-RUN npx nx build @flix-tube/video-streaming --configuration=production
+RUN npx nx run @flix-tube/video-streaming:build
 
 # Stage 2: Create the final production image
 FROM node:24-alpine

@@ -14,7 +14,7 @@ COPY ../../ .
 RUN npx nx sync
 
 # Build the history application
-RUN npx nx build history --configuration=production
+RUN npx nx run history:build
 
 # Stage 2: Create the final production image
 FROM node:24-alpine
