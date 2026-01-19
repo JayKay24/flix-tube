@@ -6,7 +6,7 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
-import { rabbitMQConfig } from '@flix-tube/rabbitmq-broker';
+import { rabbitMQConfig } from '@flix-tube/rmq-broker';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

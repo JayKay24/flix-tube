@@ -13,7 +13,7 @@ import { CreateViewedDto } from './dto/create-viewed.dto';
 import { UpdateViewedDto } from './dto/update-viewed.dto';
 import type { Response } from 'express';
 import { EventPattern } from '@nestjs/microservices';
-import { ProducerService } from '@flix-tube/rabbitmq-broker';
+import { ProducerService } from '@flix-tube/rmq-broker';
 
 @Controller('viewed')
 export class ViewedController {
