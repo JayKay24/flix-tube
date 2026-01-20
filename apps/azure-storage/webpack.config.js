@@ -9,6 +9,11 @@ module.exports = {
       devtoolModuleFilenameTemplate: '[absolute-resource-path]',
     }),
   },
+  resolve: {
+    alias: {
+      '@flix-tube/rmq-broker': join(__dirname, '../../libs/rmq-broker/src/index.ts')
+    }
+  },
   plugins: [
     new NxAppWebpackPlugin({
       target: 'node',
