@@ -57,10 +57,4 @@ export class ViewedController {
     const parsedMessage = JSON.parse(msg.content.toString());
     console.log('Parsed message: ', parsedMessage);
   }
-
-  async sendViewedMessage(messageChannel: string, videoPath: string) {
-    const msg = { videoPath };
-    const jsonMsg = JSON.stringify(msg);
-    await this.producerService.sendMessage(messageChannel, jsonMsg);
-  }
 }

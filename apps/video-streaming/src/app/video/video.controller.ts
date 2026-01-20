@@ -15,7 +15,7 @@ import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import http from 'http';
 import mongoose from 'mongoose';
-import axios from 'axios';
+import { ProducerService } from '@flix-tube/rmq-broker';
 
 const VIDEO_STORAGE_HOST = process.env.VIDEO_STORAGE_HOST ?? '';
 
@@ -27,17 +27,13 @@ const VIDEO_STORAGE_PORT = parseInt(process.env.VIDEO_STORAGE_PORT);
 
 @Controller('video')
 export class VideoController {
-  constructor(private readonly videoService: VideoService) {}
+  constructor(
+    private readonly videoService: VideoService,
+    private readonly producerService: ProducerService) {}
 
   @Post()
   create(@Body() createVideoDto: CreateVideoDto) {
     return this.videoService.create(createVideoDto);
-  }
-
-  async sendViewedMessage(videoPath: string) {
-    return await axios.post('http://history/viewed', {
-      videoPath
-    });
   }
 
   @Get()
@@ -62,7 +58,7 @@ export class VideoController {
     
     req.pipe(forwardRequest);
 
-    this.sendViewedMessage(videoRecord.videoPath);
+    await this.sendViewedMessage('viewed', videoRecord.videoPath);
   }
 
   @Get(':id')
@@ -78,5 +74,11 @@ export class VideoController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.videoService.remove(+id);
+  }
+
+   async sendViewedMessage(messageChannel: string, videoPath: string) {
+    const msg = { videoPath };
+    const jsonMsg = JSON.stringify(msg);
+    await this.producerService.sendMessage(messageChannel, jsonMsg);
   }
 }
