@@ -9,7 +9,7 @@ export class ViewedService {
   constructor(@InjectModel(Viewed.name) private readonly viewedModel: Model<Viewed>) {}
 
   async create(videoPath: string) {
-    await this.viewedModel.insertOne({ videoPath });
+    await this.viewedModel.create({ videoPath });
   }
 
   findAll() {

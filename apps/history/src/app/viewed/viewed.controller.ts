@@ -12,14 +12,11 @@ import { ViewedService } from './viewed.service';
 import { CreateViewedDto } from './dto/create-viewed.dto';
 import { UpdateViewedDto } from './dto/update-viewed.dto';
 import type { Response } from 'express';
-import { EventPattern } from '@nestjs/microservices';
-import { ProducerService } from '@flix-tube/rmq-broker';
+import { EventPattern, Payload } from '@nestjs/microservices';
 
 @Controller('viewed')
 export class ViewedController {
-  constructor(
-    private readonly producerService: ProducerService, 
-    private readonly viewedService: ViewedService) {}
+  constructor(private readonly viewedService: ViewedService) {}
 
   @Post()
   async create(
@@ -52,9 +49,8 @@ export class ViewedController {
   }
 
   @EventPattern('viewed')
-  async handleMessage(msg: Record<string, any>) {
+  async handleMessage(@Payload() msg: { videoPath: string}) {
     console.log('Message received here: ', msg);
-    const parsedMessage = JSON.parse(msg.content.toString());
-    console.log('Parsed message: ', parsedMessage);
+    await this.viewedService.create(msg.videoPath);
   }
 }

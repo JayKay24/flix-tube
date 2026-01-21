@@ -58,7 +58,7 @@ export class VideoController {
     
     req.pipe(forwardRequest);
 
-    await this.sendViewedMessage('viewed', videoRecord.videoPath);
+    this.sendViewedMessage('viewed', videoRecord.videoPath);
   }
 
   @Get(':id')
@@ -77,8 +77,10 @@ export class VideoController {
   }
 
    async sendViewedMessage(messageChannel: string, videoPath: string) {
+    console.log("This was called:, ", messageChannel, videoPath);
     const msg = { videoPath };
     const jsonMsg = JSON.stringify(msg);
+    console.log("JSON message: ", jsonMsg);
     await this.producerService.sendMessage(messageChannel, jsonMsg);
   }
 }
