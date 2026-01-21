@@ -8,4 +8,6 @@ RUN npm install
 
 RUN npx nx sync
 
-CMD ["npx", "nx", "run", "history:serve:development"]
+CMD npx wait-port rabbit:5672 && \
+    npx nx run history:serve:development
+
