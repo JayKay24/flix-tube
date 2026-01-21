@@ -15,7 +15,7 @@ import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import http from 'http';
 import mongoose from 'mongoose';
-import { ProducerService } from '@flix-tube/rmq-broker';
+import { ExchangeType, ProducerService } from '@flix-tube/rmq-broker';
 
 const VIDEO_STORAGE_HOST = process.env.VIDEO_STORAGE_HOST ?? '';
 
@@ -58,7 +58,7 @@ export class VideoController {
     
     req.pipe(forwardRequest);
 
-    this.sendViewedMessage('viewed', videoRecord.videoPath);
+    this.sendViewedMessage(ExchangeType.VIEWED, videoRecord.videoPath);
   }
 
   @Get(':id')
