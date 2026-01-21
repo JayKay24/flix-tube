@@ -49,7 +49,8 @@ export class ViewedController {
   }
 
   @EventPattern('viewed')
-  async handleMessage(@Payload() msg: { videoPath: string}) {
-    await this.viewedService.create(msg.videoPath);
+  async handleMessage(@Payload() msg: string) {
+    const parsedMsg = JSON.parse(msg);
+    await this.viewedService.create(parsedMsg.videoPath);
   }
 }
