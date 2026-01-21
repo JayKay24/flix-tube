@@ -6,7 +6,7 @@ WORKDIR /app
 COPY ../../package*.json ./
 RUN npm install
 
-RUN npx nx sync
+RUN npx nx reset
 
 CMD npx wait-port rabbit:5672 && \
     npx nx run @flix-tube/video-streaming:serve:development

@@ -6,6 +6,6 @@ WORKDIR /app
 COPY ../../package*.json ./
 RUN npm install
 
-RUN npx nx sync
+RUN npx nx reset
 
 CMD [ "npx", "nx", "run", "azure-storage:serve:development"]

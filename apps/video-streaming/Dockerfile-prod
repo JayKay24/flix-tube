@@ -11,7 +11,7 @@ RUN npm ci
 # Copy the rest of the application
 COPY ../../ .
 
-RUN npx nx sync
+RUN npx nx reset
 
 # Build the video-streaming application
 RUN npx nx run @flix-tube/video-streaming:build

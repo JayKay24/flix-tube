@@ -11,7 +11,7 @@ RUN npm ci
 # Copy the rest of the application
 COPY ../../ .
 
-RUN npx nx sync
+RUN npx nx reset
 
 # Build the history application
 RUN npx nx run history:build
