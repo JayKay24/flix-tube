@@ -10,7 +10,7 @@ export class ProducerService {
     this.client = ClientProxyFactory.create(rabbitMQConfig());
   }
 
-  async sendMessage(pattern: string, data: any) {
-    return this.client.emit(pattern, data);
+  sendMessage(pattern: string, data: any): void {
+    this.client.emit(pattern, data);
   }
 }

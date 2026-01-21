@@ -76,11 +76,9 @@ export class VideoController {
     return this.videoService.remove(+id);
   }
 
-   async sendViewedMessage(messageChannel: string, videoPath: string) {
-    console.log("This was called:, ", messageChannel, videoPath);
+   sendViewedMessage(messageChannel: string, videoPath: string): void {
     const msg = { videoPath };
     const jsonMsg = JSON.stringify(msg);
-    console.log("JSON message: ", jsonMsg);
-    await this.producerService.sendMessage(messageChannel, jsonMsg);
+    this.producerService.sendMessage(messageChannel, jsonMsg);
   }
 }

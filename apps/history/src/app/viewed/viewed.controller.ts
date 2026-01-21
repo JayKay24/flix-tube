@@ -50,7 +50,6 @@ export class ViewedController {
 
   @EventPattern('viewed')
   async handleMessage(@Payload() msg: { videoPath: string}) {
-    console.log('Message received here: ', msg);
     await this.viewedService.create(msg.videoPath);
   }
 }

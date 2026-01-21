@@ -6,6 +6,7 @@ export const rabbitMQConfig = (): RmqOptions => ({
   transport: Transport.RMQ,
   options: {
     urls: [RABBIT],
+    queue: 'viewed',
     queueOptions: {
       durable: true
     }
