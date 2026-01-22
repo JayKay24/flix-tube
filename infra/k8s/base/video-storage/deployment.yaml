@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: video-storage
-          image: video-storage:latest
+          image: azure-storage:latest
           imagePullPolicy: Never
           env:
             - name: PORT
