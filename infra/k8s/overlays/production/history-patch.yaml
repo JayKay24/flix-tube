@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: history
+spec:
+  selector:
+    matchLabels:
+      app: history
+  template:
+    spec:
+      containers:
+        - name: history
+          resources:
+            limits:
+              memory: "500Mi"
+            requests:
+              memory: "500Mi"
+              cpu: "100m"
