@@ -7,6 +7,6 @@ resources:
 - ../../base/video-streaming
 
 patches:
-  - path: history-patch-resources.yaml
-  - path: video-streaming-patch-resources.yaml
-  - path: azure-storage-patch-resources.yaml
+  - path: history-patch.yaml
+  - path: video-streaming-patch.yaml
+  - path: video-storage-patch.yaml

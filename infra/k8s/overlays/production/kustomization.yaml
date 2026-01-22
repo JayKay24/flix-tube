@@ -5,3 +5,8 @@ resources:
 - ../../base/video-storage
 - ../../base/history
 - ../../base/video-streaming
+
+patches:
+  - path: history-patch.yaml
+  - path: video-storage-patch.yaml
+  - path: video-streaming-patch.yaml
