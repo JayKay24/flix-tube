@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-prod=$1
-if [[ -n $prod ]];
+prod_dev=$1
+if [[ -n $prod_dev ]];
 then
-  ./down.sh $prod
-  ./up.sh $prod
+  ./down.sh $prod_dev
+  ./up.sh $prod_dev
 else
   ./down.sh
   ./up.sh
