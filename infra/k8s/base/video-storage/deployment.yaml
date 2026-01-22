@@ -32,11 +32,4 @@ spec:
                 secretKeyRef:
                   name: video-storage-secrets
                   key: storageAccessKey
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
-            requests:
-              memory: "64Mi"
-              cpu: "100m"
-    
+   

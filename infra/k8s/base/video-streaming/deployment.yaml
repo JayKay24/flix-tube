@@ -37,11 +37,3 @@ spec:
                 configMapKeyRef:
                   name: video-streaming-config
                   key: rabbit 
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
-            requests:
-              memory: "64Mi"
-              cpu: "100m"
-    
