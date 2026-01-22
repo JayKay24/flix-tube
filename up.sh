@@ -6,5 +6,5 @@ if [[ -n $prod ]];
 then
   docker compose -f docker-compose-prod.yml up --build
 else
-  docker compose up --build
+  docker compose -f docker-compose-dev.yml up --build
 fi
