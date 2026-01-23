@@ -18,7 +18,7 @@ export class VideoService {
   }
 
   async findById(id: mongoose.Types.ObjectId) {
-    const videoRecord = await this.videoModel.findById(id);
+    const videoRecord = await this.videoModel.findById(id).exec();
     return videoRecord;
   }
 

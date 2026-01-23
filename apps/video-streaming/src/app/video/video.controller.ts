@@ -38,6 +38,10 @@ export class VideoController {
 
   @Get()
   async findAll(@Req() req: Request, @Res() res: Response) {
+    if (!req.query.id) {
+      res.status(400).send("Video ID is required");
+      return;
+    }
     const videoId = new mongoose.Types.ObjectId(req.query.id as string);
     const videoRecord = await this.videoService.findById(videoId);
     if (!videoRecord) {

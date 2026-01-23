@@ -25,7 +25,12 @@ export class VideoController {
 
   @Get()
   async findAll(@Req() req: Request, @Res() res: Response) {
-    const blobClient = await this.videoService.findAll(req.query.path as string);
+    const videoPath = req.query.path as string;
+    if (!videoPath) {
+      res.status(400).send('A video path must be provided.');
+      return;
+    }
+    const blobClient = await this.videoService.findAll(videoPath);
     
     const properties = await blobClient.getProperties();
 

@@ -37,3 +37,13 @@ spec:
                 configMapKeyRef:
                   name: video-streaming-config
                   key: rabbit 
+            - name: VIDEO_STORAGE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: video-streaming-config
+                  key: videoStorageHost
+            - name: VIDEO_STORAGE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: video-streaming-config
+                  key: videoStoragePort
