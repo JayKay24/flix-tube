@@ -1,15 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: video-streaming
+  name: video-storage
 spec:
   selector:
     matchLabels:
-      app: video-streaming
+      app: video-storage
   template:
     spec:
       containers:
-        - name: video-streaming
+        - name: video-storage
+          image: rjprivateregistry.azurecr.io/azure-storage:latest
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               memory: "500Mi"

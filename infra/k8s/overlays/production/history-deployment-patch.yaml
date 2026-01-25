@@ -1,15 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: video-storage
+  name: history
 spec:
   selector:
     matchLabels:
-      app: video-storage
+      app: history
   template:
     spec:
       containers:
-        - name: video-storage
+        - name: history
+          image: rjprivateregistry.azurecr.io/history:latest
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               memory: "500Mi"

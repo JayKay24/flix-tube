@@ -1,15 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: history
+  name: video-streaming
 spec:
   selector:
     matchLabels:
-      app: history
+      app: video-streaming
   template:
     spec:
       containers:
-        - name: history
+        - name: video-streaming
+          image: rjprivateregistry.azurecr.io/video-streaming:latest
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               memory: "500Mi"
