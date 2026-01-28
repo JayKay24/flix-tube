@@ -60,3 +60,4 @@ npm-cache/
 **/.terraform
 *.tfvars
 *.tfstate
+*.tfstate*
