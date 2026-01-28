@@ -55,3 +55,8 @@ infra/k8s/**/config.yaml
 
 # npm cache
 npm-cache/
+
+# terraform
+**/.terraform
+*.tfvars
+*.tfstate
