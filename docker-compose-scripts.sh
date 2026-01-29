@@ -3,12 +3,13 @@
 build_images() #@ USAGE: build_images PROD
 {
   prod_dev=$1
+  tag=$2
 
-  if [[ $prod_dev = "prod" ]];
+  if [[ $prod_dev = "prod" ]] && [[ -n $tag ]];
   then
-    docker build -f apps/azure-storage/Dockerfile-prod -t azure-storage .
-    docker build -f apps/video-streaming/Dockerfile-prod -t video-streaming .
-    docker build -f apps/history/Dockerfile-prod -t history .
+    docker build -f apps/azure-storage/Dockerfile-prod -t "azure-storage:${tag:-latest}" .
+    docker build -f apps/video-streaming/Dockerfile-prod -t "video-streaming:${tag:-latest}" .
+    docker build -f apps/history/Dockerfile-prod -t "history:${tag:-latest}" .
   else
     docker build -f apps/azure-storage/Dockerfile-dev -t azure-storage .
     docker build -f apps/video-streaming/Dockerfile-dev -t video-streaming .
