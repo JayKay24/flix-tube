@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-build_azure_storage_image() #@ USAGE: build_azure_storage_image PROD
+build_azure_storage_image() #@ USAGE: build_azure_storage_image prod 1 amd
 {
   prod_dev_deps=$1
   tag=$2
@@ -19,7 +19,7 @@ build_azure_storage_image() #@ USAGE: build_azure_storage_image PROD
   fi
 }
 
-build_video_streaming_image() #@ USAGE: build_video_streaming_image PROD
+build_video_streaming_image() #@ USAGE: build_video_streaming_image prod 1 amd
 {
   prod_dev_deps=$1
   tag=$2
@@ -38,7 +38,7 @@ build_video_streaming_image() #@ USAGE: build_video_streaming_image PROD
   fi
 }
 
-build_history_image() #@ USAGE: build_history_image PROD
+build_history_image() #@ USAGE: build_history_image prod 1 amd
 {
   prod_dev_deps=$1
   tag=$2
@@ -54,6 +54,31 @@ build_history_image() #@ USAGE: build_history_image PROD
     fi
   else
     docker build -f apps/history/Dockerfile-dev -t history .
+  fi
+}
+
+build_images() #@ USAGE: build_images prod 1 amd
+{
+  prod_dev_deps=$1
+  tag=$2
+  amd=$3
+
+  if [[ $prod_dev_deps = "prod" ]] && [[ -n $tag ]];
+  then
+    if [[ $amd = "amd" ]];
+    then
+      build_azure_storage_image $prod_dev_deps $tag $amd
+      build_video_streaming_image $prod_dev_deps $tag $amd
+      build_history_image $prod_dev_deps $tag $amd
+    else
+      build_azure_storage_image $prod_dev_deps $tag
+      build_video_streaming_image $prod_dev_deps $tag
+      build_history_image $prod_dev_deps $tag
+    fi
+  else
+    build_azure_storage_image $prod_dev_deps
+    build_video_streaming_image $prod_dev_deps
+    build_history_image $prod_dev_deps
   fi
 }
 
