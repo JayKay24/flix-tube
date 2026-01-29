@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
         - name: video-storage
-          image: rjprivateregistry.azurecr.io/azure-storage:latest
+          image: rjprivatecontainerregistry.azurecr.io/azure-storage:1
           imagePullPolicy: IfNotPresent
           resources:
             limits:
