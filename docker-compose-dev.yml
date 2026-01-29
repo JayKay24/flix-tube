@@ -1,6 +1,6 @@
 services:
   db:
-    image: mongo:7.0.0
+    image: mongo:latest
     container_name: db
     ports:
       - "4000:27017"
