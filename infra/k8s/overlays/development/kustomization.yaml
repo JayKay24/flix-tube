@@ -10,3 +10,4 @@ patches:
   - path: history-deployment-patch.yaml
   - path: video-streaming-deployment-patch.yaml
   - path: video-storage-deployment-patch.yaml
+  - path: video-storage-service-patch.yaml
