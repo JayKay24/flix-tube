@@ -3,13 +3,12 @@ kind: Kustomization
 
 resources:
 - ../../base/video-storage
-- ../../base/history
-- ../../base/video-streaming
+# - ../../base/history
+# - ../../base/video-streaming
 
 patches:
-  - path: history-deployment-patch.yaml
-  - path: history-service-patch.yaml
+  # - path: history-deployment-patch.yaml
   - path: video-storage-deployment-patch.yaml
   - path: video-storage-service-patch.yaml
-  - path: video-streaming-deployment-patch.yaml
-  - path: video-streaming-service-patch.yaml
+  # - path: video-streaming-deployment-patch.yaml
+  # - path: video-streaming-service-patch.yaml
