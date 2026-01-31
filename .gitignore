@@ -49,9 +49,6 @@ test-output
 error.log
 launch.json
 .env
-config.yaml
-infra/k8s/**/secrets.yaml
-infra/k8s/**/config.yaml
 
 # npm cache
 npm-cache/

@@ -1,0 +1,7 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: video-storage-config
+data:
+  port: $PORT
+  storageAccountName: $STORAGE_ACCOUNT_NAME
