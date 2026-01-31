@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# utility functions to speed up common command-line tasks
+
 build_azure_storage_image() #@ USAGE: build_azure_storage_image prod 1 amd
 {
   prod_dev_deps=$1
