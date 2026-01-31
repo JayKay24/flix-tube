@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
         - name: video-streaming
-          image: rjprivateregistry.azurecr.io/video-streaming:latest
+          image: $CONTAINER_REGISTRY/video-streaming:$VERSION
           imagePullPolicy: IfNotPresent
           resources:
             limits:

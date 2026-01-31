@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
         - name: history
-          image: rjprivateregistry.azurecr.io/history:latest
+          image: $CONTAINER_REGISTRY/history:$VERSION
           imagePullPolicy: IfNotPresent
           resources:
             limits:
