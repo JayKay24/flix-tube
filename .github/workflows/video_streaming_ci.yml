@@ -32,6 +32,12 @@ jobs:
         run: npx nx run @flix-tube/video-streaming:build
 
   unit_test:
+    env:
+      VIDEO_STORAGE_PORT: ${{ secrets.VIDEO_STORAGE_PORT }}
+      VIDEO_STORAGE_HOST: ${{ secrets.VIDEO_STORAGE_HOST }}
+      DBHOST: ${{ secrets.DBHOST }}
+      DBNAME: ${{ secrets.DBNAME }}
+
     name: Run Unit Tests on video-streaming Microservice
     runs-on: ubuntu-latest
     steps:
