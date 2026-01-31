@@ -3,4 +3,4 @@
 deployment_env=$1
 kubectl apply -k $deployment_env --dry-run=client -o yaml | \
   envsubst | \
-  kubectl apply -f -
+  kubectl delete -f -
