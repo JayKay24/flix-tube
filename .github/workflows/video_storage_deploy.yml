@@ -1,0 +1,48 @@
+name: Deploy Microservices
+
+on:
+  push:
+    branches:
+      - "main"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  deploy_video_storage:
+    name: Deploy video-storage Microservice
+    runs-on: ubuntu-latest
+
+    env:
+      VERSION: ${{ github.sha }}
+      CONTAINER_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
+      REGISTRY_UN: ${{ secrets.REGISTRY_UN }}
+      REGISTRY_PW: ${{ secrets.REGISTRY_PW }}
+      PORT: ${{ secrets.PORT }}
+      STORAGE_ACCOUNT_NAME: ${{ secrets.STORAGE_ACCOUNT_NAME }}
+      STORAGE_ACCOUNT_KEY: ${{ secrets.STORAGE_ACCOUNT_KEY }}
+      VIDEO_STORAGE_HOST: ${{ secrets.VIDEO_STORAGE_HOST }}
+      VIDEO_STORAGE_PORT: ${{ secrets.VIDEO_STORAGE_PORT }}
+      DBHOST: ${{ secrets.DBHOST }}
+      DBNAME: ${{ secrets.DBNAME }}
+      HISTORY_DBNAME: ${{ secrets.HISTORY_DBNAME }}
+      HISTORY_DBHOST: ${{ secrets.HISTORY_DBHOST }}
+      RABBIT: ${{ secrets.RABBIT }}
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build video-storage
+        run: ./scripts/build_image.sh video-storage apps/azure-storage/Dockerfile-prod
+
+      - name: Publish video-storage
+        run: ./scripts/push_image.sh video-storage
+
+      - uses: tale/kubectl-action@v1
+        with:
+          base64-kube-config: ${{ secrets.KUBE_CONFIG }}
+          kubectl-version: v1.35.0
+
+      - name: Deploy video-storage
+        run: ./scripts/deploy.sh infra/k8s/overlays/production
