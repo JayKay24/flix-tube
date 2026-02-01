@@ -35,10 +35,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build video-storage
-        run: ./scripts/build_image.sh video-storage apps/azure-storage/Dockerfile-prod
+        run: ./scripts/build_image.sh azure-storage apps/azure-storage/Dockerfile-prod
 
       - name: Publish video-storage
-        run: ./scripts/push_image.sh video-storage
+        run: ./scripts/push_image.sh azure-storage
 
       - uses: tale/kubectl-action@v1
         with:
