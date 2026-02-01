@@ -23,7 +23,7 @@ jobs:
       REGISTRY_PW: ${{ secrets.REGISTRY_PW }}
       PORT: ${{ secrets.PORT }}
       STORAGE_ACCOUNT_NAME: ${{ secrets.STORAGE_ACCOUNT_NAME }}
-      STORAGE_ACCOUNT_KEY: ${{ secrets.STORAGE_ACCOUNT_KEY }}
+      STORAGE_ACCESS_KEY: ${{ secrets.STORAGE_ACCESS_KEY }}
       VIDEO_STORAGE_HOST: ${{ secrets.VIDEO_STORAGE_HOST }}
       VIDEO_STORAGE_PORT: ${{ secrets.VIDEO_STORAGE_PORT }}
       DBHOST: ${{ secrets.DBHOST }}
