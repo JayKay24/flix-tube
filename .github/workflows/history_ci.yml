@@ -1,0 +1,51 @@
+name: History CI
+
+on:
+  push:
+    branches:
+      - "main"
+      - "develop"
+  pull_request:
+    types: [opened]
+    branches:
+      - "main"
+      - "develop"
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  build:
+    name: Build history Microservice
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+      - name: Build history microservice
+        run: npx nx run @flix-tube/history:build
+  
+  unit_test:
+    env:
+      HISTORY_DBNAME: ${{ secrets.HISTORY_DBNAME }}
+      HISTORY_DBHOST: ${{ secrets.HISTORY_DBHOST }}
+      RABBIT: ${{ secrets.RABBIT }}
+    
+    name: Run Unit Tests on history Microservice
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+          cache: "npm"
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Unit tests on history microservice
+        run: npx nx run history:test
