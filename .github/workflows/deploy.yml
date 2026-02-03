@@ -1,4 +1,4 @@
-name: Deploy Microservices
+name: Deploy All Microservices
 
 on:
   push:
@@ -12,8 +12,8 @@ permissions:
   actions: read
 
 jobs:
-  deploy_video_storage:
-    name: Deploy video-storage Microservice
+  deploy:
+    name: Deploy All Microservices
     runs-on: ubuntu-latest
 
     env:
@@ -36,14 +36,22 @@ jobs:
       - uses: actions/checkout@v3
       - name: Build video-storage
         run: ./scripts/build_image.sh azure-storage apps/azure-storage/Dockerfile-prod
+      - name: Build history
+        run: ./scripts/build_image.sh history apps/history/Dockerfile-prod
+      - name: Build video-streaming
+        run: ./scripts/build_image.sh video-streaming apps/video-streaming/Dockerfile-prod
 
       - name: Publish video-storage
         run: ./scripts/push_image.sh azure-storage
+      - name: Publish history
+        run: ./scripts/push_image.sh history
+      - name: Publish video-streaming
+        run: ./scripts/push_image.sh video-streaming
 
       - uses: tale/kubectl-action@v1
         with:
           base64-kube-config: ${{ secrets.KUBE_CONFIG }}
           kubectl-version: v1.35.0
 
-      - name: Deploy video-storage
+      - name: Deploy to k8s cluster
         run: ./scripts/deploy.sh infra/k8s/overlays/production
