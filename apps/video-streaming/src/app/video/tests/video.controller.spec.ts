@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { VideoController } from './video.controller';
-import { VideoService } from './video.service';
+import { VideoController } from '../video.controller';
+import { VideoService } from '../video.service';
 import { getModelToken } from '@nestjs/mongoose';
-import { Video } from './schemas/video.schema';
+import { Video } from '../schemas/video.schema';
 import { ProducerService } from '@flix-tube/rmq-broker';
 
 describe('VideoController', () => {

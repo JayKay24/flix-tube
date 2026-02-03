@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { VideoService } from './video.service';
+import { VideoService } from '../video.service';
 import { getModelToken } from '@nestjs/mongoose';
-import { Video } from './schemas/video.schema';
+import { Video } from '../schemas/video.schema';
 
 describe('VideoService', () => {
   let service: VideoService;
