@@ -8,6 +8,8 @@ import {
   Delete,
   Res,
   Req,
+  Query,
+  ValidationPipe,
 } from '@nestjs/common';
 import type { Response, Request } from 'express';
 import { VideoService } from './video.service';
@@ -16,6 +18,7 @@ import { UpdateVideoDto } from './dto/update-video.dto';
 import http from 'http';
 import mongoose from 'mongoose';
 import { ExchangeType, ProducerService } from '@flix-tube/rmq-broker';
+import { QueryVideo } from './dto/query-video.dto';
 
 const VIDEO_STORAGE_HOST = process.env.VIDEO_STORAGE_HOST ?? '';
 
@@ -37,7 +40,7 @@ export class VideoController {
   }
 
   @Get()
-  async findAll(@Req() req: Request, @Res() res: Response) {
+  async findAll(@Query(new ValidationPipe()) query: QueryVideo, @Req() req: Request, @Res() res: Response) {
     if (!req.query.id) {
       res.status(400).send("Video ID is required");
       return;
