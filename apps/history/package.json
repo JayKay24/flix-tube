@@ -78,7 +78,21 @@
       },
       "test": {
         "options": {
-          "passWithNoTests": true
+          "passWithNoTests": true,
+          "coverage": true,
+          "coverageDirectory": "test-coverage",
+          "collectCoverageFrom": [
+            "**/*.(t|j)s",
+            "!main.(t|j)s",
+            "!**/*.module.(t|j)s",
+            "!**/*.dto.(t|j)s",
+            "!**/*.entity.(t|j)s",
+            "!**/*.args.(t|j)s",
+            "!**/*.factories.(t|j)s",
+            "!**/*.types.(t|j)s",
+            "!**/*.schema.(t|j)s",
+            "!**/node_modules/**"
+          ]
         }
       }
     }
