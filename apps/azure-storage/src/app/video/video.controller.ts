@@ -8,11 +8,14 @@ import {
   Delete,
   Res,
   Req,
+  Query,
+  ValidationPipe,
 } from '@nestjs/common';
 import { VideoService } from './video.service';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
-import type { Response, Request } from 'express';
+import type { Response, Request, query } from 'express';
+import { QueryVideo } from './dto/query-video.dto';
 
 @Controller('video')
 export class VideoController {
@@ -24,8 +27,8 @@ export class VideoController {
   }
 
   @Get()
-  async findAll(@Req() req: Request, @Res() res: Response) {
-    const videoPath = req.query.path as string;
+  async findAll(@Query(new ValidationPipe()) query: QueryVideo, @Req() req: Request, @Res() res: Response) {
+    const videoPath = query.path;
     if (!videoPath) {
       res.status(400).send('A video path must be provided.');
       return;
