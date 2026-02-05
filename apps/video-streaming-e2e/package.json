@@ -7,18 +7,23 @@
       "@flix-tube/video-streaming"
     ],
     "targets": {
+      "start-dev-env": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "source ./dev_utility_functions.sh && up prod"
+        }
+      },
       "e2e": {
         "executor": "@nx/jest:jest",
         "outputs": [
-          "{projectRoot}/test-output/jest/coverage"
+          "{projectRoot}/apps/video-streaming-e2e/test-output/jest/coverage"
         ],
         "options": {
           "jestConfig": "apps/video-streaming-e2e/jest.config.ts",
           "passWithNoTests": true
         },
         "dependsOn": [
-          "@flix-tube/video-streaming:build",
-          "@flix-tube/video-streaming:serve"
+          "start-dev-env"
         ]
       }
     }

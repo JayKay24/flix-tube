@@ -9,6 +9,12 @@ module.exports = async function () {
 
   const host = process.env.TEST_VSTREAM_HOST ?? 'localhost';
   const port = process.env.TEST_VSTREAM_PORT ? Number(process.env.TEST_VSTREAM_PORT) : 4002;
+  const rabbitPort = process.env.RABBIT_PORT ? Number(process.env.RABBIT_PORT) : 5672;
+  const mongoDBPort = process.env.MONGODB_PORT ? Number(process.env.MONGODB_PORT) : 4000;
+
+  console.log("Host & port: ", host, port);
+  await waitForPortOpen(mongoDBPort);
+  await waitForPortOpen(rabbitPort);
   await waitForPortOpen(port, { host });
 
   // Hint: Use `globalThis` to pass variables to global teardown.
