@@ -12,6 +12,11 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     restart: "always"
 
   azure-storage:
@@ -37,9 +42,12 @@ services:
     ports:
       - "4002:${PORT}"
     depends_on:
-      - db
-      - rabbit
-      - azure-storage
+      rabbit:
+        condition: service_healthy
+      db:
+        condition: service_started
+      azure-storage:
+        condition: service_started
     environment:
       - PORT=${PORT}
       - DBHOST=${DBHOST}
@@ -57,8 +65,10 @@ services:
     ports:
       - "4003:${PORT}"
     depends_on:
-      - db
-      - rabbit
+      rabbit:
+        condition: service_healthy
+      db:
+        condition: service_started
     environment:
       - PORT=${PORT}
       - RABBIT=${RABBIT}
