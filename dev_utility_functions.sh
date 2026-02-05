@@ -90,12 +90,12 @@ up() #@ USAGE: up PROD
 
   if [[ $prod = "prod" ]];
   then
-    docker compose -f docker-compose-prod.yml up --build
+    docker compose -f docker-compose-prod.yml up --build --detach
   elif [[ $prod = "dev" ]];
   then
-    docker compose -f docker-compose-dev.yml up --build
+    docker compose -f docker-compose-dev.yml up --build --detach
   else
-    docker compose -f docker-compose-deps.yml up --build
+    docker compose -f docker-compose-deps.yml up --build --detach
   fi
 }
 
