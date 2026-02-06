@@ -88,3 +88,25 @@ services:
       - HISTORY_DBHOST=${HISTORY_DBHOST}
       - NODE_ENV=development
     restart: "no"
+  
+  metadata:
+    image: metadata
+    build:
+      context: .
+      dockerfile: apps/metadata/Dockerfile-dev
+    container_name: metadata
+    volumes:
+      - ./:/app:z
+      - /app/node_modules
+      - /app/.nx
+    ports:
+      - "4004:${PORT}"
+    depends_on:
+      - db:
+          condition: service_started
+    environment:
+      - PORT=${PORT}
+      - DBHOST=${DBHOST}
+      - DBNAME=${DBNAME}
+    restart: "no"
+
