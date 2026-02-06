@@ -102,8 +102,8 @@ services:
     ports:
       - "4004:${PORT}"
     depends_on:
-      - db:
-          condition: service_started
+      db:
+        condition: service_started
     environment:
       - PORT=${PORT}
       - DBHOST=${DBHOST}

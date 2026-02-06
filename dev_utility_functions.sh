@@ -59,6 +59,25 @@ build_history_image() #@ USAGE: build_history_image prod 1 amd
   fi
 }
 
+build_metadata_image() #@ USAGE: build_metadata_image prod 1 amd
+{
+  prod_dev_deps=$1
+  tag=$2
+  amd=$3
+
+  if [[ $prod_dev_deps = "prod" ]] && [[ -n $tag ]];
+  then
+    if [[ $amd = "amd" ]];
+    then
+      docker build -f apps/metadata/Dockerfile-prod --platform linux/amd64 -t "metadata:${tag:-latest}" .
+    else
+      docker build -f apps/metadata/Dockerfile-prod -t "metadata:${tag:-latest}" .
+    fi
+  else
+    docker build -f apps/metadata/Dockerfile-dev -t metadata .
+  fi
+}
+
 build_images() #@ USAGE: build_images prod 1 amd
 {
   prod_dev_deps=$1
@@ -72,15 +91,18 @@ build_images() #@ USAGE: build_images prod 1 amd
       build_azure_storage_image $prod_dev_deps $tag $amd
       build_video_streaming_image $prod_dev_deps $tag $amd
       build_history_image $prod_dev_deps $tag $amd
+      build_metadata_image $prod_dev_deps $tag $amd
     else
       build_azure_storage_image $prod_dev_deps $tag
       build_video_streaming_image $prod_dev_deps $tag
       build_history_image $prod_dev_deps $tag
+      build_metadata_image $prod_dev_deps $tag
     fi
   else
     build_azure_storage_image $prod_dev_deps
     build_video_streaming_image $prod_dev_deps
     build_history_image $prod_dev_deps
+    build_metadata_image $prod_dev_deps
   fi
 }
 
