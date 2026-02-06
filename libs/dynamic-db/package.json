@@ -2,38 +2,15 @@
   "name": "@flix-tube/dynamic-db",
   "version": "0.0.1",
   "private": true,
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./src/index.ts",
+  "types": "./dist/index.ts",
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "@flix-tube/source": "./src/index.ts",
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "default": "./dist/index.js"
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "default": "./src/index.ts"
     }
   },
-  "dependencies": {
-    "tslib": "^2.3.0"
-  },
-  "nx": {
-    "targets": {
-      "build": {
-        "executor": "@nx/js:tsc",
-        "outputs": [
-          "{options.outputPath}"
-        ],
-        "options": {
-          "outputPath": "dist/libs/dynamic-db",
-          "tsConfig": "libs/dynamic-db/tsconfig.lib.json",
-          "packageJson": "libs/dynamic-db/package.json",
-          "main": "libs/dynamic-db/src/index.ts",
-          "assets": [
-            "libs/dynamic-db/*.md"
-          ]
-        }
-      }
-    }
-  }
+  "dependencies": {}
 }

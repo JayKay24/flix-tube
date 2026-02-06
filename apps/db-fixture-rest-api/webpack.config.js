@@ -9,6 +9,11 @@ module.exports = {
       devtoolModuleFilenameTemplate: '[absolute-resource-path]',
     }),
   },
+  resolve: {
+    alias: {
+      '@flix-tube/dynamic-db': join(__dirname, '../../libs/dynamic-db/src/index.ts')
+    }
+  },
   plugins: [
     new NxAppWebpackPlugin({
       target: 'node',
