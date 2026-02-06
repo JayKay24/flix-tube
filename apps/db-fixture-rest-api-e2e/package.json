@@ -1,0 +1,26 @@
+{
+  "name": "@flix-tube/db-fixture-rest-api-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@flix-tube/db-fixture-rest-api"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "apps/db-fixture-rest-api-e2e/jest.config.cts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "@flix-tube/db-fixture-rest-api:build",
+          "@flix-tube/db-fixture-rest-api:serve"
+        ]
+      }
+    }
+  }
+}

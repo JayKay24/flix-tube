@@ -57,7 +57,8 @@
         "apps/video-streaming-e2e/**/*",
         "apps/azure-storage-e2e/**/*",
         "apps/history-e2e/**/*",
-        "apps/metadata-e2e/**/*"
+        "apps/metadata-e2e/**/*",
+        "apps/db-fixture-rest-api-e2e/**/*"
       ]
     },
     {

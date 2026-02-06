@@ -35,6 +35,12 @@
     },
     {
       "path": "./apps/metadata"
+    },
+    {
+      "path": "./apps/db-fixture-rest-api-e2e"
+    },
+    {
+      "path": "./apps/db-fixture-rest-api"
     }
   ]
 }
