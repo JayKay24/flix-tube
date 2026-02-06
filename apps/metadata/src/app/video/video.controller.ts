@@ -6,7 +6,9 @@ import {
   Patch,
   Param,
   Delete,
+  Res,
 } from '@nestjs/common';
+import type { Response } from 'express';
 import { VideoService } from './video.service';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
@@ -21,8 +23,12 @@ export class VideoController {
   }
 
   @Get()
-  findAll() {
-    return this.videoService.findAll();
+  async findAll(@Res() res: Response) {
+    const videos = await this.videoService.findAll();
+    
+    res.json({
+      videos
+    });
   }
 
   @Get(':id')
