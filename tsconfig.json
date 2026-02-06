@@ -29,6 +29,12 @@
     },
     {
       "path": "./apps/gateway"
+    },
+    {
+      "path": "./apps/metadata-e2e"
+    },
+    {
+      "path": "./apps/metadata"
     }
   ]
 }
