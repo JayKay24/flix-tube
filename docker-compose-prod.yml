@@ -90,6 +90,24 @@ services:
         condition: service_started
     environment:
       - PORT=${PORT}
-      - DBHOST=${DBHOST}
-      - DBNAME=${DBNAME}
+      - METADATA_DBHOST=${METADATA_DBHOST}
+      - METADATA_DBNAME=${METADATA_DBNAME}
     restart: "no"
+
+  db-fixture-rest-api:
+    image: db-fixture-rest-api
+    build:
+      context: .
+      dockerfile: apps/db-fixture-rest-api/Dockerfile-prod
+    container_name: db-fixture-rest-api
+    ports:
+      - "9000:${PORT}"
+    depends_on:
+      db:
+        condition: service_started
+    environment:
+      - DB_FIXTURES_HOST=${DB_FIXTURES_HOST}
+      - FIXTURES_DIR=${FIXTURES_DIR}
+      - PORT=${PORT}
+    restart: "always"
+

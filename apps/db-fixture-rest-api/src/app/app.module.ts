@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { MongooseModule } from '@nestjs/mongoose';
+
+const DB_FIXTURES_HOST = process.env.DB_FIXTURES_HOST ?? '';
 
 @Module({
-  imports: [],
+  imports: [MongooseModule.forRoot(DB_FIXTURES_HOST)],
   controllers: [AppController],
   providers: [AppService],
 })
