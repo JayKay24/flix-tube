@@ -23,6 +23,12 @@
     },
     {
       "path": "./libs/rmq-broker"
+    },
+    {
+      "path": "./apps/gateway-e2e"
+    },
+    {
+      "path": "./apps/gateway"
     }
   ]
 }

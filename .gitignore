@@ -59,3 +59,8 @@ npm-cache/
 *.tfvars
 *.tfstate
 *.tfstate*
+
+# Next.js
+.next
+out
+next-env.d.ts

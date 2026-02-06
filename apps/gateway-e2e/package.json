@@ -1,0 +1,10 @@
+{
+  "name": "@flix-tube/gateway-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@flix-tube/gateway"
+    ]
+  }
+}
