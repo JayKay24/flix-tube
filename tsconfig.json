@@ -41,6 +41,9 @@
     },
     {
       "path": "./apps/db-fixture-rest-api"
+    },
+    {
+      "path": "./libs/dynamic-db"
     }
   ]
 }
