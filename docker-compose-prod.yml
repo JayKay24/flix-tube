@@ -82,7 +82,7 @@ services:
     build:
       context: .
       dockerfile: apps/metadata/Dockerfile-prod
-    container: metadata
+    container_name: metadata
     ports:
       - "4004:${PORT}"
     depends_on:
