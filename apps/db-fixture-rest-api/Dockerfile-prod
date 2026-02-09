@@ -30,6 +30,9 @@ RUN npm ci --omit=dev
 # Copy the built application from the builder stage
 COPY --from=builder /app/apps/db-fixture-rest-api/dist/ .
 
+# Copy the fixture files
+COPY apps/db-fixture-rest-api/src/fixtures ./apps/db-fixture-rest-api/src/fixtures
+
 # Expose the port the app runs on
 EXPOSE 80
 
