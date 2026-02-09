@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect } from 'react';
 import { useVideos } from '../hooks/useVideos';
 
@@ -6,7 +8,7 @@ export default function Index() {
 
   useEffect(() => {
     (async () => {
-      await fetchVideos('http://localhost:4004/video');
+      await fetchVideos('http://metadata/video');
     })()
   }, []);
   /*
