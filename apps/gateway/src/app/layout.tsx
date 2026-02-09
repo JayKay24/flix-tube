@@ -12,6 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <title>FlixTube: Home</title>
       <body>{children}</body>
     </html>
   );
