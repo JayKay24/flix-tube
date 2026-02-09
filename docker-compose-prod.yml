@@ -93,6 +93,24 @@ services:
       - METADATA_DBHOST=${METADATA_DBHOST}
       - METADATA_DBNAME=${METADATA_DBNAME}
     restart: "no"
+  
+  gateway:
+    image: gateway
+    build:
+      context: .
+      dockerfile: apps/gateway/Dockerfile-dev
+    container_name: gateway
+    ports:
+      - "4005:${PORT}"
+    depends_on:
+      metadata:
+        condition: service_started
+      video-streaming:
+        condition: service_started
+    environment:
+      - PORT=${PORT}
+      - NODE_ENV=production
+    restart: "no"
 
   db-fixture-rest-api:
     image: db-fixture-rest-api

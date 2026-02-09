@@ -109,6 +109,29 @@ services:
       - DBHOST=${DBHOST}
       - DBNAME=${DBNAME}
     restart: "no"
+  
+  gateway:
+    image: gateway
+    build:
+      context: .
+      dockerfile: apps/gateway/Dockerfile-dev
+    container_name: gateway
+    volumes:
+      - ./:/app:z
+      - /app/node_modules
+      - /app/.nx
+    ports:
+      - "4005:${PORT}"
+    depends_on:
+      metadata:
+        condition: service_started
+      video-streaming:
+        condition: service_started
+    environment:
+      - PORT=${PORT}
+      - NODE_ENV=development
+    restart: "no"
+      
 
   db-fixture-rest-api:
     image: db-fixture-rest-api
