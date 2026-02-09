@@ -5,3 +5,4 @@
 .nx
 **/dist/*
 infra
+**/.next

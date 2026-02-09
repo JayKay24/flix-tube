@@ -24,12 +24,14 @@ WORKDIR /app
 ENV NODE_ENV="production"
 
 # Copy the built application from the builder stage
-COPY --from=builder /app/apps/gateway/.next/standalone ./
+COPY --from=builder /app/apps/gateway/.next/standalone ./standalone
 
-COPY --from=builder /app/apps/gateway/public ./apps/gateway/public
+COPY --from=builder /app/apps/gateway/public ./standalone/public
+
+COPY --from=builder /app/apps/gateway/.next/static ./standalone/apps/gateway/.next/static
 
 # Expose the port the app runs on
 EXPOSE 80
 
 # Command to run the built application
-CMD [ "node", "apps/gateway/server.js" ]
+CMD [ "node", "standalone/apps/gateway/server.js" ]
