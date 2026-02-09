@@ -8,7 +8,7 @@ export default function Index() {
 
   useEffect(() => {
     (async () => {
-      await fetchVideos('http://metadata/video');
+      await fetchVideos('http://localhost:4004/video');
     })()
   }, []);
   /*

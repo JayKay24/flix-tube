@@ -26,9 +26,7 @@ export class VideoController {
   async findAll(@Res() res: Response) {
     const videos = await this.videoService.findAll();
     
-    res.json({
-      videos
-    });
+    res.json(videos);
   }
 
   @Get(':id')
