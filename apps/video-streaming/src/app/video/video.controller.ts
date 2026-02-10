@@ -17,7 +17,7 @@ import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import http from 'http';
 import mongoose from 'mongoose';
-import { ExchangeType, ProducerService } from '@flix-tube/rmq-broker';
+import { ExchangeType, IViewed, ProducerService } from '@flix-tube/rmq-broker';
 import { QueryVideo } from './dto/query-video.dto';
 
 const VIDEO_STORAGE_HOST = process.env.VIDEO_STORAGE_HOST ?? '';
@@ -65,7 +65,7 @@ export class VideoController {
     
     req.pipe(forwardRequest);
 
-    this.sendViewedMessage(ExchangeType.VIEWED, videoRecord.videoPath);
+    this.sendViewedMessage(ExchangeType.VIEWED, videoId);
   }
 
   @Get(':id')
@@ -83,8 +83,8 @@ export class VideoController {
     return this.videoService.remove(+id);
   }
 
-   sendViewedMessage(messageChannel: string, videoPath: string): void {
-    const msg = { videoPath };
+   sendViewedMessage(messageChannel: ExchangeType, videoId: mongoose.Types.ObjectId): void {
+    const msg: IViewed = { videoId: videoId.toHexString() };
     const jsonMsg = JSON.stringify(msg);
     this.producerService.sendMessage(messageChannel, jsonMsg);
   }

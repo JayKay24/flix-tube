@@ -9,7 +9,7 @@ export class Viewed {
   name!: string;
 
   @Prop()
-  videoPath!: string;
+  videoId!: string;
 }
 
 export const ViewedSchema = SchemaFactory.createForClass(Viewed);

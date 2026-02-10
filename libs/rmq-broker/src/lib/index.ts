@@ -1,4 +1,5 @@
-export { ProducerService } from './producer.service';
-export { FlixTubeRmqBrokerModule } from './rmq-broker.module';
-export { rabbitMQConfig } from './rmq-broker-config.options';
-export { ExchangeType } from './exchanges-types';
+export * from './producer.service';
+export * from './rmq-broker.module';
+export * from './rmq-broker-config.options';
+export * from './exchanges-types';
+export * from './message-types';

@@ -1,32 +1,19 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
   Delete,
-  Res,
 } from '@nestjs/common';
 import { ViewedService } from './viewed.service';
-import { CreateViewedDto } from './dto/create-viewed.dto';
 import { UpdateViewedDto } from './dto/update-viewed.dto';
-import type { Response } from 'express';
 import { EventPattern, Payload } from '@nestjs/microservices';
+import { ExchangeType, IViewed } from '@flix-tube/rmq-broker';
 
 @Controller('viewed')
 export class ViewedController {
   constructor(private readonly viewedService: ViewedService) {}
-
-  @Post()
-  async create(
-    @Body() createViewedDto: CreateViewedDto,
-    @Res() res: Response,
-  ) {
-    await this.viewedService.create(createViewedDto.videoPath);
-
-    res.sendStatus(201);
-  }
 
   @Get()
   findAll() {
@@ -48,9 +35,9 @@ export class ViewedController {
     return this.viewedService.remove(+id);
   }
 
-  @EventPattern('viewed')
+  @EventPattern(ExchangeType.VIEWED)
   async handleMessage(@Payload() msg: string) {
-    const parsedMsg = JSON.parse(msg);
-    await this.viewedService.create(parsedMsg.videoPath);
+    const parsedMsg = JSON.parse(msg) as IViewed;
+    await this.viewedService.create(parsedMsg);
   }
 }

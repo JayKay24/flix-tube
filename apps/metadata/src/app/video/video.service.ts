@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Video } from './schemas/video.schema';
 import { Model } from 'mongoose';
+import { IVideoUploaded } from '@flix-tube/rmq-broker';
 
 @Injectable()
 export class VideoService {
   constructor(@InjectModel(Video.name) private readonly videoModel: Model<Video>) {}
 
-  create(createVideoDto: CreateVideoDto) {
-    return 'This action adds a new video';
+  async create(uploadedVideo: IVideoUploaded) {
+    await this.videoModel.create({ _id: uploadedVideo.id, name: uploadedVideo.name });
   }
 
   async findAll() {

@@ -1,7 +1,6 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
@@ -10,17 +9,13 @@ import {
 } from '@nestjs/common';
 import type { Response } from 'express';
 import { VideoService } from './video.service';
-import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
+import { EventPattern, Payload } from '@nestjs/microservices';
+import { ExchangeType, IVideoUploaded } from '@flix-tube/rmq-broker';
 
 @Controller('video')
 export class VideoController {
   constructor(private readonly videoService: VideoService) {}
-
-  @Post()
-  create(@Body() createVideoDto: CreateVideoDto) {
-    return this.videoService.create(createVideoDto);
-  }
 
   @Get()
   async findAll(@Res() res: Response) {
@@ -42,5 +37,11 @@ export class VideoController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.videoService.remove(+id);
+  }
+
+  @EventPattern(ExchangeType.VIDEO_UPLOADED)
+  async handleMessage(@Payload() msg: string) {
+    const parsedMsg = JSON.parse(msg) as IVideoUploaded;
+    await this.videoService.create(parsedMsg);
   }
 }

@@ -1,3 +1,4 @@
 export enum ExchangeType {
-  VIEWED = 'viewed'
+  VIEWED = 'viewed',
+  VIDEO_UPLOADED = 'video-uploaded'
 }

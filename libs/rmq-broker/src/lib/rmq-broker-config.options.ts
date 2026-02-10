@@ -3,12 +3,12 @@ import { ExchangeType } from './exchanges-types';
 
 const RABBIT = process.env.RABBIT ?? '';
 
-export const rabbitMQConfig = (): RmqOptions => ({
+export const rabbitMQConfig = (exchangeName: ExchangeType, exchangeType = 'fanout'): RmqOptions => ({
   transport: Transport.RMQ,
   options: {
     urls: [RABBIT],
-    exchange: ExchangeType.VIEWED,
-    exchangeType: 'fanout',
+    exchange: exchangeName,
+    exchangeType: exchangeType,
     queueOptions: {
       durable: true
     }
