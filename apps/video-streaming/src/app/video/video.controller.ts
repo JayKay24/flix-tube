@@ -83,7 +83,7 @@ export class VideoController {
     return this.videoService.remove(+id);
   }
 
-   sendViewedMessage(messageChannel: ExchangeType, videoId: mongoose.Types.ObjectId): void {
+  sendViewedMessage(messageChannel: ExchangeType, videoId: mongoose.Types.ObjectId): void {
     const msg: IViewed = { videoId: videoId.toHexString() };
     const jsonMsg = JSON.stringify(msg);
     this.producerService.sendMessage(messageChannel, jsonMsg);

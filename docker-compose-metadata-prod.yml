@@ -1,5 +1,6 @@
 include:
   - ./docker-compose-metadata.yml
+  - ./docker-compose-video-upload-prod.yml
 services:
   metadata:
     build:

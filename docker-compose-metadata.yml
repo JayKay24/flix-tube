@@ -1,5 +1,6 @@
 include:
-  - ./docker-compose-mongodb.yml
+  - ./docker-compose-infra.yml
+  - ./docker-compose-video-upload.yml
 services:
   metadata:
     image: metadata
@@ -10,6 +11,10 @@ services:
       - "4004:${PORT}"
     depends_on:
       db:
+        condition: service_started
+      rabbit: 
+        condition: service_healthy
+      video-upload:
         condition: service_started
     environment:
       - PORT=${PORT}

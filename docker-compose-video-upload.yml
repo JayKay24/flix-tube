@@ -1,0 +1,15 @@
+include:
+  - ./docker-compose-rabbitmq.yml
+services:
+  video-upload:
+    image: video-upload
+    build:
+      context: .
+    container_name: video-upload
+    ports:
+      - "4005:${PORT}"
+    environment:
+      - PORT=${PORT}
+      - RABBIT=${RABBIT}
+      - VIDEO_STORAGE_HOST=${VIDEO_STORAGE_HOST}
+    restart: "no"
