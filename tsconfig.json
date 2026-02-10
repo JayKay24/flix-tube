@@ -44,6 +44,12 @@
     },
     {
       "path": "./libs/dynamic-db"
+    },
+    {
+      "path": "./apps/video-upload-e2e"
+    },
+    {
+      "path": "./apps/video-upload"
     }
   ]
 }

@@ -58,7 +58,8 @@
         "apps/azure-storage-e2e/**/*",
         "apps/history-e2e/**/*",
         "apps/metadata-e2e/**/*",
-        "apps/db-fixture-rest-api-e2e/**/*"
+        "apps/db-fixture-rest-api-e2e/**/*",
+        "apps/video-upload-e2e/**/*"
       ]
     },
     {
