@@ -1,0 +1,13 @@
+services:
+  azure-storage:
+    image: azure-storage
+    build:
+      context: .
+    container_name: video-storage
+    ports:
+      - "4001:${PORT}"
+    environment:
+      - PORT=${PORT}
+      - STORAGE_ACCOUNT_NAME=${STORAGE_ACCOUNT_NAME}
+      - STORAGE_ACCESS_KEY=${STORAGE_ACCESS_KEY}
+    restart: "no"

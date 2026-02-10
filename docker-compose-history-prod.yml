@@ -1,0 +1,6 @@
+include:
+  - ./docker-compose-history.yml
+services:
+  history:
+    build:
+      dockerfile: apps/history/Dockerfile-prod

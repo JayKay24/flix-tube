@@ -1,0 +1,22 @@
+include:
+  - ./docker-compose-infra.yml
+services:
+  history:
+    image: history
+    build:
+      context: .
+    container_name: history
+    ports:
+      - "4003:${PORT}"
+    depends_on:
+      rabbit:
+        condition: service_healthy
+      db:
+        condition: service_started
+    environment:
+      - PORT=${PORT}
+      - RABBIT=${RABBIT}
+      - HISTORY_DBNAME=${HISTORY_DBNAME}
+      - HISTORY_DBHOST=${HISTORY_DBHOST}
+      - NODE_ENV=development
+    restart: "no"

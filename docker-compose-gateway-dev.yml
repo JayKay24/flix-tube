@@ -1,0 +1,10 @@
+include:
+  - ./docker-compose-gateway.yml
+services:
+  gateway:
+    build:
+      dockerfile: apps/gateway/Dockerfile-dev
+    volumes:
+      - ./:/app:z
+      - /app/node_modules
+      - /app/.nx

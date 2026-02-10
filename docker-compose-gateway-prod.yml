@@ -1,0 +1,6 @@
+include:
+  - ./docker-compose-gateway.yml
+services:
+  gateway:
+    build:
+      dockerfile: apps/gateway/Dockerfile-prod

@@ -112,12 +112,12 @@ up() #@ USAGE: up PROD
 
   if [[ $prod = "prod" ]];
   then
-    docker compose -f docker-compose-prod.yml up --build --detach
+    docker compose -f docker-compose-all-prod.yml up --build --detach
   elif [[ $prod = "dev" ]];
   then
-    docker compose -f docker-compose-dev.yml up --build --detach
+    docker compose -f docker-compose-all-dev.yml up --build --detach
   else
-    docker compose -f docker-compose-deps.yml up --build --detach
+    docker compose -f docker-compose-infra.yml up --build --detach
   fi
 }
 
@@ -127,12 +127,12 @@ down() #@ USAGE: down PROD
 
   if [[ $prod = "prod" ]];
   then
-    docker compose -f docker-compose-prod.yml down --volumes
+    docker compose -f docker-compose-all-prod.yml down --volumes
   elif [[ $prod = "dev" ]];
   then
-    docker compose -f docker-compose-dev.yml down --volumes
+    docker compose -f docker-compose-all-dev.yml down --volumes
   else
-    docker compose -f docker-compose-deps.yml down --volumes
+    docker compose -f docker-compose-infra.yml down --volumes
   fi
 }
 

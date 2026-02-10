@@ -1,0 +1,20 @@
+include:
+  - ./docker-compose-metadata.yml
+  - ./docker-compose-video-streaming.yml
+services:
+  gateway:
+    image: gateway
+    build:
+      context: .
+    container_name: gateway
+    ports:
+      - "4005:${PORT}"
+    depends_on:
+      metadata:
+        condition: service_started
+      video-streaming:
+        condition: service_started
+    environment:
+      - PORT=${PORT}
+      - NODE_ENV=production
+    restart: "no"

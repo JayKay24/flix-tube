@@ -1,0 +1,7 @@
+include:
+  - ./docker-compose-video-storage.yml
+services:
+  azure-storage:
+    build:
+      dockerfile: apps/azure-storage/Dockerfile-prod
+    

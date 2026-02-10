@@ -1,0 +1,6 @@
+include:
+  - ./docker-compose-metadata.yml
+services:
+  metadata:
+    build:
+      dockerfile: apps/metadata/Dockerfile-prod

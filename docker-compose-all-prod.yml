@@ -1,0 +1,8 @@
+include:
+  - ./docker-compose-infra.yml
+  - ./docker-compose-video-storage-prod.yml
+  - ./docker-compose-metadata-prod.yml
+  - ./docker-compose-history-prod.yml
+  - ./docker-compose-db-fixture-rest-api-prod.yml
+  - ./docker-compose-video-streaming-prod.yml
+  - ./docker-compose-gateway-prod.yml

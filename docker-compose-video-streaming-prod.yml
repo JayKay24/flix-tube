@@ -1,0 +1,7 @@
+include:
+  - ./docker-compose-video-streaming.yml
+services:
+  video-streaming:
+    build:
+      dockerfile: apps/video-streaming/Dockerfile-prod
+    
