@@ -5,6 +5,7 @@ import { BlobServiceClient, StorageSharedKeyCredential } from '@azure/storage-bl
 
 const STORAGE_ACCOUNT_NAME = process.env.STORAGE_ACCOUNT_NAME ?? '';
 const STORAGE_ACCESS_KEY = process.env.STORAGE_ACCESS_KEY ?? '';
+const STORAGE_CONTAINER_NAME = process.env.STORAGE_CONTAINER_NAME ?? 'videos';
 
 @Injectable()
 export class VideoService {
@@ -13,9 +14,8 @@ export class VideoService {
   }
 
   async findAll(videoPath: string) {
-    const containerName = "videos";
     const blobService = this.createBlobService();
-    const containerClient = blobService.getContainerClient(containerName);
+    const containerClient = blobService.getContainerClient(STORAGE_CONTAINER_NAME);
     const blobClient = containerClient.getBlobClient(videoPath);
     
     return blobClient;
@@ -33,7 +33,7 @@ export class VideoService {
     return `This action removes a #${id} video`;
   }
 
-  private createBlobService() {
+  createBlobService() {
     const sharedKeyCredential = new StorageSharedKeyCredential(STORAGE_ACCOUNT_NAME, STORAGE_ACCESS_KEY);
     const blobService = new BlobServiceClient(`https://${STORAGE_ACCOUNT_NAME}.blob.core.windows.net`, sharedKeyCredential);
     return blobService;
