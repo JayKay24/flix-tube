@@ -11,7 +11,7 @@
       "start-dev-env": {
         "executor": "nx:run-commands",
         "options": {
-          "command": "source ./dev_utility_functions.sh && up prod"
+          "command": "source ./dev_utility_functions.sh && up prod video-storage"
         }
       },
       "e2e": {

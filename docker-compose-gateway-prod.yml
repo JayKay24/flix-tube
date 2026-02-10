@@ -1,5 +1,7 @@
 include:
   - ./docker-compose-gateway.yml
+  - ./docker-compose-video-streaming-prod.yml
+  - ./docker-compose-metadata-prod.yml
 services:
   gateway:
     build:

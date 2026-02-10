@@ -1,5 +1,6 @@
 include:
   - ./docker-compose-video-streaming.yml
+  - ./docker-compose-video-storage-dev.yml
 services:
   video-streaming:
     build:

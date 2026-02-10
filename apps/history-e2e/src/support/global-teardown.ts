@@ -8,5 +8,5 @@ module.exports = async function () {
   // Hint: `globalThis` is shared between setup and teardown.
   
   console.log(globalThis.__TEARDOWN_MESSAGE__);
-  execSync('source ./dev_utility_functions.sh && down prod');
+  execSync('source ./dev_utility_functions.sh && down prod history');
 };
