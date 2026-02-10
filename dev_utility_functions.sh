@@ -106,40 +106,59 @@ build_images() #@ USAGE: build_images prod 1 amd
   fi
 }
 
-up() #@ USAGE: up PROD
+up() #@ USAGE: up PROD video-streaming
 {
   prod=$1
+  service=$2
 
-  if [[ $prod = "prod" ]];
+  if [[ -n $prod ]] && [[ -n $service ]];
   then
-    docker compose -f docker-compose-all-prod.yml up --build --detach
-  elif [[ $prod = "dev" ]];
-  then
-    docker compose -f docker-compose-all-dev.yml up --build --detach
+    docker compose -f "docker-compose-${service}-${prod}.yml" up --build --detach
   else
-    docker compose -f docker-compose-infra.yml up --build --detach
+    if [[ $prod = "prod" ]];
+    then
+      docker compose -f docker-compose-all-prod.yml up --build --detach
+    elif [[ $prod = "dev" ]];
+    then
+      docker compose -f docker-compose-all-dev.yml up --build --detach
+    else
+      docker compose -f docker-compose-infra.yml up --build --detach
+    fi
   fi
 }
 
-down() #@ USAGE: down PROD
+down() #@ USAGE: down PROD video-streaming
 {
   prod=$1
+  service=$2
 
-  if [[ $prod = "prod" ]];
+  if [[ -n $prod ]] && [[ -n $service ]];
   then
-    docker compose -f docker-compose-all-prod.yml down --volumes
-  elif [[ $prod = "dev" ]];
-  then
-    docker compose -f docker-compose-all-dev.yml down --volumes
+    docker compose -f "docker-compose-${service}-${prod}.yml" down --volumes
   else
-    docker compose -f docker-compose-infra.yml down --volumes
+    if [[ $prod = "prod" ]];
+    then
+      docker compose -f docker-compose-all-prod.yml down --volumes
+    elif [[ $prod = "dev" ]];
+    then
+      docker compose -f docker-compose-all-dev.yml down --volumes
+    else
+      docker compose -f docker-compose-infra.yml down --volumes
+    fi
   fi
 }
 
-reboot() #@ USAGE: reboot PROD
+reboot() #@ USAGE: reboot PROD video-streaming
 {
   prod_dev=$1
+  service=$2
 
-  down $prod_dev
-  up $prod_dev
+  if [[-n $prod_dev ]] && [[ -n $service ]];
+  then
+    down $prod_dev $service
+    up $prod_dev $service
+  else
+    down $prod_dev
+    up $prod_dev
+  fi  
 }
