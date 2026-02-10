@@ -6,12 +6,14 @@ import {
   Param,
   Delete,
   Res,
+  ValidationPipe,
 } from '@nestjs/common';
 import type { Response } from 'express';
 import { VideoService } from './video.service';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import { EventPattern, Payload } from '@nestjs/microservices';
 import { ExchangeType, IVideoUploaded } from '@flix-tube/rmq-broker';
+import { GetVideoParam } from './dto/param-video.dto';
 
 @Controller('video')
 export class VideoController {
@@ -25,8 +27,13 @@ export class VideoController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.videoService.findOne(+id);
+  async findOne(@Param(new ValidationPipe()) params: GetVideoParam, @Res() res: Response) {
+    const video = await this.videoService.findOne(params.id);
+    if (!video) {
+      res.sendStatus(404);
+    } else {
+      res.json(video);
+    }
   }
 
   @Patch(':id')

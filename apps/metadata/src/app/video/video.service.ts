@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Video } from './schemas/video.schema';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { IVideoUploaded } from '@flix-tube/rmq-broker';
 
 @Injectable()
@@ -17,8 +17,8 @@ export class VideoService {
     return await this.videoModel.find().exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} video`;
+  async findOne(id: string) {
+    return await this.videoModel.findById(new mongoose.Types.ObjectId(id)).exec();
   }
 
   update(id: number, updateVideoDto: UpdateVideoDto) {
