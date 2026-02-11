@@ -1,6 +1,6 @@
 import { IsMongoId } from "class-validator";
 
-export class VideoUploadQuery {
+export class GetVideoParams {
   @IsMongoId()
   id!: string;
 }

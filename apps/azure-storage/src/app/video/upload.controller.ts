@@ -1,7 +1,7 @@
-import { Controller, Query, Req, Res } from "@nestjs/common";
+import { Controller, Post, Param, Req, Res, Headers } from "@nestjs/common";
 import type { Request, Response } from "express";
-import { VideoUploadQuery } from "./dto/headers-upload.dto";
 import { VideoService } from "./video.service";
+import { GetVideoParams } from "./dto/params-video.dto";
 
 const STORAGE_CONTAINER_NAME = process.env.STORAGE_CONTAINER_NAME ?? 'videos';
 
@@ -9,9 +9,14 @@ const STORAGE_CONTAINER_NAME = process.env.STORAGE_CONTAINER_NAME ?? 'videos';
 export class UploadController {
   constructor(private readonly videoService: VideoService) {}
 
-  async upload(@Query() query: VideoUploadQuery, @Req() req: Request, @Res() res: Response) {
-    const videoId = query.id;
-    const contentType = req.headers['content-type'];
+  @Post(':id')
+  async upload(
+    @Param() params: GetVideoParams, 
+    @Req() req: Request, 
+    @Res() res: Response, 
+    @Headers('content-type') contentType: string
+  ) {
+    const videoId = params.id;
 
     const blobService = this.videoService.createBlobService();
     const containerClient = blobService.getContainerClient(STORAGE_CONTAINER_NAME);

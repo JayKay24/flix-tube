@@ -13,16 +13,12 @@ export class VideoService {
     return 'This action adds a new video';
   }
 
-  async findAll(videoPath: string) {
+  findOne(videoId: string) {
     const blobService = this.createBlobService();
     const containerClient = blobService.getContainerClient(STORAGE_CONTAINER_NAME);
-    const blobClient = containerClient.getBlobClient(videoPath);
+    const blobClient = containerClient.getBlobClient(videoId);
     
     return blobClient;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} video`;
   }
 
   update(id: number, updateVideoDto: UpdateVideoDto) {

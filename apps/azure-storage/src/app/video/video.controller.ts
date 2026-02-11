@@ -14,8 +14,8 @@ import {
 import { VideoService } from './video.service';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
-import type { Response, Request, query } from 'express';
-import { QueryVideo } from './dto/query-video.dto';
+import type { Response, Request } from 'express';
+import { GetVideoParams } from './dto/params-video.dto';
 
 @Controller('video')
 export class VideoController {
@@ -26,14 +26,11 @@ export class VideoController {
     return this.videoService.create(createVideoDto);
   }
 
-  @Get()
-  async findAll(@Query(new ValidationPipe()) query: QueryVideo, @Req() req: Request, @Res() res: Response) {
-    const videoPath = query.path;
-    if (!videoPath) {
-      res.status(400).send('A video path must be provided.');
-      return;
-    }
-    const blobClient = await this.videoService.findAll(videoPath);
+  @Get(':id')
+  async findOne(@Param(new ValidationPipe()) params: GetVideoParams, @Res() res: Response) {
+    const videoId = params.id;
+
+    const blobClient = await this.videoService.findOne(videoId);
     
     const properties = await blobClient.getProperties();
 
@@ -44,11 +41,6 @@ export class VideoController {
 
     const response = await blobClient.download();
     response.readableStreamBody?.pipe(res);
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.videoService.findOne(+id);
   }
 
   @Patch(':id')
