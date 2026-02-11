@@ -2,13 +2,12 @@
 
 import { useMetadata } from "@/hooks/useMetadata";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useParams } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Index() {
   const { fetchVideoMetadata, videoMetadata } = useMetadata();
-  const router = useRouter();
-  const { id } = router.query;
+  const { id } = useParams<{id: string}>();
 
   useEffect(() => {
     (async () => {
