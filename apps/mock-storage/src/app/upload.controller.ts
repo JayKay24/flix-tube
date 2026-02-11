@@ -18,6 +18,10 @@ export class UploadController {
     console.log("Content-Type: ", contentType);
     const videoId = params.id;
     const localFilePath = path.join(storagePath, videoId);
+    
+    // Ensure the storage directory exists
+    fs.mkdirSync(storagePath, { recursive: true });
+
     const fileWriteStream = fs.createWriteStream(localFilePath);
     req.pipe(fileWriteStream)
       .on('error', (err) => {
