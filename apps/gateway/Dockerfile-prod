@@ -21,8 +21,6 @@ FROM node:24-alpine
 
 WORKDIR /app
 
-ENV NODE_ENV="production"
-
 # Copy the built application from the builder stage
 COPY --from=builder /app/apps/gateway/.next/standalone ./standalone
 

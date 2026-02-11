@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useVideos } from '../hooks/useVideos';
+import Link from 'next/link';
 
 export default function Index() {
   const { videos, fetchVideos } = useVideos();
@@ -23,9 +24,15 @@ export default function Index() {
           <div className="text-xl font-bold">
             FlixTube
           </div>
-          <div className="ml-16 border-b-2 border-blue-600">
-            <a href="/">Videos</a>
-          </div>
+          <Link className="ml-16 border-b-2 border-blue-600" href="/">
+            Videos
+          </Link>
+          <Link className="ml-4" href="/upload">
+            Upload
+          </Link>
+          <Link className="ml-4" href="/history">
+            History
+          </Link>
         </div>
       </div>
       <div className="m-4">
