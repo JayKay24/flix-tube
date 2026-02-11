@@ -41,8 +41,8 @@ export default function Index() {
           {
             videos.length > 0 ? (
                 videos.map((video) => (
-                  <Link className="mt-1" key={video._id} href={`/play?id=${video._id}`}>
-                    {video.videoPath}
+                  <Link className="mt-1" key={video._id} href={`/play/${video._id}`}>
+                    {video.name}
                   </Link>
                 ))
               ) : ( 

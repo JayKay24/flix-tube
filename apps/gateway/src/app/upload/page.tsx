@@ -25,6 +25,7 @@ export default function Index() {
         data: file,
         headers: {
           'Content-Type': file.type,
+          'File-Name': file.name
         },
       });
 

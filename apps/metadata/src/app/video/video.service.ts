@@ -10,6 +10,7 @@ export class VideoService {
   constructor(@InjectModel(Video.name) private readonly videoModel: Model<Video>) {}
 
   async create(uploadedVideo: IVideoUploaded) {
+    console.log("Creating video metadata: ", uploadedVideo);
     await this.videoModel.create({ _id: uploadedVideo.id, name: uploadedVideo.name, url: uploadedVideo?.url ?? ''});
   }
 

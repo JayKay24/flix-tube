@@ -5,7 +5,8 @@ import axios from "axios";
 
 interface IVideo {
   _id: string;
-  videoPath: string;
+  url: string;
+  name: string;
 };
 
 function useVideos() {

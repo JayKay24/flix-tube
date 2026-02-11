@@ -48,6 +48,7 @@ export class VideoController {
 
   @EventPattern(ExchangeType.VIDEO_UPLOADED)
   async handleMessage(@Payload() msg: string) {
+    console.log("Received message: ", msg);
     const parsedMsg = JSON.parse(msg) as IVideoUploaded;
     await this.videoService.create(parsedMsg);
   }

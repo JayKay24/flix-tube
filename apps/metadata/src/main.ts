@@ -16,8 +16,9 @@ async function bootstrap() {
     throw new Error("Please specify the port number for the HTTP server with the environment variable PORT.");
   }
 
-  app.connectMicroservice(rabbitMQConfig(ExchangeType.VIEWED));
-  
+  app.connectMicroservice(rabbitMQConfig(ExchangeType.VIDEO_UPLOADED));
+
+  await app.startAllMicroservices();
   await app.listen(port);
   Logger.log(
     `🚀 metadata microservice is running on: http://localhost:${port}`

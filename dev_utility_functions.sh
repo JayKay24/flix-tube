@@ -153,7 +153,7 @@ reboot() #@ USAGE: reboot PROD video-streaming
   prod_dev=$1
   service=$2
 
-  if [[-n $prod_dev ]] && [[ -n $service ]];
+  if [[ -n $prod_dev ]] && [[ -n $service ]];
   then
     down $prod_dev $service
     up $prod_dev $service

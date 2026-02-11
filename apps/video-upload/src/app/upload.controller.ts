@@ -14,7 +14,8 @@ export class UploadController {
   async upload(
     @Req() req: Request, 
     @Res() res: Response, 
-    @Headers('file-name') fileName: string
+    @Headers('file-name') fileName: string,
+    @Headers('content-type') contentType: string
   ) {
     const videoId = new mongoose.Types.ObjectId();
     try {
@@ -23,9 +24,10 @@ export class UploadController {
         url:`http://${VIDEO_STORAGE_HOST}/upload/${videoId.toHexString()}`,
         data: req,
         headers: {
-          "content-type": req.headers["content-type"],
+          "content-type": contentType,
         }
       });
+      console.log("Data: ", data, "Content-Type: ", contentType, "File-Name: ", fileName);
       res.status(200).json({ ...data });
 
       this.broadCastVideoUploadedMessage(ExchangeType.VIDEO_UPLOADED, videoId, fileName, data.url);
@@ -44,5 +46,6 @@ export class UploadController {
     };
     const jsonMsg = JSON.stringify(msg);
     this.producerService.sendMessage(messageChannel, jsonMsg);
+    console.log("After broadcast");
   }
 }

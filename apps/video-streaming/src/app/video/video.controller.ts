@@ -32,8 +32,8 @@ export class VideoController {
     return this.videoService.create(createVideoDto);
   }
 
-  @Get()
-  async findAll(@Param(new ValidationPipe()) params: GetVideoParams, @Req() req: Request, @Res() res: Response) {
+  @Get(":id")
+  async findOne(@Param(new ValidationPipe()) params: GetVideoParams, @Req() req: Request, @Res() res: Response) {
     const videoId = new mongoose.Types.ObjectId(params.id);
     const response = await axios({
       method: 'GET',
@@ -44,11 +44,6 @@ export class VideoController {
     response.data.pipe(res);
 
     this.sendViewedMessage(ExchangeType.VIEWED, videoId);
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.videoService.findOne(+id);
   }
 
   @Patch(':id')

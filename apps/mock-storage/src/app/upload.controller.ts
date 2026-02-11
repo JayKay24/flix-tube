@@ -30,6 +30,7 @@ export class UploadController {
         res.sendStatus(500);
       })
       .on('finish', () => {
+        console.log("Upload finished.");
         res.status(200).json({ url: localFilePath });
       });
   }
