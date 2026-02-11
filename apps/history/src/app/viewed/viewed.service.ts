@@ -13,8 +13,8 @@ export class ViewedService {
     await this.viewedModel.create({ videoId: viewed.videoId });
   }
 
-  findAll() {
-    return `This action returns all viewed`;
+  async findAll() {
+    return await this.viewedModel.find().exec();
   }
 
   findOne(id: number) {

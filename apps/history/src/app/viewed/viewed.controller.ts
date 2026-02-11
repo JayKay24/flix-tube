@@ -16,8 +16,8 @@ export class ViewedController {
   constructor(private readonly viewedService: ViewedService) {}
 
   @Get()
-  findAll() {
-    return this.viewedService.findAll();
+  async findAll() {
+    return await this.viewedService.findAll();
   }
 
   @Get(':id')

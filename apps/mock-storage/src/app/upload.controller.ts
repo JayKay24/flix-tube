@@ -26,7 +26,7 @@ export class UploadController {
         res.sendStatus(500);
       })
       .on('finish', () => {
-        res.sendStatus(200);
+        res.status(200).json({ url: localFilePath });
       });
   }
 }

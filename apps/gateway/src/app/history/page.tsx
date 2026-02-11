@@ -35,18 +35,22 @@ export default function Index() {
         <h1>Viewing history</h1>
         <div className="m-4">
           <table>
-            <tr>
-              <th className="border-b-2 p-1 px-2">Video Id</th>
-            </tr>
-            {
-              history.map((historyItem) => (
-                <tr className="mt-1" key={historyItem._id}>
-                  <td className="border-2 p-1 px-2">
-                    {historyItem.videoId}
-                  </td>
-                </tr>
-              ))
-            }
+            <thead>
+              <tr>
+                <th className="border-b-2 p-1 px-2">Video Id</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                history.map((historyItem) => (
+                  <tr className="mt-1" key={historyItem._id}>
+                    <td className="border-2 p-1 px-2">
+                      {historyItem.videoId}
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
           </table>
         </div>
       </div>

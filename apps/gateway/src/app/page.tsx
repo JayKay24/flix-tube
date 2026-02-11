@@ -9,7 +9,7 @@ export default function Index() {
 
   useEffect(() => {
     (async () => {
-      await fetchVideos(`${process.env.NEXT_PUBLIC_VIDEO_STORAGE_HOST}/video`);
+      await fetchVideos(`${process.env.NEXT_PUBLIC_METADATA_HOST}/video`);
     })()
   }, []);
   /*
@@ -41,11 +41,9 @@ export default function Index() {
           {
             videos.length > 0 ? (
                 videos.map((video) => (
-                  <div className="mt-1" key={video._id}>
-                    <a href={`/video?id=${video._id}`}>
-                      {video.videoPath}
-                    </a>
-                  </div>
+                  <Link className="mt-1" key={video._id} href={`/play?id=${video._id}`}>
+                    {video.videoPath}
+                  </Link>
                 ))
               ) : ( 
                 <div>No videos uploaded yet.</div> 
