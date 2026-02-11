@@ -10,6 +10,9 @@ export class Video {
   
   @Prop()
   videoPath!: string;
+
+  @Prop()
+  url?: string;
 }
 
 export const VideoSchema = SchemaFactory.createForClass(Video);

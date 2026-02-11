@@ -28,6 +28,6 @@ export class UploadController {
     await blockBlobClient.setHTTPHeaders({
       blobContentType: contentType,
     });
-    res.sendStatus(200);
+    res.status(200).json({ url: blockBlobClient.url});
   }
 }

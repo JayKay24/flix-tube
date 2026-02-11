@@ -17,24 +17,24 @@ export class UploadController {
     @Headers('file-name') fileName: string
   ) {
     const videoId = new mongoose.Types.ObjectId();
-    const response = await axios({
+    const { data } = await axios<IVideoUploaded>({
       method: "POST",
       url:`${VIDEO_STORAGE_HOST}/upload/${videoId.toHexString()}`,
       data: req,
-      responseType: "stream",
       headers: {
         "content-type": req.headers["content-type"],
       }
     });
-    response.data.pipe(res);
+    res.status(200).json({ ...data });
 
-    this.broadCastVideoUploadedMessage(ExchangeType.VIDEO_UPLOADED, videoId, fileName);
+    this.broadCastVideoUploadedMessage(ExchangeType.VIDEO_UPLOADED, videoId, fileName, data.url);
   }
 
-  broadCastVideoUploadedMessage(messageChannel: ExchangeType, videoId: mongoose.Types.ObjectId, fileName: string) {
+  broadCastVideoUploadedMessage(messageChannel: ExchangeType, videoId: mongoose.Types.ObjectId, fileName: string, url?: string) {
     const msg: IVideoUploaded = {
       id: videoId.toHexString(),
-      name: fileName
+      name: fileName,
+      url: url ?? ''
     };
     const jsonMsg = JSON.stringify(msg);
     this.producerService.sendMessage(messageChannel, jsonMsg);

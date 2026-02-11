@@ -11,9 +11,9 @@ interface IVideo {
 function useVideos() {
   const [videos, setVideos] = useState<IVideo[]>([]);
 
-  async function fetchVideos(urlPath: string) {
+  async function fetchVideos(url: string) {
     try {
-      const response = await axios.get<IVideo[]>(urlPath);
+      const response = await axios.get<IVideo[]>(url);
       setVideos(response.data);
     } catch (error) {
       console.error(error);
@@ -24,4 +24,3 @@ function useVideos() {
 }
 
 export { useVideos };
-export type { IVideo };

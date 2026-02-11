@@ -5,6 +5,7 @@ interface IViewed {
 interface IVideoUploaded {
   id: string;
   name: string;
+  url?: string;
 }
 
 export type { IViewed, IVideoUploaded };

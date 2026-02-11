@@ -10,7 +10,7 @@ export class VideoService {
   constructor(@InjectModel(Video.name) private readonly videoModel: Model<Video>) {}
 
   async create(uploadedVideo: IVideoUploaded) {
-    await this.videoModel.create({ _id: uploadedVideo.id, name: uploadedVideo.name });
+    await this.videoModel.create({ _id: uploadedVideo.id, name: uploadedVideo.name, url: uploadedVideo?.url ?? ''});
   }
 
   async findAll() {

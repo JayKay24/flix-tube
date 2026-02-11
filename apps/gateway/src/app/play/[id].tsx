@@ -1,6 +1,21 @@
+"use client"
+
+import { useMetadata } from "@/hooks/useMetadata";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Index() {
+  const { fetchVideoMetadata, videoMetadata } = useMetadata();
+  const router = useRouter();
+  const { id } = router.query;
+
+  useEffect(() => {
+    (async () => {
+      await fetchVideoMetadata(`${process.env.NEXT_PUBLIC_METADATA_HOST}/video/${id}`);
+    })()
+  }, []);
+
   return (
     <div className="flex flex-col">
       <div className="border-b-2 bg-gray-100">
@@ -20,7 +35,13 @@ export default function Index() {
         </div>
       </div>
       <div className="m-4">
-        <h1>Playing</h1>
+        <h1>Playing {videoMetadata?.name}</h1>
+        <div className="m-4">
+          <video controls autoPlay muted>
+            <source src={videoMetadata?.url} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
       </div>
     </div>
   );

@@ -11,9 +11,9 @@ interface IHistoryItem {
 function useHistory() {
   const [history, setHistory] = useState<IHistoryItem[]>([]);
 
-  async function fetchHistory(urlPath: string) {
+  async function fetchHistory(url: string) {
     try {
-      const response = await axios.get<IHistoryItem[]>(urlPath);
+      const response = await axios.get<IHistoryItem[]>(url);
       setHistory(response.data);
     } catch (error) {
       console.error(error);
@@ -24,4 +24,3 @@ function useHistory() {
 }
 
 export { useHistory };
-export type { IHistoryItem };
