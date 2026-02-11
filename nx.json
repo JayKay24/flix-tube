@@ -59,7 +59,8 @@
         "apps/history-e2e/**/*",
         "apps/metadata-e2e/**/*",
         "apps/db-fixture-rest-api-e2e/**/*",
-        "apps/video-upload-e2e/**/*"
+        "apps/video-upload-e2e/**/*",
+        "apps/mock-storage-e2e/**/*"
       ]
     },
     {

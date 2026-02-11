@@ -1,0 +1,26 @@
+{
+  "name": "@flix-tube/mock-storage-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@flix-tube/mock-storage"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "apps/mock-storage-e2e/jest.config.cts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "@flix-tube/mock-storage:build",
+          "@flix-tube/mock-storage:serve"
+        ]
+      }
+    }
+  }
+}
