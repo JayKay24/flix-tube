@@ -1,6 +1,7 @@
 include:
   - ./docker-compose-infra.yml
   - ./docker-compose-video-storage.yml
+  - ./docker-compose-history.yml
 services:
   video-streaming:
     image: video-streaming
@@ -15,6 +16,8 @@ services:
       db:
         condition: service_started
       azure-storage:
+        condition: service_started
+      history:
         condition: service_started
     environment:
       - PORT=${PORT}
