@@ -8,25 +8,18 @@ import {
   Delete,
   Res,
   Req,
-  Query,
   ValidationPipe,
 } from '@nestjs/common';
 import type { Response, Request } from 'express';
 import { VideoService } from './video.service';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
-import http from 'http';
 import mongoose from 'mongoose';
 import { ExchangeType, IViewed, ProducerService } from '@flix-tube/rmq-broker';
-import { QueryVideo } from './dto/query-video.dto';
+import { GetVideoParams } from './dto/params-video.dto';
+import axios from "axios";
 
 const VIDEO_STORAGE_HOST = process.env.VIDEO_STORAGE_HOST ?? '';
-
-if (!process.env.VIDEO_STORAGE_PORT) {
-  throw new Error('VIDEO_STORAGE_PORT is not defined');
-}
-
-const VIDEO_STORAGE_PORT = parseInt(process.env.VIDEO_STORAGE_PORT);
 
 @Controller('video')
 export class VideoController {
@@ -40,30 +33,15 @@ export class VideoController {
   }
 
   @Get()
-  async findAll(@Query(new ValidationPipe()) query: QueryVideo, @Req() req: Request, @Res() res: Response) {
-    if (!req.query.id) {
-      res.status(400).send("Video ID is required");
-      return;
-    }
-    const videoId = new mongoose.Types.ObjectId(req.query.id as string);
-    const videoRecord = await this.videoService.findById(videoId);
-    if (!videoRecord) {
-      res.sendStatus(404);
-      return;
-    }
-
-    const forwardRequest = http.request({
-      host: VIDEO_STORAGE_HOST,
-      port: VIDEO_STORAGE_PORT,
-      path: `/video?path=${videoRecord.videoPath}`,
+  async findAll(@Param(new ValidationPipe()) params: GetVideoParams, @Req() req: Request, @Res() res: Response) {
+    const videoId = new mongoose.Types.ObjectId(params.id);
+    const response = await axios({
       method: 'GET',
-      headers: req.headers
-    }, (forwardResponse) => {
-      res.writeHead(forwardResponse.statusCode as number, forwardResponse.headers);
-      forwardResponse.pipe(res);
+      url: `http://${VIDEO_STORAGE_HOST}/video/${videoId}`,
+      responseType: 'stream',
+      data: req
     });
-    
-    req.pipe(forwardRequest);
+    response.data.pipe(res);
 
     this.sendViewedMessage(ExchangeType.VIEWED, videoId);
   }

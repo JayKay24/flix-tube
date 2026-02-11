@@ -1,4 +1,4 @@
-import { Controller, Post, Param, Req, Res, Headers } from "@nestjs/common";
+import { Controller, Post, Param, Req, Res, Headers, ValidationPipe } from "@nestjs/common";
 import type { Request, Response } from "express";
 import { VideoService } from "./video.service";
 import { GetVideoParams } from "./dto/params-video.dto";
@@ -11,7 +11,7 @@ export class UploadController {
 
   @Post(':id')
   async upload(
-    @Param() params: GetVideoParams, 
+    @Param(new ValidationPipe()) params: GetVideoParams, 
     @Req() req: Request, 
     @Res() res: Response, 
     @Headers('content-type') contentType: string
