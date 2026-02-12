@@ -39,7 +39,7 @@ export default function Index() {
           {
             !isLoading && videoMetadata && (
               <video controls autoPlay muted>
-                <source src={videoMetadata.url} type="video/mp4" />
+                <source src={`${process.env.NEXT_PUBLIC_VIDEO_STREAMING_HOST}/video/${id}`} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             )
