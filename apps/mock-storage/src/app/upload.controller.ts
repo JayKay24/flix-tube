@@ -31,7 +31,8 @@ export class UploadController {
       })
       .on('finish', () => {
         console.log("Upload finished.");
-        res.status(200).json({ url: localFilePath });
+        const processedFilePath = localFilePath.replace(/\/app/, process.env.ABSOLUTE_PROJECT_PATH ?? '')
+        res.status(200).json({ url: processedFilePath });
       });
   }
 }

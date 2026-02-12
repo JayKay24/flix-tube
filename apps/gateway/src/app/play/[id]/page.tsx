@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Index() {
-  const { fetchVideoMetadata, videoMetadata } = useMetadata();
+  const { fetchVideoMetadata, videoMetadata, isLoading } = useMetadata();
   const { id } = useParams<{id: string}>();
 
   useEffect(() => {
@@ -36,10 +36,19 @@ export default function Index() {
       <div className="m-4">
         <h1>Playing {videoMetadata?.name}</h1>
         <div className="m-4">
-          <video controls autoPlay muted>
-            <source src={videoMetadata?.url} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          {
+            !isLoading && videoMetadata && (
+              <video controls autoPlay muted>
+                <source src={videoMetadata.url} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )
+          }
+          {
+            isLoading && (
+              <p>Loading video...</p> // Optional: add a loading indicator
+            )
+          }
         </div>
       </div>
     </div>
