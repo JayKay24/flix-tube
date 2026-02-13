@@ -10,7 +10,7 @@
       "start-dev-env": {
         "executor": "nx:run-commands",
         "options": {
-          "command": "source ./dev_utility_functions.sh && up prod metadata"
+          "command": "source ./dev_utility_functions.sh && up prod metadata && up prod db-fixture-rest-api"
         }
       },
       "e2e": {

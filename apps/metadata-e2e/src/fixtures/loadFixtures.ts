@@ -13,4 +13,20 @@ async function unloadFixture(databaseName: string, fixtureName: string) {
   await axios.get(url);
 }
 
-export { loadFixture, unloadFixture };
+async function dropDatabase(databaseName: string) {
+  const url = `${dbFixturesURL}/drop-database?db=${databaseName}`;
+  await axios.get(url);
+}
+
+async function dropCollection(databaseName: string, collectionName: string) {
+  const url = `${dbFixturesURL}/drop-collection?db=${databaseName}&collection=${collectionName}`;
+  await axios.get(url);
+}
+
+async function getCollection<T>(databaseName: string, collectionName: string): Promise<T> {
+  const url = `${dbFixturesURL}/get-collection?db=${databaseName}&collection=${collectionName}`;
+  const response = await axios.get<T>(url);
+  return response.data;
+}
+
+export { loadFixture, unloadFixture, dropDatabase, dropCollection, getCollection };

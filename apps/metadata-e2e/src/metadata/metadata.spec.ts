@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { loadFixture } from '../fixtures/loadFixtures';
 
-describe('GET /api', () => {
+describe('GET /', () => {
   it('should return a message', async () => {
-    const res = await axios.get(`/api`);
+    const res = await axios.get('/');
 
     expect(res.status).toBe(200);
     expect(res.data).toEqual({ message: 'Hello API' });
@@ -12,7 +12,7 @@ describe('GET /api', () => {
 
 describe('GET /video/:id', () => {
   beforeEach(async () => {
-    await loadFixture('metadata', 'metadata.json');
+    await loadFixture('metadata', 'metadata/videos.json');
   });
 
   it('should return a single video metadata object when a valid ID is provided', async () => {

@@ -6,5 +6,5 @@ module.exports = async function () {
   // Hint: `globalThis` is shared between setup and teardown.
 
   console.log(globalThis.__TEARDOWN_MESSAGE__);
-  execSync('source ./dev_utility_functions.sh && down prod metadata');
+  execSync('source ./dev_utility_functions.sh && down prod metadata && down prod db-fixture-rest-api');
 };

@@ -11,9 +11,11 @@ module.exports = async function () {
   const port = process.env.TEST_METADATA_PORT ? Number(process.env.TEST_METADATA_PORT) : 4004;
   const rabbitPort = process.env.RABBIT_PORT ? Number(process.env.RABBIT_PORT) : 5672;
   const mongoDBPort = process.env.MONGODB_PORT ? Number(process.env.MONGODB_PORT) : 4000;
+  const dbFixtureRestApiPort = process.env.DB_FIXTURE_REST_API_PORT ? Number(process.env.DB_FIXTURE_REST_API_PORT) : 9000;
 
   console.log("Host & port: ", host, port);
 
+  await waitForPortOpen(dbFixtureRestApiPort);
   await waitForPortOpen(mongoDBPort);
   await waitForPortOpen(rabbitPort);
   await waitForPortOpen(port, { host });
