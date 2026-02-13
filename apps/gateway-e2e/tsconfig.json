@@ -24,7 +24,7 @@
   ],
   "references": [
     {
-      "path": "../../lib/mongodb-fixtures/tsconfig.lib.json"
+      "path": "../../libs/mongodb-fixtures"
     }
   ]
 }

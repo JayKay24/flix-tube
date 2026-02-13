@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { loadFixture } from '../fixtures/loadFixtures';
+import { loadFixture } from '@flix-tube/mongodb-fixtures';
 
 describe('GET /', () => {
   it('should return a message', async () => {
