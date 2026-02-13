@@ -20,4 +20,5 @@ services:
       - PORT=${PORT}
       - METADATA_DBHOST=${METADATA_DBHOST}
       - METADATA_DBNAME=${METADATA_DBNAME}
+      - RABBIT=${RABBIT}
     restart: "no"

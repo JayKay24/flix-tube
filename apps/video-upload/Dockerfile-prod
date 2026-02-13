@@ -6,7 +6,7 @@ WORKDIR /app
 # Copy package.json and package-lock.json for dependency installation
 # We need the root package.json and package-lock.lock for nx commands
 COPY ../../package*.json ./
-RUN npm ci
+RUN npm install
 
 # Copy the rest of the application
 COPY ../../ .
@@ -25,7 +25,7 @@ WORKDIR /app
 COPY ../../package*.json ./
 
 # Install only production dependencies
-RUN npm ci --omit=dev
+RUN npm install --omit=dev
 
 # Copy the built application from the builder stage
 COPY --from=builder /app/apps/video-upload/dist/ .
