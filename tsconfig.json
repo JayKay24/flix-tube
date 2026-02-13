@@ -56,6 +56,9 @@
     },
     {
       "path": "./apps/mock-storage"
+    },
+    {
+      "path": "./libs/mongodb-fixtures"
     }
   ]
 }

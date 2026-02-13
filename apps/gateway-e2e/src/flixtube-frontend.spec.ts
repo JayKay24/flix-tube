@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
-import { loadFixture } from './support/db-fixture';
+import { loadFixture } from '@flix-tube/mongodb-fixtures';
 
 const { describe } = test;
 
 describe("FlixTube Gateway", () => {
   test('can list videos', async ({ page }) => {
-    await loadFixture('metadata', 'videos.json');
+    await loadFixture('metadata', 'metadata/videos.json');
 
     await page.goto('/');
 
