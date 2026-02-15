@@ -22,9 +22,5 @@
     "eslint.config.mjs",
     "eslint.config.cjs"
   ],
-  "references": [
-    {
-      "path": "../../libs/mongodb-fixtures"
-    }
-  ]
+  "references": []
 }

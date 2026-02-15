@@ -40,11 +40,17 @@ export default function Index() {
         <div id="video-list" className="m-4">
           {
             videos.length > 0 ? (
-                videos.map((video) => (
-                  <Link className="mt-1" key={video._id} href={`/play/${video._id}`}>
-                    {video.name}
-                  </Link>
-                ))
+              <ul>
+                {
+                  videos.map((video) => (
+                    <li>
+                      <Link className="mt-1" key={video._id} href={`/play/${video._id}`}>
+                        {video.name}
+                      </Link>
+                    </li>
+                  ))
+                }
+              </ul>
               ) : ( 
                 <div>No videos uploaded yet.</div> 
               )
