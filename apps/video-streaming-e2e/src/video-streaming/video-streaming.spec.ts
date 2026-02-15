@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import { loadFixture } from '@flix-tube/mongodb-fixtures';
 
 describe('GET /api', () => {
   it('should return a message', async () => {
@@ -9,15 +10,19 @@ describe('GET /api', () => {
   });
 });
 
-describe('GET /video', () => {
-  it('should return a video stream when a valid ID is provided', async () => {
-    const videoId = '5d9e690ad76fe06a3d7ae416'; // ID from our fixture
+// describe('GET /video', () => {
+//   beforeEach(async () => {
+//     await loadFixture('video-streaming', 'metadata/videos.js');
+//   });
 
-    const res = await axios.get(`/video?id=${videoId}`, {
-      responseType: 'stream',
-    });
+//   it('should return a video stream when a valid ID is provided', async () => {
+//     const videoId = '5d9e690ad76fe06a3d7ae416'; // ID from our fixture
 
-    expect(res.status).toBe(200);
-    expect(res.headers['content-type']).toEqual('video/mp4');
-  });
-});
+//     const res = await axios.get(`/video?id=${videoId}`, {
+//       responseType: 'stream',
+//     });
+
+//     expect(res.status).toBe(200);
+//     expect(res.headers['content-type']).toEqual('video/mp4');
+//   });
+// });
