@@ -19,7 +19,7 @@ export class VideoService {
   }
 
   async findOne(id: string) {
-    return await this.videoModel.findById(new mongoose.Types.ObjectId(id)).exec();
+    return await this.videoModel.findById(id).exec();
   }
 
   update(id: number, updateVideoDto: UpdateVideoDto) {
