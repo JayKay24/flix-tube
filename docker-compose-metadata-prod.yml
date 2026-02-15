@@ -1,7 +1,10 @@
 include:
   - ./docker-compose-metadata.yml
   - ./docker-compose-video-upload-prod.yml
+  - ./docker-compose-db-fixture-rest-api-prod.yml
 services:
   metadata:
     build:
       dockerfile: apps/metadata/Dockerfile-prod
+    depends_on:
+      - db-fixture-rest-api

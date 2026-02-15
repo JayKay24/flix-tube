@@ -2,8 +2,11 @@ include:
   - ./docker-compose-video-streaming.yml
   - ./docker-compose-video-storage-prod.yml
   - ./docker-compose-history-prod.yml
+  - ./docker-compose-db-fixture-rest-api-prod.yml
 services:
   video-streaming:
     build:
       dockerfile: apps/video-streaming/Dockerfile-prod
+    depends_on:
+      - db-fixture-rest-api
     
