@@ -22,3 +22,28 @@ spec:
                 configMapKeyRef:
                   name: gateway-config
                   key: port
+            - name: NEXT_PUBLIC_HISTORY_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: gateway-config
+                  key: nextPublicHistoryHost
+            - name: NEXT_PUBLIC_VIDEO_STORAGE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: gateway-config
+                  key: nextPublicVideoStorageHost
+            - name: NEXT_PUBLIC_VIDEO_UPLOAD_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: gateway-config
+                  key: nextPublicVideoUploadHost
+            - name: NEXT_PUBLIC_METADATA_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: gateway-config
+                  key: nextPublicMetadataHost
+            - name: NEXT_PUBLIC_VIDEO_STREAMING_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: gateway-config
+                  key: nextPublicVideoStreamingHost

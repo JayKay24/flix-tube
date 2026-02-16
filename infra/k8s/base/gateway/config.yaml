@@ -4,3 +4,8 @@ metadata:
   name: gateway-config
 data:
   port: "$PORT"
+  nextPublicHistoryHost: "$NEXT_PUBLIC_HISTORY_HOST"
+  nextPublicVideoStorageHost: "$NEXT_PUBLIC_VIDEO_STORAGE_HOST"
+  nextPublicVideoUploadHost: "$NEXT_PUBLIC_VIDEO_UPLOAD_HOST"
+  nextPublicMetadataHost: "$NEXT_PUBLIC_METADATA_HOST"
+  nextPublicVideoStreamingHost: "$NEXT_PUBLIC_VIDEO_STREAMING_HOST"
