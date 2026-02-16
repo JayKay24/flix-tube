@@ -173,3 +173,20 @@ load_env() #@ USAGE: load_env file
   fi
   set +a
 }
+
+load_all_env() #@ USAGE: load_all_env
+{
+  files_list=()
+  files_list+=(common.env)
+  files_list+=(db-fixtures-rest-api.env)
+  files_list+=(gateway.env)
+  files_list+=(history.env)
+  files_list+=(metadata.env)
+  files_list+=(test.env)
+  files_list+=(video-storage.env)
+  files_list+=(video-streaming.env)
+  files_list+=(video-upload.env)
+  for file_name in $files_list; do
+    load_env $file_name
+  done
+}
