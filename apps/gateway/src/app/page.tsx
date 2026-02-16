@@ -43,8 +43,8 @@ export default function Index() {
               <ul>
                 {
                   videos.map((video) => (
-                    <li>
-                      <Link className="mt-1" key={video._id} href={`/play/${video._id}`}>
+                    <li key={video._id}>
+                      <Link className="mt-1" href={`/play/${video._id}`}>
                         {video.name}
                       </Link>
                     </li>
