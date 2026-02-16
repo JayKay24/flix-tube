@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metadata
+spec:
+  selector:
+    matchLabels:
+      app: metadata
+  template:
+    spec:
+      containers:
+        - name: metadata
+          resources:
+            limits:
+              memory: "128Mi"
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
