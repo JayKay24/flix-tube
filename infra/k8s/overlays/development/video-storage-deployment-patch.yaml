@@ -10,8 +10,6 @@ spec:
     spec:
       containers:
         - name: video-storage
-          image: azure-storage:1
-          imagePullPolicy: Never
           resources:
             limits:
               memory: "128Mi"
