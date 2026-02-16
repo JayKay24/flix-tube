@@ -25,4 +25,5 @@ services:
       - DBNAME=${DBNAME}
       - VIDEO_STORAGE_HOST=${VIDEO_STORAGE_HOST}
       - VIDEO_STORAGE_PORT=${VIDEO_STORAGE_PORT}
+      - RABBIT=${RABBIT}
     restart: "no"

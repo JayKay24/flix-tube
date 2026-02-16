@@ -1,7 +1,6 @@
 include:
   - ./docker-compose-video-streaming.yml
   - ./docker-compose-mock-storage.yml
-  # - ./docker-compose-video-storage-dev.yml
   - ./docker-compose-history-dev.yml
 services:
   video-streaming:
