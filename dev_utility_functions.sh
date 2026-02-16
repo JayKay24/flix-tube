@@ -162,3 +162,14 @@ reboot() #@ USAGE: reboot PROD video-streaming
     up $prod_dev
   fi  
 }
+
+load_env() #@ USAGE: load_env file
+{
+  file_name=$1
+  set -a
+  if [[ -f $file_name ]];
+  then
+    source $file_name
+  fi
+  set +a
+}
