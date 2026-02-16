@@ -12,9 +12,7 @@ resources:
 patches:
   - path: history-deployment-patch.yaml
   - path: video-storage-deployment-patch.yaml
-  - path: video-storage-service-patch.yaml
   - path: video-streaming-deployment-patch.yaml
-  - path: video-streaming-service-patch.yaml
   - path: gateway-deployment-patch.yaml
   - path: video-upload-deployment-patch.yaml
   - path: metadata-deployment-patch.yaml
