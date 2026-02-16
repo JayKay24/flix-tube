@@ -7,4 +7,5 @@ data:
   dbHost: "$DBHOST"
   dbName: "$DBNAME"
   rabbit: "$RABBIT"
-  videoStoragePort: '"$VIDEO_STORAGE_PORT"'
+  videoStoragePort: "$VIDEO_STORAGE_PORT"
+  videoStorageHost: "$VIDEO_STORAGE_HOST"
