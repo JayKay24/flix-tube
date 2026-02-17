@@ -9,7 +9,7 @@ export default function Index() {
 
   useEffect(() => {
     (async () => {
-      await fetchHistory(`${process.env.NEXT_PUBLIC_HISTORY_HOST}/viewed`);
+      await fetchHistory("/api/history");
     })()
   }, []);
 

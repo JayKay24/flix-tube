@@ -11,7 +11,7 @@ export default function Index() {
 
   useEffect(() => {
     (async () => {
-      await fetchVideoMetadata(`${process.env.NEXT_PUBLIC_METADATA_HOST}/video/${id}`);
+      await fetchVideoMetadata(`/api/metadata/${id}`);
     })()
   }, []);
 
@@ -39,7 +39,7 @@ export default function Index() {
           {
             !isLoading && videoMetadata && (
               <video controls autoPlay muted>
-                <source src={`${process.env.NEXT_PUBLIC_VIDEO_STREAMING_HOST}/video/${id}`} type="video/mp4" />
+                <source src={`/api/play/${id}`} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             )

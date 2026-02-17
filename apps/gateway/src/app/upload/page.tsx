@@ -17,7 +17,7 @@ export default function Index() {
   };
 
   const handleUploadFile = async (file: File) => {
-    const uploadRoute = `${process.env.NEXT_PUBLIC_VIDEO_UPLOAD_HOST}/upload`;
+    const uploadRoute = '/api/upload';
     try {
       await axios({
         method: 'POST',

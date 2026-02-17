@@ -9,7 +9,7 @@ export default function Index() {
 
   useEffect(() => {
     (async () => {
-      await fetchVideos(`${process.env.NEXT_PUBLIC_METADATA_HOST}/video`);
+      await fetchVideos('/api/video');
     })()
   }, []);
   /*
