@@ -6,4 +6,6 @@ module "production" {
   flixtube_az_resource_group_name = var.flixtube_az_resource_group_name
   flixtube_aks_app_name = var.flixtube_aks_app_name
   flixtube_kubernetes_version = var.flixtube_kubernetes_version
+  flixtube_cosmosdb_account_name = var.flixtube_cosmosdb_account_name
+  # flixtube_cosmosdb_database_names = var.flixtube_cosmosdb_database_names
 }

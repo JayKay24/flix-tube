@@ -27,3 +27,8 @@ variable "flixtube_kubernetes_version" {
   type = string
   description = "AKS Kubernetes version"
 }
+
+variable "flixtube_cosmosdb_account_name" {
+  type        = string
+  description = "Name for the Azure Cosmos DB account."
+}
