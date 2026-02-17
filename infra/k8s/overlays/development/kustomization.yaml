@@ -8,6 +8,8 @@ resources:
 - ../../base/gateway
 - ../../base/video-upload
 - ../../base/metadata
+- ../../base/rabbitmq
+- ../../base/mongodb
 
 patches:
   - path: history-deployment-patch.yaml
