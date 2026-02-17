@@ -1,6 +1,7 @@
 import axios from "axios";
+import { Readable } from "node:stream";
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
   const response = await axios({
     method: "POST",
     url: `${process.env.NEXT_PUBLIC_VIDEO_UPLOAD_HOST}/upload`,
@@ -11,5 +12,5 @@ export async function POST(req: Request, res: Response) {
     },
     responseType: "stream"
   });
-  response.data.pipe(res);
+  return new Response(Readable.toWeb(response.data) as ReadableStream);
 }

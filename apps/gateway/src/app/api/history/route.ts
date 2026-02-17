@@ -1,10 +1,12 @@
 import axios from "axios"
+import { Readable } from "node:stream";
 
-export async function GET(res: Response) {
+export async function GET() {
   const response = await axios({
     method: "GET",
     url: `${process.env.NEXT_PUBLIC_HISTORY_HOST}/viewed`,
     responseType: "stream"
   });
-  response.data.pipe(res);
+
+  return new Response(Readable.toWeb(response.data) as ReadableStream);
 }
