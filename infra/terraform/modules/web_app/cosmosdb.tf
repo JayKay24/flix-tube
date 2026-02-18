@@ -7,6 +7,8 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
   
   free_tier_enabled   = true 
 
+  mongo_server_version = "7.0"
+
   # Set to Eventual consistency for the cheapest option.
   consistency_policy {
     consistency_level = "Eventual"
