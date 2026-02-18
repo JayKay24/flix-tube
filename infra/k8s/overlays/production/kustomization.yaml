@@ -8,6 +8,7 @@ resources:
 - ../../base/gateway
 - ../../base/video-upload
 - ../../base/metadata
+- ../../base/rabbitmq
 
 patches:
   - path: history-deployment-patch.yaml
