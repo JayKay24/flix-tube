@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# update this script after upgrading to bash 5
 docker_images=(
   "azure-storage:apps/azure-storage/Dockerfile-prod"
   "gateway:apps/gateway/Dockerfile-prod"
@@ -13,5 +14,5 @@ docker_images=(
 for item in "${docker_images[@]}"; do
   image_name="${item%%:*}"
   dockerfile="${item#*:}"
-  docker build -t $CONTAINER_REGISTRY/$image_name:$VERSION --file $dockerfile .
+  docker build -t $CONTAINER_REGISTRY/$image_name:$VERSION --file $dockerfile --platform linux/amd64 .
 done
