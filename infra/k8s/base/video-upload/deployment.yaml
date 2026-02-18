@@ -12,6 +12,10 @@ spec:
       labels:
         app: video-upload
     spec:
+      initContainers:
+        - name: init-ctr
+          image: busybox:1.28.4
+          command: ['sh', '-c', 'until nslookup rabbitmq; do echo waiting for rabbitmq service; sleep 1; done; echo rabbitmq found!']
       containers:
         - name: video-upload
           image: video-upload:latest
