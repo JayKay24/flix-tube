@@ -14,5 +14,5 @@ docker_images=(
 for item in "${docker_images[@]}"; do
   image_name="${item%%:*}"
   dockerfile="${item#*:}"
-  docker build -t $CONTAINER_REGISTRY/$image_name:$VERSION --file $dockerfile --platform linux/amd64 .
+  docker buildx build -t $CONTAINER_REGISTRY/$image_name:$VERSION --file $dockerfile --platform linux/amd64 .
 done
