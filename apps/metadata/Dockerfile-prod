@@ -33,5 +33,6 @@ COPY --from=builder /app/apps/metadata/dist/ .
 # Expose the port the app runs on
 EXPOSE 80
 
-# Command to run the built application
-CMD [ "node", "main.js" ]
+ENTRYPOINT [ "node" ]
+
+CMD [ "main.js" ]

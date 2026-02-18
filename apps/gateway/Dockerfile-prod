@@ -31,5 +31,6 @@ COPY --from=builder /app/apps/gateway/.next/static ./standalone/apps/gateway/.ne
 # Expose the port the app runs on
 EXPOSE 80
 
-# Command to run the built application
-CMD [ "node", "standalone/apps/gateway/server.js" ]
+ENTRYPOINT [ "node" ]
+
+CMD [ "standalone/apps/gateway/server.js" ]

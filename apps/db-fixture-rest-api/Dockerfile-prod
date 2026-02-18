@@ -36,5 +36,6 @@ COPY apps/db-fixture-rest-api/src/fixtures ./apps/db-fixture-rest-api/src/fixtur
 # Expose the port the app runs on
 EXPOSE 80
 
-# Command to run the built application
-CMD [ "node", "main.js" ]
+ENTRYPOINT [ "node" ]
+
+CMD [ "main.js" ]
