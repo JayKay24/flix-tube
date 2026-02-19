@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
         - name: metadata
-          image: $CONTAINER_REGISTRY/metadata:$VERSION
+          image: $CONTAINER_REGISTRY/prod-metadata:$VERSION
           imagePullPolicy: IfNotPresent
           resources:
             limits:

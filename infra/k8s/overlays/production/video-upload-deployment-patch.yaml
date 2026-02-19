@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
         - name: video-upload
-          image: $CONTAINER_REGISTRY/video-upload:$VERSION
+          image: $CONTAINER_REGISTRY/prod-video-upload:$VERSION
           imagePullPolicy: IfNotPresent
           resources:
             limits:

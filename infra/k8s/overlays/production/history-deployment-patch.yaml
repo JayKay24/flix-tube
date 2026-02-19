@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
         - name: history
-          image: $CONTAINER_REGISTRY/history:$VERSION
+          image: $CONTAINER_REGISTRY/prod-history:$VERSION
           imagePullPolicy: IfNotPresent
           resources:
             limits:

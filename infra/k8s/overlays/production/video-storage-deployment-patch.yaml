@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
         - name: video-storage
-          image: $CONTAINER_REGISTRY/azure-storage:$VERSION
+          image: $CONTAINER_REGISTRY/prod-azure-storage:$VERSION
           imagePullPolicy: IfNotPresent
           resources:
             limits:
