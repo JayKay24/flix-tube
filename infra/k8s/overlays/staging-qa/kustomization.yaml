@@ -8,6 +8,7 @@ resources:
 - ../../base/gateway
 - ../../base/video-upload
 - ../../base/metadata
+- ../../base/db-fixture-rest-api
 - ../../base/rabbitmq
 - ../../base/mongodb
 
@@ -18,3 +19,4 @@ patches:
   - path: gateway-deployment-patch.yaml
   - path: video-upload-deployment-patch.yaml
   - path: metadata-deployment-patch.yaml
+  - path: db-fixture-rest-api-deployment-patch.yaml
