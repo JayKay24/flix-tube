@@ -1,15 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: history
+  name: metadata
+  namespace: staging
 spec:
   selector:
     matchLabels:
-      app: history
+      app: metadata
   template:
     spec:
       containers:
-        - name: history
+        - name: metadata
           resources:
             limits:
               memory: "128Mi"

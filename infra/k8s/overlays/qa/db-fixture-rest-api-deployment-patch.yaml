@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-fixture-rest-api
+  namespace: qa
+spec:
+  selector:
+    matchLabels:
+      app: db-fixture-rest-api
+  template:
+    spec:
+      containers:
+        - name: db-fixture-rest-api
+          resources:
+            limits:
+              memory: "128Mi"
+            requests:
+              memory: "128Mi"
+              cpu: "100m"

@@ -1,15 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: video-upload
+  name: history
+  namespace: qa
 spec:
   selector:
     matchLabels:
-      app: video-upload
+      app: history
   template:
     spec:
       containers:
-        - name: video-upload
+        - name: history
           resources:
             limits:
               memory: "128Mi"

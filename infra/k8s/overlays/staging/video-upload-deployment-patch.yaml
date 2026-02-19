@@ -1,15 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: video-streaming
+  name: video-upload
+  namespace: staging
 spec:
   selector:
     matchLabels:
-      app: video-streaming
+      app: video-upload
   template:
     spec:
       containers:
-        - name: video-streaming
+        - name: video-upload
           resources:
             limits:
               memory: "128Mi"

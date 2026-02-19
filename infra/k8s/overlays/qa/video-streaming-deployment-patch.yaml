@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video-streaming
+  namespace: qa
+spec:
+  selector:
+    matchLabels:
+      app: video-streaming
+  template:
+    spec:
+      containers:
+        - name: video-streaming
+          resources:
+            limits:
+              memory: "128Mi"
+            requests:
+              memory: "128Mi"
+              cpu: "100m"

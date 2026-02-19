@@ -1,15 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: db-fixture-rest-api
+  name: history
+  namespace: staging
 spec:
   selector:
     matchLabels:
-      app: db-fixture-rest-api
+      app: history
   template:
     spec:
       containers:
-        - name: db-fixture-rest-api
+        - name: history
           resources:
             limits:
               memory: "128Mi"

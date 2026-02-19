@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video-upload
+  namespace: qa
+spec:
+  selector:
+    matchLabels:
+      app: video-upload
+  template:
+    spec:
+      containers:
+        - name: video-upload
+          resources:
+            limits:
+              memory: "128Mi"
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
