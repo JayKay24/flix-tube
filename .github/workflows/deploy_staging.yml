@@ -33,6 +33,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Build all images
       - name: Build video-storage
         run: ./scripts/build_image.sh azure-storage apps/azure-storage/Dockerfile-prod
       - name: Build history
