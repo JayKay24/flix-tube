@@ -13,11 +13,6 @@ variable "flixtube_az_region_name" {
   description = "Azure Region where application is deployed"
 }
 
-variable "flixtube_az_container_registry_name" {
-  type = string
-  description = "Azure Container Registry Name to host flixtube container images"
-}
-
 variable "flixtube_aks_app_name" {
   type = string
   description = "App name for AKS cluster"
