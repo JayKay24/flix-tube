@@ -11,6 +11,8 @@ spec:
     spec:
       containers:
         - name: video-streaming
+          image: $CONTAINER_REGISTRY/staging-video-streaming:$VERSION
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               memory: "128Mi"

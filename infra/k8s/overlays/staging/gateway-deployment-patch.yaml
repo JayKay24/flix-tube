@@ -11,6 +11,8 @@ spec:
     spec:
       containers:
         - name: gateway
+          image: $CONTAINER_REGISTRY/staging-gateway:$VERSION
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               memory: "128Mi"

@@ -11,6 +11,8 @@ spec:
     spec:
       containers:
         - name: history
+          image: $CONTAINER_REGISTRY/staging-history:$VERSION
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               memory: "128Mi"

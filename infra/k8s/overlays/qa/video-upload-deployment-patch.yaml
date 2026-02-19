@@ -11,6 +11,8 @@ spec:
     spec:
       containers:
         - name: video-upload
+          image: $CONTAINER_REGISTRY/qa-video-upload:$VERSION
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               memory: "128Mi"

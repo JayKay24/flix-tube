@@ -11,6 +11,8 @@ spec:
     spec:
       containers:
         - name: metadata
+          image: $CONTAINER_REGISTRY/qa-metadata:$VERSION
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               memory: "128Mi"

@@ -11,6 +11,8 @@ spec:
     spec:
       containers:
         - name: db-fixture-rest-api
+          image: $CONTAINER_REGISTRY/qa-db-fixture-rest-api:$VERSION
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               memory: "128Mi"
