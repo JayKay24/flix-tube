@@ -1,9 +1,9 @@
-name: Deploy All Microservices to Staging
+name: Deploy All Microservices to Production
 
 on:
   push:
     branches:
-      - "develop"
+      - "main"
   workflow_dispatch:
 
 permissions:
@@ -12,17 +12,14 @@ permissions:
 
 jobs:
   deploy:
-    name: Deploy All Microservices to Staging
+    name: Deploy All Microservices to Production
     runs-on: ubuntu-latest
     environment: staging_qa
 
     env:
-      BASE_URL: ${{ secrets.BASE_URL }}
       CONTAINER_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
       DBHOST: ${{ secrets.DBHOST }}
       DBNAME: ${{ secrets.DBNAME }}
-      DB_FIXTURES_HOST: ${{ secrets.DB_FIXTURES_HOST }}
-      FIXTURES_DIR: ${{ secrets.FIXTURES_DIR }}
       HISTORY_DBHOST: ${{ secrets.HISTORY_DBHOST }}
       HISTORY_DBNAME: ${{ secrets.HISTORY_DBNAME }}
       KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
@@ -48,7 +45,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build all images
-        run: ./scripts/build_all_images.sh "linux/amd64" staging
+        run: ./scripts/build_all_images.sh "linux/amd64" prod
 
       - uses: tale/kubectl-action@v1
         with:
@@ -56,4 +53,4 @@ jobs:
           kubectl-version: v1.35.0
 
       - name: Deploy to k8s cluster
-        run: ./scripts/deploy.sh infra/k8s/overlays/staging
+        run: ./scripts/deploy.sh infra/k8s/overlays/production
