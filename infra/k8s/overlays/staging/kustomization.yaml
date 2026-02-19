@@ -1,5 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: staging
 
 resources:
 - ../../base/namespaces
@@ -21,10 +22,3 @@ patches:
   - path: video-upload-deployment-patch.yaml
   - path: metadata-deployment-patch.yaml
   - path: db-fixture-rest-api-deployment-patch.yaml
-  - path: history-service-patch.yaml
-  - path: video-streaming-service-patch.yaml
-  - path: video-storage-service-patch.yaml
-  - path: gateway-service-patch.yaml
-  - path: video-upload-service-patch.yaml
-  - path: metadata-service-patch.yaml
-  - path: db-fixture-rest-api-service-patch.yaml
