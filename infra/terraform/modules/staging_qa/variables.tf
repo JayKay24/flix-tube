@@ -27,3 +27,8 @@ variable "flixtube_kubernetes_version" {
   type = string
   description = "AKS Kubernetes version"
 }
+
+variable "container_registry_id" {
+  type        = string
+  description = "The ID of the Azure Container Registry"
+}

@@ -1,3 +1,9 @@
+provider "azurerm" {
+  features {}
+  subscription_id = var.flixtube_az_subscription_id
+  resource_provider_registrations = "none"
+}
+
 module "common" {
   source = "../modules/common"
   flixtube_az_region_name = var.flixtube_az_region_name
@@ -13,4 +19,5 @@ module "staging_qa" {
   flixtube_az_resource_group_name = var.flixtube_az_resource_group_name
   flixtube_az_subscription_id = var.flixtube_az_subscription_id
   flixtube_kubernetes_version = var.flixtube_kubernetes_version
+  container_registry_id = module.common.container_registry_id
 }
