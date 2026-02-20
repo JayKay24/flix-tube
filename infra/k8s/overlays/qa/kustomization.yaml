@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: qa
 
 resources:
-- ../../base/namespaces
+- ./qa.yaml
 - ../../base/video-storage
 - ../../base/history
 - ../../base/video-streaming

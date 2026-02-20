@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: staging
 
 resources:
-- ../../base/namespaces
+- ./staging.yaml
 - ../../base/video-storage
 - ../../base/history
 - ../../base/video-streaming
