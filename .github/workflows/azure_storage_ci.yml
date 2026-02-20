@@ -27,7 +27,7 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
       - name: Build azure-storage microservice
         run: npx nx run azure-storage:build
   
@@ -45,6 +45,6 @@ jobs:
           node-version: 24.x
           cache: "npm"
       - name: Install dependencies
-        run: npm ci
+        run: npm install
       - name: Run Unit tests on azure-storage microservice
         run: npx nx run azure-storage:test
