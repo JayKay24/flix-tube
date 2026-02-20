@@ -17,36 +17,23 @@ permissions:
 
 jobs:
   build:
-    name: Build video-streaming Microservice
+    name: Build & unit test
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24.x
-          cache: "npm"
-
-      - name: Install dependencies
-        run: npm install
-      - name: Build video-streaming microservice
-        run: npx nx run @flix-tube/video-streaming:build
-
-  unit_test:
     env:
       VIDEO_STORAGE_PORT: ${{ secrets.VIDEO_STORAGE_PORT }}
       VIDEO_STORAGE_HOST: ${{ secrets.VIDEO_STORAGE_HOST }}
       DBHOST: ${{ secrets.DBHOST }}
       DBNAME: ${{ secrets.DBNAME }}
-
-    name: Run Unit Tests on video-streaming Microservice
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v6
         with:
           node-version: 24.x
           cache: "npm"
+
       - name: Install dependencies
         run: npm install
-      - name: Run Unit tests on video-streaming microservice
+      - name: Build
+        run: npx nx run @flix-tube/video-streaming:build
+      - name: Run Unit tests
         run: npx nx run @flix-tube/video-streaming:test

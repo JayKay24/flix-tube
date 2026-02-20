@@ -19,9 +19,11 @@ permissions:
 jobs:
   deploy:
     if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_run' &&
       github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.event == 'push' &&
-      github.event.workflow_run.head_branch == 'develop'
+      github.event.workflow_run.head_branch == 'develop')
     name: Deploy All Microservices to Staging
     runs-on: ubuntu-latest
     environment: staging_qa
@@ -53,7 +55,6 @@ jobs:
       VERSION: ${{ github.sha }}
       VIDEO_STORAGE_HOST: ${{ secrets.VIDEO_STORAGE_HOST }}
       VIDEO_STORAGE_PORT: ${{ secrets.VIDEO_STORAGE_PORT }}
-
 
     steps:
       - uses: actions/checkout@v3

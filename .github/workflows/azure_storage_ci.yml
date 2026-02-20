@@ -17,8 +17,11 @@ permissions:
 
 jobs:
   build:
-    name: Build azure-storage Microservice
+    name: Build & unit test
     runs-on: ubuntu-latest
+    env:
+      STORAGE_ACCOUNT_NAME: ${{ secrets.STORAGE_ACCOUNT_NAME }}
+      STORAGE_ACCESS_KEY: ${{ secrets.STORAGE_ACCESS_KEY }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v6
@@ -28,23 +31,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-      - name: Build azure-storage microservice
+      - name: Build
         run: npx nx run azure-storage:build
-  
-  unit_test:
-    env:
-      STORAGE_ACCOUNT_NAME: ${{ secrets.STORAGE_ACCOUNT_NAME }}
-      STORAGE_ACCESS_KEY: ${{ secrets.STORAGE_ACCESS_KEY }}
-    
-    name: Run Unit Tests on azure-storage Microservice
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24.x
-          cache: "npm"
-      - name: Install dependencies
-        run: npm install
-      - name: Run Unit tests on azure-storage microservice
+      - name: Run Unit tests
         run: npx nx run azure-storage:test

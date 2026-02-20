@@ -17,8 +17,12 @@ permissions:
 
 jobs:
   build:
-    name: Build history Microservice
+    name: Build & unit test
     runs-on: ubuntu-latest
+    env:
+      HISTORY_DBNAME: ${{ secrets.HISTORY_DBNAME }}
+      HISTORY_DBHOST: ${{ secrets.HISTORY_DBHOST }}
+      RABBIT: ${{ secrets.RABBIT }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v6
@@ -28,24 +32,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-      - name: Build history microservice
+      - name: Build
         run: npx nx run history:build
-  
-  unit_test:
-    env:
-      HISTORY_DBNAME: ${{ secrets.HISTORY_DBNAME }}
-      HISTORY_DBHOST: ${{ secrets.HISTORY_DBHOST }}
-      RABBIT: ${{ secrets.RABBIT }}
-    
-    name: Run Unit Tests on history Microservice
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24.x
-          cache: "npm"
-      - name: Install dependencies
-        run: npm install
-      - name: Run Unit tests on history microservice
+      - name: Run Unit tests
         run: npx nx run history:test
