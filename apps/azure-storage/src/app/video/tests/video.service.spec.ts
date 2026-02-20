@@ -36,15 +36,15 @@ describe('VideoService', () => {
     expect(service).toBeDefined();
   });
 
-  describe('findAll', () => {
+  describe('findOne', () => {
     it('should return a blob client for a given video path', async () => {
-      const videoPath = 'some/video/path.mp4';
+      const videoId = 'some_id';
       const containerName = 'videos';
 
-      const blobClient = await service.findAll(videoPath);
+      const blobClient = await service.findOne(videoId);
 
       const containerClient = blobServiceClient.getContainerClient(containerName);
-      expect(containerClient.getBlobClient).toHaveBeenCalledWith(videoPath);
+      expect(containerClient.getBlobClient).toHaveBeenCalledWith(videoId);
       expect(blobClient).toBeDefined();
     });
   });

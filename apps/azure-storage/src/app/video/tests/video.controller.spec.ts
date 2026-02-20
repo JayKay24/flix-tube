@@ -14,7 +14,7 @@ describe('VideoController', () => {
         {
           provide: VideoService,
           useValue: {
-            findAll: jest.fn(),
+            findOne: jest.fn(),
           },
         },
       ],
@@ -28,9 +28,9 @@ describe('VideoController', () => {
     expect(controller).toBeDefined();
   });
 
-  describe('findAll', () => {
-    it('should stream a video when a valid path is provided', async () => {
-      const videoPath = 'some/video.mp4';
+  describe('findOne', () => {
+    it('should stream a video when a valid id is provided', async () => {
+      const videoId = 'some_id';
       const mockContentLength = 12345;
       const mockStream = { pipe: jest.fn() };
 
@@ -43,7 +43,7 @@ describe('VideoController', () => {
         }),
       };
 
-      (videoService.findAll as jest.Mock).mockResolvedValue(mockBlobClient);
+      (videoService.findOne as jest.Mock).mockResolvedValue(mockBlobClient);
 
       const res = {
         writeHead: jest.fn(),
@@ -51,9 +51,9 @@ describe('VideoController', () => {
         send: jest.fn().mockReturnThis(),
       } as unknown as Response;
 
-      await controller.findAll({ path: videoPath }, {} as any, res);
+      await controller.findOne({ id: videoId }, res);
 
-      expect(videoService.findAll).toHaveBeenCalledWith(videoPath);
+      expect(videoService.findOne).toHaveBeenCalledWith(videoId);
       expect(mockBlobClient.getProperties).toHaveBeenCalled();
       expect(mockBlobClient.download).toHaveBeenCalled();
       expect(res.writeHead).toHaveBeenCalledWith(200, {
@@ -61,18 +61,6 @@ describe('VideoController', () => {
         'Content-Type': 'video/mp4',
       });
       expect(mockStream.pipe).toHaveBeenCalledWith(res);
-    });
-
-    it('should return a 400 error if no video path is provided', async () => {
-      const res = {
-        status: jest.fn().mockReturnThis(),
-        send: jest.fn(),
-      } as unknown as Response;
-
-      await controller.findAll({ path: '' }, {} as any, res);
-
-      expect(res.status).toHaveBeenCalledWith(400);
-      expect(res.send).toHaveBeenCalledWith('A video path must be provided.');
     });
   });
 });
