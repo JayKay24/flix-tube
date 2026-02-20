@@ -7,14 +7,12 @@ import {
   Param,
   Delete,
   Res,
-  Req,
-  Query,
   ValidationPipe,
 } from '@nestjs/common';
 import { VideoService } from './video.service';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
-import type { Response, Request } from 'express';
+import type { Response } from 'express';
 import { GetVideoParams } from './dto/params-video.dto';
 
 @Controller('video')
