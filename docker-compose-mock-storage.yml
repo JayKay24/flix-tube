@@ -1,0 +1,16 @@
+services:
+  azure-storage:
+    image: mock-storage
+    build:
+      context: .
+      dockerfile: apps/mock-storage/Dockerfile-dev
+    container_name: video-storage
+    ports:
+      - "4001:${PORT}"
+    environment:
+      - PORT=${PORT}
+    volumes:
+      - ./:/app:z
+      - /app/node_modules
+      - /app/.nx
+    restart: "no"

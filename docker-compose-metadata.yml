@@ -1,0 +1,24 @@
+include:
+  - ./docker-compose-infra.yml
+  - ./docker-compose-video-upload.yml
+services:
+  metadata:
+    image: metadata
+    build:
+      context: .
+    container_name: metadata
+    ports:
+      - "4004:${PORT}"
+    depends_on:
+      db:
+        condition: service_started
+      rabbit: 
+        condition: service_healthy
+      video-upload:
+        condition: service_started
+    environment:
+      - PORT=${PORT}
+      - METADATA_DBHOST=${METADATA_DBHOST}
+      - METADATA_DBNAME=${METADATA_DBNAME}
+      - RABBIT=${RABBIT}
+    restart: "no"

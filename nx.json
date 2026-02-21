@@ -28,7 +28,8 @@
           "buildDepsName": "build-deps",
           "watchDepsName": "watch-deps"
         }
-      }
+      },
+      "exclude": ["libs/rmq-broker/*"]
     },
     {
       "plugin": "@nx/webpack/plugin",
@@ -52,12 +53,59 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["apps/video-streaming-e2e/**/*"]
+      "exclude": [
+        "apps/video-streaming-e2e/**/*",
+        "apps/azure-storage-e2e/**/*",
+        "apps/history-e2e/**/*",
+        "apps/metadata-e2e/**/*",
+        "apps/db-fixture-rest-api-e2e/**/*",
+        "apps/video-upload-e2e/**/*",
+        "apps/mock-storage-e2e/**/*"
+      ]
+    },
+    {
+      "plugin": "@nx/js/typescript",
+      "include": ["libs/rmq-broker/*"],
+      "options": {
+        "typecheck": {
+          "targetName": "typecheck"
+        }
+      }
+    },
+    {
+      "plugin": "@nx/next/plugin",
+      "options": {
+        "startTargetName": "start",
+        "buildTargetName": "build",
+        "devTargetName": "dev",
+        "serveStaticTargetName": "serve-static",
+        "buildDepsTargetName": "build-deps",
+        "watchDepsTargetName": "watch-deps"
+      }
+    },
+    {
+      "plugin": "@nx/playwright/plugin",
+      "options": {
+        "targetName": "e2e"
+      }
     }
   ],
   "targetDefaults": {
     "test": {
       "dependsOn": ["^build"]
+    },
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    }
+  },
+  "generators": {
+    "@nx/next": {
+      "application": {
+        "style": "tailwind",
+        "linter": "eslint"
+      }
     }
   }
 }

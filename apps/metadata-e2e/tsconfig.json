@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "out-tsc/@flix-tube/metadata-e2e",
+    "esModuleInterop": true,
+    "noUnusedLocals": false,
+    "noImplicitAny": false
+  },
+  "include": ["jest.config.ts", "src/**/*.ts"],
+  "references": [
+    {
+      "path": "../../libs/mongodb-fixtures"
+    }
+  ]
+}

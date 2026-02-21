@@ -1,0 +1,10 @@
+include:
+  - ./docker-compose-video-storage.yml
+services:
+  azure-storage:
+    build:
+      dockerfile: apps/azure-storage/Dockerfile-dev
+    volumes:
+      - ./:/app:z
+      - /app/node_modules
+      - /app/.nx

@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: staging
+
+resources:
+- ./staging.yaml
+- ../../base/video-storage
+- ../../base/history
+- ../../base/video-streaming
+- ../../base/gateway
+- ../../base/video-upload
+- ../../base/metadata
+- ../../base/db-fixture-rest-api
+- ../../base/rabbitmq
+- ../../base/mongodb
+
+patches:
+  - path: history-deployment-patch.yaml
+  - path: video-streaming-deployment-patch.yaml
+  - path: video-storage-deployment-patch.yaml
+  - path: gateway-deployment-patch.yaml
+  - path: video-upload-deployment-patch.yaml
+  - path: metadata-deployment-patch.yaml
+  - path: db-fixture-rest-api-deployment-patch.yaml

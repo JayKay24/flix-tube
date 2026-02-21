@@ -1,0 +1,36 @@
+# Stage 1: Build the application
+FROM node:24-alpine AS builder
+
+WORKDIR /app
+
+# Copy package.json and package-lock.json for dependency installation
+# We need the root package.json and package-lock.lock for nx commands
+COPY ../../package*.json ./
+RUN npm install
+
+# Copy the rest of the application
+COPY ../../ .
+
+RUN npx nx reset
+
+# Build the gateway application
+RUN npx nx run @flix-tube/gateway:build
+
+# Stage 2: Create the final production image
+FROM node:24-alpine
+
+WORKDIR /app
+
+# Copy the built application from the builder stage
+COPY --from=builder /app/apps/gateway/.next/standalone ./standalone
+
+COPY --from=builder /app/apps/gateway/public ./standalone/public
+
+COPY --from=builder /app/apps/gateway/.next/static ./standalone/apps/gateway/.next/static
+
+# Expose the port the app runs on
+EXPOSE 80
+
+ENTRYPOINT [ "node" ]
+
+CMD [ "standalone/apps/gateway/server.js" ]

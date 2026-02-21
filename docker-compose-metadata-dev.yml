@@ -1,0 +1,11 @@
+include:
+  - ./docker-compose-metadata.yml
+  - ./docker-compose-video-upload-dev.yml
+services:
+  metadata:
+    build:
+      dockerfile: apps/metadata/Dockerfile-dev
+    volumes:
+      - ./:/app:z
+      - /app/node_modules
+      - /app/.nx

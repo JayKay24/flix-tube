@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video-storage
+spec:
+  selector:
+    matchLabels:
+      app: video-storage
+  template:
+    spec:
+      containers:
+        - name: video-storage
+          image: $CONTAINER_REGISTRY/prod-azure-storage:$VERSION
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "500Mi"
+            requests:
+              memory: "500Mi"
+              cpu: "100m"

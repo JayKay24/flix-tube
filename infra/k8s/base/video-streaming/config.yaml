@@ -1,0 +1,11 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: video-streaming-config
+data:
+  port: "$PORT"
+  dbHost: "$DBHOST"
+  dbName: "$DBNAME"
+  rabbit: "$RABBIT"
+  videoStoragePort: "$VIDEO_STORAGE_PORT"
+  videoStorageHost: "$VIDEO_STORAGE_HOST"

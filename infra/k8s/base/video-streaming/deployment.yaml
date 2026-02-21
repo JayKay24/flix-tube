@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video-streaming
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: video-streaming
+  template:
+    metadata:
+      labels:
+        app: video-streaming
+    spec:
+      initContainers:
+        - name: init-ctr
+          image: busybox:1.28.4
+          command: ['sh', '-c', 'until nslookup rabbitmq; do echo waiting for rabbitmq service; sleep 1; done; echo rabbitmq found!']
+      containers:
+        - name: video-streaming
+          image: video-streaming:latest
+          imagePullPolicy: Never
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: video-streaming-config
+                  key: port
+            - name: DBHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: video-streaming-config
+                  key: dbHost
+            - name: DBNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: video-streaming-config
+                  key: dbName
+            - name: RABBIT
+              valueFrom:
+                configMapKeyRef:
+                  name: video-streaming-config
+                  key: rabbit 
+            - name: VIDEO_STORAGE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: video-streaming-config
+                  key: videoStorageHost
+            - name: VIDEO_STORAGE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: video-streaming-config
+                  key: videoStoragePort

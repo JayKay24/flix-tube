@@ -1,0 +1,6 @@
+include:
+  - ./docker-compose-db-fixture-rest-api.yml
+services:
+  db-fixture-rest-api:
+    build:
+      dockerfile: apps/db-fixture-rest-api/Dockerfile-prod

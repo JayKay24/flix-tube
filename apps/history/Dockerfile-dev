@@ -1,0 +1,12 @@
+# Stage 1: Build the application
+FROM node:24-alpine
+
+WORKDIR /app
+
+COPY ../../package*.json ./
+RUN npm install
+
+RUN npx nx reset
+
+CMD npx nx run history:serve:development
+

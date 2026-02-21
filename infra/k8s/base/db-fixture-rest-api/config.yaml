@@ -1,0 +1,8 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: db-fixture-rest-api-config
+data:
+  port: "$PORT"
+  fixturesDir: "$FIXTURES_DIR"
+  dbFixturesHost: "$DB_FIXTURES_HOST"

@@ -1,0 +1,13 @@
+include:
+  - ./docker-compose-video-streaming.yml
+  - ./docker-compose-mock-storage.yml
+  - ./docker-compose-history-dev.yml
+services:
+  video-streaming:
+    build:
+      dockerfile: apps/video-streaming/Dockerfile-dev
+    volumes:
+      - ./:/app:z
+      - /app/node_modules
+      - /app/.nx
+    

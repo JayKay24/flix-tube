@@ -1,0 +1,32 @@
+{
+  "name": "@flix-tube/history-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "name": "history-e2e",
+    "implicitDependencies": [
+      "history"
+    ],
+    "targets": {
+      "start-dev-env": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "source ./dev_utility_functions.sh && up prod history"
+        }
+      },
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/apps/history-e2e/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "apps/history-e2e/jest.config.ts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "start-dev-env"
+        ]
+      }
+    }
+  }
+}

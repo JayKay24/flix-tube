@@ -8,6 +8,57 @@
     },
     {
       "path": "./apps/video-streaming"
+    },
+    {
+      "path": "./apps/azure-storage-e2e"
+    },
+    {
+      "path": "./apps/azure-storage"
+    },
+    {
+      "path": "./apps/history-e2e"
+    },
+    {
+      "path": "./apps/history"
+    },
+    {
+      "path": "./libs/rmq-broker"
+    },
+    {
+      "path": "./apps/gateway-e2e"
+    },
+    {
+      "path": "./apps/gateway"
+    },
+    {
+      "path": "./apps/metadata-e2e"
+    },
+    {
+      "path": "./apps/metadata"
+    },
+    {
+      "path": "./apps/db-fixture-rest-api-e2e"
+    },
+    {
+      "path": "./apps/db-fixture-rest-api"
+    },
+    {
+      "path": "./libs/dynamic-db"
+    },
+    {
+      "path": "./apps/video-upload-e2e"
+    },
+    {
+      "path": "./apps/video-upload"
+    },
+    {
+      "path": "./apps/mock-storage-e2e"
+    },
+    {
+      "path": "./apps/mock-storage"
+    },
+    {
+      "path": "./libs/mongodb-fixtures"
     }
   ]
 }

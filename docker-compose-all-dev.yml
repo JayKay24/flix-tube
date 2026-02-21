@@ -1,0 +1,10 @@
+include:
+  - ./docker-compose-infra.yml
+  # - ./docker-compose-video-storage-dev.yml
+  - ./docker-compose-mock-storage.yml
+  - ./docker-compose-metadata-dev.yml
+  - ./docker-compose-history-dev.yml
+  - ./docker-compose-db-fixture-rest-api-dev.yml
+  - ./docker-compose-video-streaming-dev.yml
+  - ./docker-compose-video-upload-dev.yml
+  - ./docker-compose-gateway-dev.yml

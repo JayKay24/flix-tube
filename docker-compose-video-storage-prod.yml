@@ -1,0 +1,10 @@
+include:
+  - ./docker-compose-video-storage.yml
+  - ./docker-compose-db-fixture-rest-api-prod.yml
+services:
+  azure-storage:
+    build:
+      dockerfile: apps/azure-storage/Dockerfile-prod
+    depends_on:
+      - db-fixture-rest-api
+    

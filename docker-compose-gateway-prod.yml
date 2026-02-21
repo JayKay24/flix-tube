@@ -1,0 +1,11 @@
+include:
+  - ./docker-compose-gateway.yml
+  - ./docker-compose-video-streaming-prod.yml
+  - ./docker-compose-metadata-prod.yml
+  - ./docker-compose-db-fixture-rest-api-prod.yml
+services:
+  gateway:
+    build:
+      dockerfile: apps/gateway/Dockerfile-prod
+    depends_on:
+      - db-fixture-rest-api

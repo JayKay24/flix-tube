@@ -1,0 +1,32 @@
+name: Azure-Storage CI
+
+on:
+  pull_request:
+    types: [opened]
+    branches:
+      - "develop"
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  build:
+    name: Build & unit test
+    runs-on: ubuntu-latest
+    env:
+      STORAGE_ACCOUNT_NAME: ${{ secrets.STORAGE_ACCOUNT_NAME }}
+      STORAGE_ACCESS_KEY: ${{ secrets.STORAGE_ACCESS_KEY }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npx nx run azure-storage:build
+      - name: Run Unit tests
+        run: npx nx run azure-storage:test

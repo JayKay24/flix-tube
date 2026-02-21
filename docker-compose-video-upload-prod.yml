@@ -1,0 +1,10 @@
+include:
+  - docker-compose-video-upload.yml
+  - docker-compose-video-storage-prod.yml
+  - docker-compose-db-fixture-rest-api-prod.yml
+services:
+  video-upload:
+    build:
+      dockerfile: apps/video-upload/Dockerfile-prod
+    depends_on:
+      - db-fixture-rest-api

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video-streaming
+spec:
+  selector:
+    matchLabels:
+      app: video-streaming
+  template:
+    spec:
+      containers:
+        - name: video-streaming
+          image: $CONTAINER_REGISTRY/qa-video-streaming:$VERSION
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "128Mi"
+            requests:
+              memory: "128Mi"
+              cpu: "100m"

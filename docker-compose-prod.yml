@@ -1,0 +1,113 @@
+include:
+  - ./docker-compose-infra.yml
+services:
+  azure-storage:
+    image: azure-storage
+    build:
+      context: .
+      dockerfile: apps/azure-storage/Dockerfile-prod
+    container_name: video-storage
+    ports:
+      - "4001:${PORT}"
+    environment:
+      - PORT=${PORT}
+      - STORAGE_ACCOUNT_NAME=${STORAGE_ACCOUNT_NAME}
+      - STORAGE_ACCESS_KEY=${STORAGE_ACCESS_KEY}
+    restart: "no"
+
+  video-streaming:
+    image: video-streaming
+    build:
+      context: .
+      dockerfile: apps/video-streaming/Dockerfile-prod
+    container_name: video-streaming
+    ports:
+      - "4002:${PORT}"
+    depends_on:
+      rabbit:
+        condition: service_healthy
+      db:
+        condition: service_started
+      azure-storage:
+        condition: service_started
+    environment:
+      - PORT=${PORT}
+      - DBHOST=${DBHOST}
+      - DBNAME=${DBNAME}
+      - VIDEO_STORAGE_HOST=${VIDEO_STORAGE_HOST}
+      - VIDEO_STORAGE_PORT=${VIDEO_STORAGE_PORT}
+    restart: "no"
+
+  history:
+    image: history
+    build:
+      context: .
+      dockerfile: apps/history/Dockerfile-prod
+    container_name: history
+    ports:
+      - "4003:${PORT}"
+    depends_on:
+      rabbit:
+        condition: service_healthy
+      db:
+        condition: service_started
+    environment:
+      - PORT=${PORT}
+      - RABBIT=${RABBIT}
+      - HISTORY_DBNAME=${HISTORY_DBNAME}
+      - HISTORY_DBHOST=${HISTORY_DBHOST}
+      - NODE_ENV=development
+    restart: "no"
+
+  metadata:
+    image: metadata
+    build:
+      context: .
+      dockerfile: apps/metadata/Dockerfile-prod
+    container_name: metadata
+    ports:
+      - "4004:${PORT}"
+    depends_on:
+      db:
+        condition: service_started
+    environment:
+      - PORT=${PORT}
+      - METADATA_DBHOST=${METADATA_DBHOST}
+      - METADATA_DBNAME=${METADATA_DBNAME}
+    restart: "no"
+  
+  gateway:
+    image: gateway
+    build:
+      context: .
+      dockerfile: apps/gateway/Dockerfile-prod
+    container_name: gateway
+    ports:
+      - "4005:${PORT}"
+    depends_on:
+      metadata:
+        condition: service_started
+      video-streaming:
+        condition: service_started
+    environment:
+      - PORT=${PORT}
+      - NODE_ENV=production
+    restart: "no"
+
+  db-fixture-rest-api:
+    image: db-fixture-rest-api
+    build:
+      context: .
+      dockerfile: apps/db-fixture-rest-api/Dockerfile-prod
+    container_name: db-fixture-rest-api
+    ports:
+      - "9000:${PORT}"
+    depends_on:
+      db:
+        condition: service_started
+    environment:
+      - DB_FIXTURES_HOST=${DB_FIXTURES_HOST}
+      - FIXTURES_DIR=${FIXTURES_DIR}
+      - PORT=${PORT}
+    restart: "always"
+

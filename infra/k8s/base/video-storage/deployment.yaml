@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video-storage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: video-storage
+  template:
+    metadata:
+      labels:
+        app: video-storage
+    spec:
+      containers:
+        - name: video-storage
+          image: azure-storage:latest
+          imagePullPolicy: Never
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: video-storage-config
+                  key: port
+            - name: STORAGE_ACCOUNT_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: video-storage-config
+                  key: storageAccountName
+            - name: STORAGE_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: video-storage-secrets
+                  key: storageAccessKey
+   

@@ -1,0 +1,10 @@
+include:
+  - ./docker-compose-history.yml
+services:
+  history:
+    build:
+      dockerfile: apps/history/Dockerfile-dev
+    volumes:
+      - ./:/app:z
+      - /app/node_modules
+      - /app/.nx

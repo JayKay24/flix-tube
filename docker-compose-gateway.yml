@@ -1,0 +1,24 @@
+include:
+  - ./docker-compose-metadata.yml
+  - ./docker-compose-video-streaming.yml
+services:
+  gateway:
+    image: gateway
+    build:
+      context: .
+    container_name: gateway
+    ports:
+      - "4006:${PORT}"
+    depends_on:
+      metadata:
+        condition: service_started
+      video-streaming:
+        condition: service_started
+    environment:
+      - PORT=${PORT}
+      - NEXT_PUBLIC_HISTORY_HOST=${NEXT_PUBLIC_HISTORY_HOST}
+      - NEXT_PUBLIC_VIDEO_UPLOAD_HOST=${NEXT_PUBLIC_VIDEO_UPLOAD_HOST}
+      - NEXT_PUBLIC_VIDEO_STREAMING_HOST=${NEXT_PUBLIC_VIDEO_STREAMING_HOST}
+      - NEXT_PUBLIC_METADATA_HOST=${NEXT_PUBLIC_METADATA_HOST}
+      - NEXT_PUBLIC_VIDEO_STORAGE_HOST=${NEXT_PUBLIC_VIDEO_STORAGE_HOST}
+    restart: "no"

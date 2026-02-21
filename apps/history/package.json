@@ -1,0 +1,111 @@
+{
+  "name": "@flix-tube/history",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "name": "history",
+    "targets": {
+      "build": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "webpack-cli build",
+          "args": [
+            "--node-env=production"
+          ],
+          "cwd": "apps/history"
+        },
+        "configurations": {
+          "development": {
+            "args": [
+              "--node-env=development"
+            ]
+          }
+        }
+      },
+      "prune-lockfile": {
+        "dependsOn": [
+          "build"
+        ],
+        "cache": true,
+        "executor": "@nx/js:prune-lockfile",
+        "outputs": [
+          "{workspaceRoot}/apps/history/dist/package.json",
+          "{workspaceRoot}/apps/history/dist/package-lock.json"
+        ],
+        "options": {
+          "buildTarget": "build"
+        }
+      },
+      "copy-workspace-modules": {
+        "dependsOn": [
+          "build"
+        ],
+        "cache": true,
+        "outputs": [
+          "{workspaceRoot}/apps/history/dist/workspace_modules"
+        ],
+        "executor": "@nx/js:copy-workspace-modules",
+        "options": {
+          "buildTarget": "build"
+        }
+      },
+      "prune": {
+        "dependsOn": [
+          "prune-lockfile",
+          "copy-workspace-modules"
+        ],
+        "executor": "nx:noop"
+      },
+      "serve": {
+        "continuous": true,
+        "executor": "@nx/js:node",
+        "defaultConfiguration": "development",
+        "dependsOn": [
+          "build"
+        ],
+        "options": {
+          "buildTarget": "history:build",
+          "runBuildTargetDependencies": false
+        },
+        "configurations": {
+          "development": {
+            "buildTarget": "history:build:development"
+          },
+          "production": {
+            "buildTarget": "history:build:production"
+          }
+        }
+      },
+      "test": {
+        "options": {
+          "passWithNoTests": true,
+          "coverage": true,
+          "coverageDirectory": "test-coverage",
+          "collectCoverageFrom": [
+            "**/*.(t|j)s",
+            "!main.(t|j)s",
+            "!**/*.module.(t|j)s",
+            "!**/*.dto.(t|j)s",
+            "!**/*.entity.(t|j)s",
+            "!**/*.args.(t|j)s",
+            "!**/*.factories.(t|j)s",
+            "!**/*.types.(t|j)s",
+            "!**/*.schema.(t|j)s",
+            "!**/node_modules/**"
+          ]
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.0.0",
+    "@nestjs/core": "^11.0.0",
+    "@nestjs/platform-express": "^11.0.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@nestjs/testing": "^11.0.0"
+  }
+}

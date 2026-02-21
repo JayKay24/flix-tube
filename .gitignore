@@ -16,6 +16,7 @@ node_modules
 *.launch
 .settings/
 *.sublime-workspace
+.idx/dev.local.nix
 
 # IDE - VSCode
 .vscode/*
@@ -33,6 +34,8 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+**/test-coverage/
+**/storage
 
 # System Files
 .DS_Store
@@ -47,3 +50,19 @@ test-output
 
 error.log
 launch.json
+.env
+*.env
+
+# npm cache
+npm-cache/
+
+# terraform
+**/.terraform
+*.tfvars
+*.tfstate
+*.tfstate*
+
+# Next.js
+.next
+out
+next-env.d.ts

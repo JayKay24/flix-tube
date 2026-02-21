@@ -1,0 +1,9 @@
+include:
+  - ./docker-compose-history.yml
+  - ./docker-compose-db-fixture-rest-api-prod.yml
+services:
+  history:
+    build:
+      dockerfile: apps/history/Dockerfile-prod
+    depends_on:
+      - db-fixture-rest-api

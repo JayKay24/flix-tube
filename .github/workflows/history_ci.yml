@@ -1,0 +1,33 @@
+name: History CI
+
+on:
+  pull_request:
+    types: [opened]
+    branches:
+      - "develop"
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  build:
+    name: Build & unit test
+    runs-on: ubuntu-latest
+    env:
+      HISTORY_DBNAME: ${{ secrets.HISTORY_DBNAME }}
+      HISTORY_DBHOST: ${{ secrets.HISTORY_DBHOST }}
+      RABBIT: ${{ secrets.RABBIT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npx nx run history:build
+      - name: Run Unit tests
+        run: npx nx run history:test

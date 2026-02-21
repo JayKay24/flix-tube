@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-fixture-rest-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-fixture-rest-api
+  template:
+    metadata:
+      labels:
+        app: db-fixture-rest-api
+    spec:
+      initContainers:
+        - name: init-ctr
+          image: busybox:1.28.4
+          command: ['sh', '-c', 'until nslookup mongodb; do echo waiting for mongodb service; sleep 1; done; echo mongodb found!']
+      containers:
+        - name: db-fixture-rest-api
+          image: db-fixture-rest-api:latest
+          imagePullPolicy: Never
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: db-fixture-rest-api-config
+                  key: port
+            - name: FIXTURES_DIR
+              valueFrom:
+                configMapKeyRef:
+                  name: db-fixture-rest-api-config
+                  key: fixturesDir
+            - name: DB_FIXTURES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: db-fixture-rest-api-config
+                  key: dbFixturesHost

@@ -1,0 +1,29 @@
+include:
+  - ./docker-compose-infra.yml
+  - ./docker-compose-video-storage.yml
+  - ./docker-compose-history.yml
+services:
+  video-streaming:
+    image: video-streaming
+    build:
+      context: .
+    container_name: video-streaming
+    ports:
+      - "4002:${PORT}"
+    depends_on:
+      rabbit:
+        condition: service_healthy
+      db:
+        condition: service_started
+      azure-storage:
+        condition: service_started
+      history:
+        condition: service_started
+    environment:
+      - PORT=${PORT}
+      - DBHOST=${DBHOST}
+      - DBNAME=${DBNAME}
+      - VIDEO_STORAGE_HOST=${VIDEO_STORAGE_HOST}
+      - VIDEO_STORAGE_PORT=${VIDEO_STORAGE_PORT}
+      - RABBIT=${RABBIT}
+    restart: "no"

@@ -1,0 +1,8 @@
+**/node_modules/*
+.github
+.vscode
+.git
+.nx
+**/dist/*
+infra
+**/.next

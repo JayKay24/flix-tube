@@ -1,0 +1,62 @@
+"use client"
+
+import { useEffect } from 'react';
+import { useVideos } from '../hooks/useVideos';
+import Link from 'next/link';
+
+export default function Index() {
+  const { videos, fetchVideos } = useVideos();
+
+  useEffect(() => {
+    (async () => {
+      await fetchVideos('/api/video');
+    })()
+  }, []);
+  /*
+   * Replace the elements below with your own.
+   *
+   * Note: The corresponding styles are in the ./index.tailwind file.
+   */
+  return (
+    <div className="flex flex-col">
+      <div className="border-b-2 bg-gray-100">
+        <div className="nav flex flex-row items-center mt-1 p-2">
+          <div className="text-xl font-bold">
+            FlixTube
+          </div>
+          <Link className="ml-16 border-b-2 border-blue-600" href="/">
+            Videos
+          </Link>
+          <Link className="ml-4" href="/upload">
+            Upload
+          </Link>
+          <Link className="ml-4" href="/history">
+            History
+          </Link>
+        </div>
+      </div>
+      <div className="m-4">
+        <h1>Videos</h1>
+        <div id="video-list" className="m-4">
+          {
+            videos.length > 0 ? (
+              <ul>
+                {
+                  videos.map((video) => (
+                    <li key={video._id}>
+                      <Link className="mt-1" href={`/play/${video._id}`}>
+                        {video.name}
+                      </Link>
+                    </li>
+                  ))
+                }
+              </ul>
+              ) : ( 
+                <div>No videos uploaded yet.</div> 
+              )
+          }
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: history
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: history
+  template:
+    metadata:
+      labels:
+        app: history
+    spec:
+      initContainers:
+        - name: init-ctr
+          image: busybox:1.28.4
+          command: ['sh', '-c', 'until nslookup rabbitmq; do echo waiting for rabbitmq service; sleep 1; done; echo rabbitmq found!']
+      containers:
+        - name: history
+          image: history:latest
+          imagePullPolicy: Never
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: history-config
+                  key: port
+            - name: HISTORY_DBNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: history-config
+                  key: historyDbName
+            - name: HISTORY_DBHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: history-config
+                  key: historyDBHost
+            - name: RABBIT
+              valueFrom:
+                configMapKeyRef:
+                  name: history-config
+                  key: rabbit

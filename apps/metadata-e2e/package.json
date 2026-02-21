@@ -1,0 +1,31 @@
+{
+  "name": "@flix-tube/metadata-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@flix-tube/metadata"
+    ],
+    "targets": {
+      "start-dev-env": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "source ./dev_utility_functions.sh && up prod metadata"
+        }
+      },
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "apps/metadata-e2e/jest.config.cts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "start-dev-env"
+        ]
+      }
+    }
+  }
+}
