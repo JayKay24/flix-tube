@@ -12,5 +12,5 @@ module "production" {
   flixtube_aks_app_name           = var.flixtube_aks_app_name
   flixtube_kubernetes_version     = var.flixtube_kubernetes_version
   flixtube_cosmosdb_account_name  = var.flixtube_cosmosdb_account_name
-  container_registry_id           = module.common.container_registry_id
+  flixtube_az_container_registry_id = var.flixtube_az_container_registry_id
 }
