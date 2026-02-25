@@ -28,7 +28,7 @@ variable "flixtube_cosmosdb_account_name" {
   description = "Name for the Azure Cosmos DB account."
 }
 
-variable "container_registry_id" {
+variable "flixtube_az_container_registry_id" {
   type        = string
   description = "The ID of the Azure Container Registry"
 }
