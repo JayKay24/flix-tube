@@ -12,5 +12,5 @@ module "staging_qa" {
   flixtube_az_resource_group_name = var.flixtube_az_resource_group_name
   flixtube_az_subscription_id = var.flixtube_az_subscription_id
   flixtube_kubernetes_version = var.flixtube_kubernetes_version
-  container_registry_id = module.common.container_registry_id
+  flixtube_az_container_registry_id = var.flixtube_az_container_registry_id
 }
