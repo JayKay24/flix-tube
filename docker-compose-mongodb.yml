@@ -3,5 +3,5 @@ services:
     image: mongo:latest
     container_name: db
     ports:
-      - "4000:27017"
+      - "27017:27017"
     restart: "always"
