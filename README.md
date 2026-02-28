@@ -82,6 +82,72 @@ Kubernetes manifests are located in `infra/k8s`. Deployment scripts are provided
 
 ---
 
+## 🔑 Environment Variables
+
+To run the services successfully, the following environment variables need to be configured. You can find example values in the `*.env` files in the root directory.
+
+### Common Variables
+- `PORT`: The port number for the HTTP server (required for all microservices).
+- `RABBIT`: The connection string for RabbitMQ (e.g., `amqp://guest:guest@localhost:5672`).
+- `NODE_ENV`: The environment mode (`development` or `production`).
+
+### `gateway` (Frontend)
+- `NEXT_PUBLIC_HISTORY_HOST`: URL of the history microservice.
+- `NEXT_PUBLIC_METADATA_HOST`: URL of the metadata microservice.
+- `NEXT_PUBLIC_VIDEO_STREAMING_HOST`: URL of the video-streaming microservice.
+- `NEXT_PUBLIC_VIDEO_UPLOAD_HOST`: URL of the video-upload microservice.
+
+### `video-streaming`
+- `DBHOST`: MongoDB connection string.
+- `DBNAME`: Name of the streaming database.
+- `VIDEO_STORAGE_HOST`: Hostname and port of the video storage service (Azure or Mock).
+
+### `video-upload`
+- `VIDEO_STORAGE_HOST`: Hostname and port of the video storage service.
+
+### `metadata`
+- `METADATA_DBHOST`: MongoDB connection string.
+- `METADATA_DBNAME`: Name of the metadata database.
+
+### `history`
+- `HISTORY_DBHOST`: MongoDB connection string.
+- `HISTORY_DBNAME`: Name of the history database.
+
+### `azure-storage`
+- `STORAGE_ACCOUNT_NAME`: Your Azure Storage account name.
+- `STORAGE_ACCESS_KEY`: Your Azure Storage access key.
+- `STORAGE_CONTAINER_NAME`: The name of the blob container (defaults to `videos`).
+
+### `mock-storage`
+- `ABSOLUTE_PROJECT_PATH`: The absolute path to the project root on your local machine (used for mapping file paths).
+
+### `db-fixture-rest-api`
+- `DB_FIXTURES_HOST`: MongoDB connection string.
+- `FIXTURES_DIR`: Directory where database fixtures are stored.
+
+---
+
+## 📸 Screenshots
+
+Here is FlixTube running locally, demonstrating the core features from video listing to playback and history tracking.
+
+### 1. Video Upload
+![Video Upload](./flixtube_screenshots/Screenshot%202026-02-28%20at%2014.17.46%20(2).png)
+
+### 2. Video Selection
+![Video Selection](./flixtube_screenshots/Screenshot%202026-02-28%20at%2014.18.45%20(2).png)
+
+### 3. Video List
+![Video List](./flixtube_screenshots/Screenshot%202026-02-28%20at%2014.19.37%20(2).png)
+
+### 4. Video Playback
+![Video Playback](./flixtube_screenshots/Screenshot%202026-02-28%20at%2014.20.16%20(2).png)
+
+### 5. Video History
+![Video History](./flixtube_screenshots/Screenshot%202026-02-28%20at%2014.24.07%20(2).png)
+
+---
+
 ## 🗺 Roadmap
 
 The project is continuously evolving. Key areas for future development include:
