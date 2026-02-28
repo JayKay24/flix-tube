@@ -1,90 +1,109 @@
 # FlixTube
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+FlixTube is a distributed, cloud-native video streaming application built from the ground up to explore microservices architecture. This project serves as a comprehensive playground for building, deploying, and scaling modern web applications using a variety of technologies and architectural patterns.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+Inspired by the book [Bootstrapping Microservices](https://www.amazon.com/dp/1633438562), this project demonstrates a wholistic view of a microservices ecosystem, from frontend development to event-driven communication and cloud-native orchestration.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## 🚀 Architecture Overview
 
-## Finish your CI setup
+The system is composed of several specialized microservices organized in an **Nx monorepo**:
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/VCUgrkQmuR)
+### Core Services
+- **`gateway` (Next.js)**: The central web frontend and API gateway. It orchestrates requests to the underlying microservices to provide a unified user experience.
+- **`video-upload` (NestJS)**: Manages video file uploads and initiates the storage process.
+- **`video-streaming` (NestJS)**: Handles efficient video streaming by interfacing with the storage backend.
+- **`metadata` (NestJS)**: Manages video metadata (titles, descriptions, URLs) stored in MongoDB.
+- **`history` (NestJS)**: Tracks user viewing history through event-driven updates.
+- **`azure-storage` (NestJS)**: A wrapper service for interacting with Azure Blob Storage.
+- **`mock-storage` (NestJS)**: A local filesystem-based storage alternative used during development.
+- **`db-fixture-rest-api` (NestJS)**: A utility service for seeding and managing database fixtures across the ecosystem.
 
+### Shared Libraries
+- **`rmq-broker`**: Standardized RabbitMQ messaging logic for event-driven communication.
+- **`dynamic-db`**: Common MongoDB utilities and abstraction layers.
+- **`mongodb-fixtures`**: Shared logic for managing test and development data.
 
-## Generate a library
+### Communication Flow
+1. **Synchronous**: Services communicate via REST APIs (orchestrated primarily by the `gateway`).
+2. **Asynchronous**: Event-driven communication via **RabbitMQ** for decoupling (e.g., `VIDEO_UPLOADED` and `VIEWED` events).
 
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
-```
+---
 
-## Run tasks
+## 🛠 Tech Stack
 
-To build the library use:
+- **Frameworks**: [Next.js](https://nextjs.org/), [NestJS](https://nestjs.com/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Monorepo Management**: [Nx](https://nx.dev/)
+- **Database**: [MongoDB](https://www.mongodb.com/) (Mongoose)
+- **Messaging**: [RabbitMQ](https://www.rabbitmq.com/)
+- **Storage**: [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
+- **DevOps**: Docker, Kubernetes, Terraform, GitHub Actions
 
-```sh
-npx nx build pkg1
-```
+---
 
-To run any task with Nx use:
+## 🏃 Getting Started
 
-```sh
-npx nx <target> <project-name>
-```
+### Prerequisites
+- [Docker](https://www.docker.com/) & [Docker Compose](https://docs.docker.com/compose/)
+- [Node.js](https://nodejs.org/) (v20+)
+- [Nx CLI](https://nx.dev/getting-started/install)
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+### Development with Docker
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+The project includes a robust utility script for managing the Docker environment.
 
-## Versioning and releasing
+1.  **Load utility functions:**
+    ```bash
+    source dev_utility_functions.sh
+    ```
+2.  **Start all services in development mode:**
+    ```bash
+    up dev
+    ```
+    *This will spin up all microservices, MongoDB instances, and RabbitMQ using `docker-compose-all-dev.yml`.*
 
-To version and release the library use
+3.  **Shut down the environment:**
+    ```bash
+    down dev
+    ```
 
-```
-npx nx release
-```
+### Deployment with Kubernetes
 
-Pass `--dry-run` to see what would happen without actually releasing the library.
+Kubernetes manifests are located in `infra/k8s`. Deployment scripts are provided in the `scripts/` directory.
 
-[Learn more about Nx release &raquo;](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+1.  **Build images:**
+    ```bash
+    ./scripts/build_all_images.sh <platform> <env>
+    ```
+2.  **Deploy to cluster:**
+    ```bash
+    ./scripts/deploy.sh <deployment_env>
+    ```
 
-## Keep TypeScript project references up to date
+---
 
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
+## 🗺 Roadmap
 
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
+The project is continuously evolving. Key areas for future development include:
 
-```sh
-npx nx sync
-```
+- [ ] **Observability**: Implement ELK stack, Prometheus, Grafana, and OpenTelemetry.
+- [ ] **Auth**: Add Authentication & Authorization (RBAC).
+- [ ] **SQL Integration**: Introduce Postgres with Drizzle ORM.
+- [ ] **Security**: Static Analysis Security Testing (SAST) with Sonarqube.
+- [ ] **Scaling**: Implement elastic scaling for microservices and K8s clusters.
+- [ ] **Messaging**: Evaluate replacing RabbitMQ with Kafka.
+- [ ] **Mobile**: Develop a mobile gateway and GraphQL support.
+- [ ] **Performance**: Integrate Redis for caching.
 
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
+---
 
-```sh
-npx nx sync:check
-```
+## 📖 Learning Journey
 
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
+This project was built to gain hands-on experience with:
+- Designing microservice boundaries.
+- Implementing event-driven architectures.
+- Managing a monorepo with Nx.
+- Orchestrating deployments with Kubernetes and Terraform.
+- Handling cloud-native storage and streaming.
 
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Built by [James Njuguna](https://github.com/JayKay24).
