@@ -7,12 +7,6 @@
       "@flix-tube/metadata"
     ],
     "targets": {
-      "start-dev-env": {
-        "executor": "nx:run-commands",
-        "options": {
-          "command": "source ./dev_utility_functions.sh && up prod metadata"
-        }
-      },
       "e2e": {
         "executor": "@nx/jest:jest",
         "outputs": [
@@ -21,10 +15,7 @@
         "options": {
           "jestConfig": "apps/metadata-e2e/jest.config.cts",
           "passWithNoTests": true
-        },
-        "dependsOn": [
-          "start-dev-env"
-        ]
+        }
       }
     }
   }

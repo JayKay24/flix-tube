@@ -4,10 +4,10 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { FlixTubeDynamicDbModule } from '@flix-tube/dynamic-db';
 
-const DB_FIXTURES_HOST = process.env.DB_FIXTURES_HOST ?? '';
+const DB_FIXTURES_DB_HOST = process.env.DB_FIXTURES_DB_HOST ?? '';
 
 @Module({
-  imports: [MongooseModule.forRoot(DB_FIXTURES_HOST), FlixTubeDynamicDbModule],
+  imports: [MongooseModule.forRoot(DB_FIXTURES_DB_HOST), FlixTubeDynamicDbModule],
   controllers: [AppController],
   providers: [AppService],
 })
