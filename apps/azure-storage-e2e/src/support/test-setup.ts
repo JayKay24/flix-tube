@@ -1,10 +1,13 @@
 /* eslint-disable */
 import axios from 'axios';
 
+const VIDEO_STORAGE_HOST = process.env.VIDEO_STORAGE_HOST;
+if (!VIDEO_STORAGE_HOST) {
+  console.error("VIDEO_STORAGE_HOST is not defined");
+  process.exit(1);
+}
+
 module.exports = async function () {
   // Configure axios for tests to use.
-  const host = process.env.TEST_VSTOR_HOST ?? 'localhost';
-  const port = process.env.TEST_VSTOR_PORT ? Number(process.env.TEST_VSTOR_PORT) : 4001;
-  axios.defaults.baseURL = `http://${host}:${port}`;
-  console.log("video-storage microservice Axios Base URL: ", axios.defaults.baseURL);
+  axios.defaults.baseURL = VIDEO_STORAGE_HOST;
 };

@@ -12,7 +12,7 @@ services:
       db:
         condition: service_started
     environment:
-      - DB_FIXTURES_HOST=${DB_FIXTURES_HOST}
+      - DB_FIXTURES_DB_HOST=${DB_FIXTURES_DB_HOST}
       - FIXTURES_DIR=${FIXTURES_DIR}
       - PORT=${PORT}
     restart: "always"

@@ -15,11 +15,7 @@
         "options": {
           "jestConfig": "apps/db-fixture-rest-api-e2e/jest.config.cts",
           "passWithNoTests": true
-        },
-        "dependsOn": [
-          "@flix-tube/db-fixture-rest-api:build",
-          "@flix-tube/db-fixture-rest-api:serve"
-        ]
+        }
       }
     }
   }
