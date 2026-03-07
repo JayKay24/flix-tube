@@ -1,8 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { VideoController } from '../video.controller';
 import { VideoService } from '../video.service';
-import { getModelToken } from '@nestjs/mongoose';
-import { Video } from '../schemas/video.schema';
 import { ProducerService } from '@flix-tube/rmq-broker';
 
 describe('VideoController', () => {
@@ -13,12 +11,6 @@ describe('VideoController', () => {
       controllers: [VideoController],
       providers: [
         VideoService,
-        {
-          provide: getModelToken(Video.name),
-          useValue: {
-            findById: jest.fn(),
-          },
-        },
         {
           provide: ProducerService,
           useValue: {
