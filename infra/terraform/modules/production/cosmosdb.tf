@@ -26,7 +26,7 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
 }
 
 resource "azurerm_cosmosdb_mongo_database" "mongo_databases" {
-  for_each            = toset(["history", "metadata", "video-streaming"])
+  for_each            = toset(["history", "metadata"])
   name                = each.key
   resource_group_name = azurerm_cosmosdb_account.cosmosdb_account.resource_group_name
   account_name        = azurerm_cosmosdb_account.cosmosdb_account.name
