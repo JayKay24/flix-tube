@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: history
+  name: video-storage
 spec:
   selector:
     matchLabels:
-      app: history
+      app: video-storage
   template:
     spec:
       containers:
-        - name: history
-          image: $CONTAINER_REGISTRY/qa-history:$VERSION
+        - name: video-storage
+          image: $CONTAINER_REGISTRY/staging-mock-storage:$VERSION
           imagePullPolicy: IfNotPresent
           resources:
             limits:

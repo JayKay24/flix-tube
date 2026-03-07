@@ -3,7 +3,7 @@ include:
 services:
   azure-storage:
     build:
-      dockerfile: apps/azure-storage/Dockerfile-dev
+      dockerfile: apps/mock-storage/Dockerfile-dev
     volumes:
       - ./:/app:z
       - /app/node_modules

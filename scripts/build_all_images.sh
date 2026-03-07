@@ -2,16 +2,33 @@
 
 current_platform=$1
 cluster_env=$2
+images_json_file=${3:-scripts/docker_images.json}
+
+if [[ -z "$current_platform" || -z "$cluster_env" ]]; then
+  echo "Usage: $0 <platform> <cluster_env> [images_json_file]"
+  exit 1
+fi
+
+if ! command -v jq >/dev/null 2>&1; then
+  echo "Error: jq is required but not installed."
+  exit 1
+fi
+
+if [[ ! -f "$images_json_file" ]]; then
+  echo "Error: JSON file not found: $images_json_file"
+  exit 1
+fi
+
+if ! jq -e 'type == "object" and all(values[]; type == "string")' "$images_json_file" >/dev/null 2>&1; then
+  echo "Error: $images_json_file must be a JSON object of string keys to string values."
+  exit 1
+fi
 
 declare -A docker_images
 
-docker_images["azure-storage"]="apps/azure-storage/Dockerfile-prod"
-docker_images["gateway"]="apps/gateway/Dockerfile-prod"
-docker_images["history"]="apps/history/Dockerfile-prod"
-docker_images["metadata"]="apps/metadata/Dockerfile-prod"
-docker_images["video-streaming"]="apps/video-streaming/Dockerfile-prod"
-docker_images["video-upload"]="apps/video-upload/Dockerfile-prod"
-docker_images["db-fixture-rest-api"]="apps/db-fixture-rest-api/Dockerfile-prod"
+while IFS=$'\t' read -r image_name dockerfile; do
+  docker_images["$image_name"]="$dockerfile"
+done < <(jq -r 'to_entries[] | [.key, .value] | @tsv' "$images_json_file")
 
 for item in "${!docker_images[@]}"; do
   image_name=$item
