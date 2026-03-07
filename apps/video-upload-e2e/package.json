@@ -15,11 +15,7 @@
         "options": {
           "jestConfig": "apps/video-upload-e2e/jest.config.cts",
           "passWithNoTests": true
-        },
-        "dependsOn": [
-          "@flix-tube/video-upload:build",
-          "@flix-tube/video-upload:serve"
-        ]
+        }
       }
     }
   }

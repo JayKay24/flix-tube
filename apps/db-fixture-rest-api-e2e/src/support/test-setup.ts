@@ -1,9 +1,13 @@
 /* eslint-disable */
 import axios from 'axios';
 
+const DB_FIXTURES_HOST = process.env.DB_FIXTURES_HOST;
+if (!DB_FIXTURES_HOST) {
+  console.error("DB_FIXTURES_HOST is not defined");
+  process.exit(1);
+}
+
 module.exports = async function () {
   // Configure axios for tests to use.
-  const host = process.env.HOST ?? 'localhost';
-  const port = process.env.PORT ?? '3000';
-  axios.defaults.baseURL = `http://${host}:${port}`;
+  axios.defaults.baseURL = DB_FIXTURES_HOST;
 };
