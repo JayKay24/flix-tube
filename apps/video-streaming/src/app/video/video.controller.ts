@@ -1,8 +1,6 @@
 import {
   Controller,
   Get,
-  Post,
-  Body,
   Patch,
   Param,
   Delete,
@@ -12,8 +10,6 @@ import {
 } from '@nestjs/common';
 import type { Response, Request } from 'express';
 import { VideoService } from './video.service';
-import { CreateVideoDto } from './dto/create-video.dto';
-import { UpdateVideoDto } from './dto/update-video.dto';
 import mongoose from 'mongoose';
 import { ExchangeType, IViewed, ProducerService } from '@flix-tube/rmq-broker';
 import { GetVideoParams } from './dto/params-video.dto';
@@ -26,11 +22,6 @@ export class VideoController {
   constructor(
     private readonly videoService: VideoService,
     private readonly producerService: ProducerService) {}
-
-  @Post()
-  create(@Body() createVideoDto: CreateVideoDto) {
-    return this.videoService.create(createVideoDto);
-  }
 
   @Get(":id")
   async findOne(@Param(new ValidationPipe()) params: GetVideoParams, @Req() req: Request, @Res() res: Response) {
@@ -47,13 +38,13 @@ export class VideoController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateVideoDto: UpdateVideoDto) {
-    return this.videoService.update(+id, updateVideoDto);
+  update(@Param('id') id: number) {
+    return this.videoService.update(id);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.videoService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.videoService.remove(id);
   }
 
   sendViewedMessage(messageChannel: ExchangeType, videoId: mongoose.Types.ObjectId): void {
