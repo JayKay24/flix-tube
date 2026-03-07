@@ -31,8 +31,8 @@ spec:
                 configMapKeyRef:
                   name: db-fixture-rest-api-config
                   key: fixturesDir
-            - name: DB_FIXTURES_HOST
+            - name: DB_FIXTURES_DB_HOST
               valueFrom:
                 configMapKeyRef:
                   name: db-fixture-rest-api-config
-                  key: dbFixturesHost
+                  key: dbFixturesDbHost
