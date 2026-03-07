@@ -7,7 +7,7 @@ cluster_env=$4
 
 if [[ $current_platform == "linux/amd64" ]];
 then
-  docker buildx build -t $CONTAINER_REGISTRY/$cluster_env-image_name:$VERSION --file $dockerfile --platform linux/amd64 .
+  docker buildx build -t $CONTAINER_REGISTRY/$cluster_env-$image_name:$VERSION --file $dockerfile --platform linux/amd64 .
 else
-  docker buildx build -t $CONTAINER_REGISTRY/$cluster_env-image_name:$VERSION --file $dockerfile .
+  docker buildx build -t $CONTAINER_REGISTRY/$cluster_env-$image_name:$VERSION --file $dockerfile .
 fi
