@@ -20,6 +20,7 @@ spec:
             httpGet:
               path: /ready
               port: {{PORT}}
+            initialDelaySeconds: 5
           livenessProbe:
             httpGet:
               path: /alive

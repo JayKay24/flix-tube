@@ -24,6 +24,7 @@ spec:
             httpGet:
               path: /ready
               port: {{PORT}}
+            initialDelaySeconds: 5
           env:
             - name: PORT
               valueFrom:
