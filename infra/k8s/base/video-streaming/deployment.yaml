@@ -19,11 +19,11 @@ spec:
           livenessProbe:
             httpGet:
               path: /alive
-              port: "$PORT"
+              port: 80
           readinessProbe:
             httpGet:
               path: /ready
-              port: "$PORT"
+              port: 80
             initialDelaySeconds: 5
           env:
             - name: PORT
