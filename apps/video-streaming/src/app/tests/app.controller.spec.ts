@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from '../app.controller';
 import { AppService } from '../app.service';
+import { ProducerService } from "@flix-tube/rmq-broker";
 
 describe('AppController', () => {
   let app: TestingModule;
@@ -8,7 +9,15 @@ describe('AppController', () => {
   beforeAll(async () => {
     app = await Test.createTestingModule({
       controllers: [AppController],
-      providers: [AppService],
+      providers: [
+        AppService, {
+          provide: ProducerService,
+          useValue: {
+            sendMessage: jest.fn(),
+            isReady: jest.fn().mockResolvedValue(true),
+          },
+        }
+      ],
     }).compile();
   });
 
