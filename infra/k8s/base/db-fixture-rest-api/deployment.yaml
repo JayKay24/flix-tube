@@ -12,14 +12,18 @@ spec:
       labels:
         app: db-fixture-rest-api
     spec:
-      initContainers:
-        - name: init-ctr
-          image: busybox:1.28.4
-          command: ['sh', '-c', 'until nslookup mongodb; do echo waiting for mongodb service; sleep 1; done; echo mongodb found!']
       containers:
         - name: db-fixture-rest-api
           image: db-fixture-rest-api:latest
           imagePullPolicy: Never
+          livenessProbe:
+            httpGet:
+              path: /alive
+              port: {{PORT}}
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: {{PORT}}
           env:
             - name: PORT
               valueFrom:

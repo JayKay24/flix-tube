@@ -23,11 +23,19 @@ export class AppController {
     return this.appService.getData();
   }
 
-  @Get('is-alive')
-  isAlive(@Res() res: Response) {
-    res.json({
-      ok: true
-    });
+  @Get('alive')
+  alive(@Res() res: Response) {
+    res.status(200).send('OK');
+  }
+
+  @Get('ready')
+  async ready(@Res() res: Response) {
+    const isReady = await this.appService.checkReadiness();
+    if (isReady) {
+      res.status(200).send('OK');
+    } else {
+      res.status(500).send('Not Ready');
+    }
   }
 
   @Get('load-fixture')
