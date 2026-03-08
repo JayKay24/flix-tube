@@ -27,4 +27,19 @@ export class ProducerService implements OnModuleDestroy {
     const client = this.getClient(exchange);
     client.emit(exchange, data);
   }
+
+  async isReady(): Promise<boolean> {
+    // This check creates a temporary client to check the connection to RabbitMQ.
+    const exchange = ExchangeType.VIEWED;
+    const tempClient = ClientProxyFactory.create(rabbitMQConfig(exchange));
+    try {
+      await tempClient.connect();
+      return true;
+    } catch (error) {
+      console.error('Failed to connect to RabbitMQ: ', error);
+      return false;
+    } finally {
+      tempClient.close();
+    }
+  }
 }
