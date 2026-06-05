@@ -1,5 +1,18 @@
 # FlixTube
 
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](https://choosealicense.com/licenses/mit/)
+[![GitHub stars](https://img.shields.io/github/stars/JayKay24/flix-tube?style=flat-square)](https://github.com/JayKay24/flix-tube/stargazers)
+[![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Next JS](https://img.shields.io/badge/Next-black?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=flat-square&logo=nestjs&logoColor=white)](https://nestjs.com/)
+[![Nx](https://img.shields.io/badge/nx-143055?style=flat-square&logo=nx&logoColor=white)](https://nx.dev/)
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=flat-square&logo=kubernetes&logoColor=white)](https://kubernetes.io/)
+[![Terraform](https://img.shields.io/badge/terraform-%235835CC.svg?style=flat-square&logo=terraform&logoColor=white)](https://www.terraform.io/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=flat-square&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![RabbitMQ](https://img.shields.io/badge/Rabbitmq-FF6600?style=flat-square&logo=rabbitmq&logoColor=white)](https://www.rabbitmq.com/)
+[![Azure](https://img.shields.io/badge/azure-%230072C6.svg?style=flat-square&logo=microsoftazure&logoColor=white)](https://azure.microsoft.com/)
+
 FlixTube is a distributed, cloud-native video streaming application built from the ground up to explore microservices architecture. This project serves as a comprehensive playground for building, deploying, and scaling modern web applications using a variety of technologies and architectural patterns.
 
 Inspired by the book [Bootstrapping Microservices](https://www.amazon.com/dp/1633438562), this project demonstrates a wholistic view of a microservices ecosystem, from frontend development to event-driven communication and cloud-native orchestration.
