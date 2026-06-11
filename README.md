@@ -13,28 +13,28 @@
 [![RabbitMQ](https://img.shields.io/badge/Rabbitmq-FF6600?style=flat-square&logo=rabbitmq&logoColor=white)](https://www.rabbitmq.com/)
 [![Azure](https://img.shields.io/badge/azure-%230072C6.svg?style=flat-square&logo=microsoftazure&logoColor=white)](https://azure.microsoft.com/)
 
-FlixTube is a distributed, cloud-native video streaming application built from the ground up to explore microservices architecture. This project serves as a comprehensive playground for building, deploying, and scaling modern web applications using a variety of technologies and architectural patterns.
+FlixTube is a distributed, cloud-native video streaming application I built from the ground up to explore microservices architecture. I designed this project as a comprehensive playground for building, deploying, and scaling modern web applications using a variety of technologies and architectural patterns.
 
-Inspired by the book [Bootstrapping Microservices](https://www.amazon.com/dp/1633438562), this project demonstrates a wholistic view of a microservices ecosystem, from frontend development to event-driven communication and cloud-native orchestration.
+Inspired by the book [Bootstrapping Microservices](https://www.amazon.com/dp/1633438562), I built this to demonstrate a wholistic view of a microservices ecosystem — from frontend development to event-driven communication and cloud-native orchestration.
 
 ## 🚀 Architecture Overview
 
-The system is composed of several specialized microservices organized in an **Nx monorepo**:
+I organized the system as several specialized microservices in an **Nx monorepo**:
 
 ### Core Services
-- **`gateway` (Next.js)**: The central web frontend and API gateway. It orchestrates requests to the underlying microservices to provide a unified user experience.
+- **`gateway` (Next.js)**: The central web frontend and API gateway I built to orchestrate requests to the underlying microservices and provide a unified user experience.
 - **`video-upload` (NestJS)**: Manages video file uploads and initiates the storage process.
 - **`video-streaming` (NestJS)**: Handles efficient video streaming by interfacing with the storage backend.
 - **`metadata` (NestJS)**: Manages video metadata (titles, descriptions, URLs) stored in MongoDB.
 - **`history` (NestJS)**: Tracks user viewing history through event-driven updates.
-- **`azure-storage` (NestJS)**: A wrapper service for interacting with Azure Blob Storage.
-- **`mock-storage` (NestJS)**: A local filesystem-based storage alternative used during development.
-- **`db-fixture-rest-api` (NestJS)**: A utility service for seeding and managing database fixtures across the ecosystem.
+- **`azure-storage` (NestJS)**: A wrapper service I wrote for interacting with Azure Blob Storage.
+- **`mock-storage` (NestJS)**: A local filesystem-based storage alternative I use during development.
+- **`db-fixture-rest-api` (NestJS)**: A utility service I built for seeding and managing database fixtures across the ecosystem.
 
 ### Shared Libraries
-- **`rmq-broker`**: Standardized RabbitMQ messaging logic for event-driven communication.
-- **`dynamic-db`**: Common MongoDB utilities and abstraction layers.
-- **`mongodb-fixtures`**: Shared logic for managing test and development data.
+- **`rmq-broker`**: Standardized RabbitMQ messaging logic I wrote for event-driven communication.
+- **`dynamic-db`**: Common MongoDB utilities and abstraction layers I extracted for reuse.
+- **`mongodb-fixtures`**: Shared logic I built for managing test and development data.
 
 ### Communication Flow
 1. **Synchronous**: Services communicate via REST APIs (orchestrated primarily by the `gateway`).
@@ -63,7 +63,7 @@ The system is composed of several specialized microservices organized in an **Nx
 
 ### Development with Docker
 
-The project includes a robust utility script for managing the Docker environment.
+I included a robust utility script for managing the Docker environment.
 
 1.  **Load utility functions:**
     ```bash
@@ -82,7 +82,7 @@ The project includes a robust utility script for managing the Docker environment
 
 ### Deployment with Kubernetes
 
-Kubernetes manifests are located in `infra/k8s`. Deployment scripts are provided in the `scripts/` directory.
+I keep Kubernetes manifests in `infra/k8s` and deployment scripts in the `scripts/` directory.
 
 1.  **Build images:**
     ```bash
@@ -97,7 +97,7 @@ Kubernetes manifests are located in `infra/k8s`. Deployment scripts are provided
 
 ## 🔑 Environment Variables
 
-To run the services successfully, the following environment variables need to be configured. You can find example values in the `*.env` files in the root directory.
+To run the services successfully, the following environment variables need to be configured. I've included example values in the `*.env` files in the root directory.
 
 ### Common Variables
 - `PORT`: The port number for the HTTP server (required for all microservices).
@@ -142,7 +142,7 @@ To run the services successfully, the following environment variables need to be
 
 ## 📸 Screenshots
 
-Here is FlixTube running locally, demonstrating the core features from video listing to playback and history tracking.
+Here is FlixTube running locally, demonstrating the core features I built — from video listing to playback and history tracking.
 
 ### 1. Video Upload
 ![Video Upload](./flixtube_screenshots/Screenshot%202026-02-28%20at%2014.17.46%20(2).png)
@@ -163,7 +163,7 @@ Here is FlixTube running locally, demonstrating the core features from video lis
 
 ## 🗺 Roadmap
 
-The project is continuously evolving. Key areas for future development include:
+I'm continuously evolving this project. Key areas I plan to tackle next:
 
 - [ ] **Observability**: Implement ELK stack, Prometheus, Grafana, and OpenTelemetry.
 - [ ] **Auth**: Add Authentication & Authorization (RBAC).
@@ -178,11 +178,11 @@ The project is continuously evolving. Key areas for future development include:
 
 ## 📖 Learning Journey
 
-This project was built to gain hands-on experience with:
+I built this project to gain hands-on experience with:
 - Designing microservice boundaries.
 - Implementing event-driven architectures.
 - Managing a monorepo with Nx.
 - Orchestrating deployments with Kubernetes and Terraform.
 - Handling cloud-native storage and streaming.
 
-Built by [James Njuguna](https://github.com/JayKay24).
+— [James Njuguna](https://github.com/JayKay24)

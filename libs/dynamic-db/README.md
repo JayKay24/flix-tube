@@ -1,6 +1,6 @@
 # dynamic-db
 
-This library was generated with [Nx](https://nx.dev).
+I built this library to provide common MongoDB utilities and abstraction layers shared across the FlixTube microservices. It was scaffolded with [Nx](https://nx.dev).
 
 ## Building
 
