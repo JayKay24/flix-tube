@@ -15,8 +15,6 @@
 
 FlixTube is a distributed, cloud-native video streaming application I built from the ground up to explore microservices architecture. I designed this project as a comprehensive playground for building, deploying, and scaling modern web applications using a variety of technologies and architectural patterns.
 
-Inspired by the book [Bootstrapping Microservices](https://www.amazon.com/dp/1633438562), I built this to demonstrate a wholistic view of a microservices ecosystem — from frontend development to event-driven communication and cloud-native orchestration.
-
 ## 🚀 Architecture Overview
 
 I organized the system as several specialized microservices in an **Nx monorepo**:
@@ -184,5 +182,17 @@ I built this project to gain hands-on experience with:
 - Managing a monorepo with Nx.
 - Orchestrating deployments with Kubernetes and Terraform.
 - Handling cloud-native storage and streaming.
+
+---
+
+## 👏 Acknowledgements
+
+Inspired by the book [Bootstrapping Microservices](https://www.amazon.com/dp/1633438562) by Ashley Davis, I built this to demonstrate a wholistic view of a microservices ecosystem — from frontend development to event-driven communication and cloud-native orchestration.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 — [James Njuguna](https://github.com/JayKay24)
